@@ -3,6 +3,7 @@ package javaconcepts.constructors;
 public class DefaultConstructor {
     public static void main(String[] args) {
         C c = new C(8);
+        C c1 = new C();
     }
 }
 
