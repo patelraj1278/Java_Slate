@@ -5,8 +5,8 @@ import bank.Bank;
 import bank.exceptions.NegativeAmountException;
 import bank.exceptions.NoSuchAccountException;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class TestBank {
@@ -68,27 +68,63 @@ public class TestBank {
 
         //Java 8: getList of Accounts with penalty
         List<Account> accountList = bank.getAccountStream().filter(Account::hasPenalty).collect(Collectors.toList());
-        System.out.println(accountList);
-
-        //Java 8: Sort the list, on different criteria
-
-        //Java 8: Create the Collector using the four components
-
-        //Java 8: Get summary statistics for all the account balances
+        System.out.println("GetList of Accounts with penalty ="+accountList);
 
         //Java 8: Get the Account with the maximum number of transactions
+        Account maxTransAccount = bank.getAccountStream().max(Comparator.comparingInt(ac -> ac.getPassbook().size())).get();
+        System.out.println("Get the Account with the maximum number of transactions ="+maxTransAccount);
 
         //Java 8: Get the highest transaction amount
+        long highestTransAmount =bank.getAccountStream().flatMap(Account::getTransactionStream).mapToLong(Account.Transaction::getAmount).max().getAsLong();
+        System.out.println(highestTransAmount);
 
-        //Java 8: Get the summary statistics for the transaction amounts
-
-        //Java 8: Get the summary statistics for the transaction net-amounts
 
         //Java 8: Using Collectors.groupingBy :  get a map of namewise list of accounts
+        Map<String, List<Account>> namewiseAccounts = bank.getAccountStream().collect(Collectors.groupingBy(Account::getName));
+        System.out.println("namewise accounts:"+namewiseAccounts);
 
         //Java 8: Using Collectors.groupingBy :  get a partition of accounts with and without penalty
+        Map<Boolean, List<Account>> penaltywiseAccounts = bank.getAccountStream()
+                .collect(Collectors.partitioningBy(Account::hasPenalty));
+        System.out.println("with and without penalty accounts:"+penaltywiseAccounts);
 
         //Java 8: Using Collectors.groupingBy :  get a map of namewise sum of balance
+        Map<String, Long> namewiseBalances = bank.getAccountStream()
+                .collect(Collectors.groupingBy(Account::getName,
+                        Collectors.summingLong(Account::getBalance)));
+        System.out.println("namewise balance sum:"+ namewiseBalances);
 
+        //Java 8: Sort the list, on different criteria - Account GET NAME
+        System.out.println("Sorting Based on Account's Name ::"+bank.getAccountStream().sorted(Comparator.comparing(Account::getName)).collect(Collectors.toList()));
+
+
+        //Java 8: Get summary statistics for all the account balances  [NOTE : THIS WILL RETURN 38 COUNT AS 2 TRANSACTION GOT PENALTY]
+        LongSummaryStatistics balanceStatistics = bank.getAccountStream()
+                .collect(Collectors.summarizingLong(Account::getBalance));
+        System.out.println(balanceStatistics);
+
+        //Java 8: Get the summary statistics for the transaction amounts
+        LongSummaryStatistics amountSummaryStatistics = bank.getAccountStream()
+                .flatMap(Account::getTransactionStream)
+                .mapToLong(Account.Transaction::getAmount)
+                .summaryStatistics();
+        System.out.println(amountSummaryStatistics);
+
+        //Java 8: Get the summary statistics for the transaction net-amounts
+        LongSummaryStatistics netAmountSummaryStatistics = bank.getAccountStream()
+                .flatMap(Account::getTransactionStream)
+                .mapToLong(Account.Transaction::getNetAmount)
+                .summaryStatistics();
+        System.out.println(netAmountSummaryStatistics);
+
+        //Java 8: Create the Collector using the four components
+        Collector<Account,?,List<Account>> accountListCollector = Collector.of(
+                ArrayList<Account>::new,    // supplier
+//                        (accountList, account) -> accountList.add(account),
+                ArrayList::add, // accumulator
+                (list1, list2) -> {list1.addAll(list2); return list1;}, // combiner
+                Collections::unmodifiableList); // finisher
+        List<Account> accountList1 = bank.getAccountStream().filter(Account::hasPenalty).collect(accountListCollector);
+        System.out.println(accountList1);
     }
 }
