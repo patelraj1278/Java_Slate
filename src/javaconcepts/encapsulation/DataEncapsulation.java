@@ -1,4 +1,4 @@
-package javaconcepts;
+package javaconcepts.encapsulation;
 
 public class DataEncapsulation {
     /*To achieve encapsulation in Java −

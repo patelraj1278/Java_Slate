@@ -1,4 +1,4 @@
-package javaconcepts.Abstraction;
+package javaconcepts.abstraction;
 
 /* File name : Salary.java */
 public class Salary extends Employee {

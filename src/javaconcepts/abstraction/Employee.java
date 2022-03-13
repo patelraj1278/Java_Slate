@@ -1,4 +1,4 @@
-package javaconcepts.Abstraction;
+package javaconcepts.abstraction;
 
 public abstract class Employee {
 
