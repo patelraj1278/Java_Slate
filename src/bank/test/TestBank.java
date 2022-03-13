@@ -52,6 +52,7 @@ public class TestBank {
         bank.withdraw(acno3, 100);
         bank.withdraw(acno2, 95_000);
 
+        //Test Accout Method from Bank class
         bank.display(acno1);
         bank.deposit(acno1, 10_000);
         bank.display(acno1);
@@ -62,7 +63,32 @@ public class TestBank {
         bank.listAccounts();
 
         //Java 8: displaying all accounts which have a penalty transaction
+        System.out.println("displaying all accounts which have a penalty transaction");
+        bank.getAccountStream().filter(Account::hasPenalty).forEach(Account::display);
+
+        //Java 8: getList of Accounts with penalty
         List<Account> accountList = bank.getAccountStream().filter(Account::hasPenalty).collect(Collectors.toList());
-        accountList.stream().forEach(Account::getName);
+        System.out.println(accountList);
+
+        //Java 8: // Sort the list, on different criteria
+
+        //Java 8: // create the Collector using the four components
+
+        //Java 8: Get summary statistics for all the account balances
+
+        //Java 8: Get the Account with the maximum number of transactions
+
+        //Java 8: Get the highest transaction amount
+
+        //Java 8: Get the summary statistics for the transaction amounts
+
+        //Java 8: Get the summary statistics for the transaction net-amounts
+
+        //Java 8: Using Collectors.groupingBy : // get a map of namewise list of accounts
+
+        //Java 8: Using Collectors.groupingBy : // get a partition of accounts with and without penalty
+
+        //Java 8: Using Collectors.groupingBy : // get a map of namewise sum of balance
+
     }
 }
