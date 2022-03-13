@@ -3,6 +3,7 @@ package bank;
 import bank.exceptions.NegativeAmountException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -154,6 +155,16 @@ public abstract class Account implements Comparable<Account>{
         }
         System.out.println("End of passbook");
     }
+
+    public boolean hasPenalty() {
+        return getTransactionStream().anyMatch(tr -> tr.getNaration().equals("Penalty"));
+    }
+
+    public List<Transaction> getPassbook() {
+//      return this.passbook;
+        return Collections.unmodifiableList(this.passbook);
+    }
+
 
     @Override
     public int compareTo(Account ac){return ((Long)this.accountNumber).compareTo(ac.accountNumber);}

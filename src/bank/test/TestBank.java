@@ -1,8 +1,13 @@
 package bank.test;
 
+import bank.Account;
 import bank.Bank;
 import bank.exceptions.NegativeAmountException;
 import bank.exceptions.NoSuchAccountException;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestBank {
     public static void main(String[] args) throws NegativeAmountException, NoSuchAccountException {
@@ -56,6 +61,8 @@ public class TestBank {
         //Java 8: Print display method of Account by Streaming Account Map
         bank.listAccounts();
 
-
+        //Java 8: displaying all accounts which have a penalty transaction
+        List<Account> accountList = bank.getAccountStream().filter(Account::hasPenalty).collect(Collectors.toList());
+        accountList.stream().forEach(Account::getName);
     }
 }
