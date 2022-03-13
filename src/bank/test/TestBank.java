@@ -70,9 +70,9 @@ public class TestBank {
         List<Account> accountList = bank.getAccountStream().filter(Account::hasPenalty).collect(Collectors.toList());
         System.out.println(accountList);
 
-        //Java 8: // Sort the list, on different criteria
+        //Java 8: Sort the list, on different criteria
 
-        //Java 8: // create the Collector using the four components
+        //Java 8: Create the Collector using the four components
 
         //Java 8: Get summary statistics for all the account balances
 
@@ -84,11 +84,11 @@ public class TestBank {
 
         //Java 8: Get the summary statistics for the transaction net-amounts
 
-        //Java 8: Using Collectors.groupingBy : // get a map of namewise list of accounts
+        //Java 8: Using Collectors.groupingBy :  get a map of namewise list of accounts
 
-        //Java 8: Using Collectors.groupingBy : // get a partition of accounts with and without penalty
+        //Java 8: Using Collectors.groupingBy :  get a partition of accounts with and without penalty
 
-        //Java 8: Using Collectors.groupingBy : // get a map of namewise sum of balance
+        //Java 8: Using Collectors.groupingBy :  get a map of namewise sum of balance
 
     }
 }
