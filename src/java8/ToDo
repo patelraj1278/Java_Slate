@@ -1,0 +1,102 @@
+https://mkyong.com/tutorials/java-8-tutorials/
+https://www.oracle.com/java/technologies/javase/8-whats-new.html
+//1. Functional Interface
+Java 8 Function examples
+Java 8 BiFunction examples
+Java 8 BinaryOperator examples
+Java 8 UnaryOperator Examples
+Java 8 Predicate examples
+Java 8 BiPredicate examples
+Java 8 Consumer examples
+Java 8 BiConsumer examples
+Java 8 Supplier Examples
+
+//2. Lambda Expressions & Method References
+Java 8 Lambda : Comparator example
+Java 8 method references, double colon (::) operator
+//3. Streams
+Java 8 Streams filter examples
+Java 8 Streams map() examples
+Java 8 flatMap example
+Java 8 Parallel Streams Examples
+Java 8 Stream.iterate examples
+Java 8 Stream Collectors groupingBy examples
+Java 8 Filter a null value from a Stream
+Java 8 Convert a Stream to List
+Java 8 Stream findFirst() and findAny()
+Java 8 Stream.reduce() examples
+Java 8 Convert a Stream to List
+Java 8 How to Sum BigDecimal using Stream?
+Java 8 Stream – Read a file line by line
+Java 8 Stream – Convert List<List<String>> to List<String>
+Java 8 Stream – The peek() is not working with count()?
+Java 8 Should we close the Stream after use?
+Java 8 Convert a Stream to Array
+Java 8 How to convert IntStream to Integer array
+Java 8 How to convert IntStream to int or int array
+Java 8 How to sort list with stream.sorted()
+Java – How to sum all the stream integers
+Java – How to convert a primitive Array to List
+Java – How to convert Array to Stream
+Java – Stream has already been operated upon or closed
+
+//4. New Date Time APIs
+Java – How to get current date time
+Java – How to get current timestamp
+Java – How to convert String to a Date
+Java 8 – Duration and Period examples
+Java 8 – How to convert String to LocalDate
+Java 8 – How to format LocalDateTime
+Java 8 – Convert Instant to LocalDateTime
+Java 8 – Convert Instant to ZoneDateTime
+Java 8 – Convert Date to LocalDate and LocalDateTime
+Java 8 – ZonedDateTime examples
+Java – Convert date and time between timezone
+Java – How to add days to current date
+Java 8 – TemporalAdjusters examples
+Java 8 – Convert Epoch time milliseconds to LocalDate or LocalDateTime
+Java 8 – Difference between two LocalDate or LocalDateTime
+Java 8 – How to calculate days between two dates?
+Java 8 – How to parse date with "dd MMM" (02 Jan), without year?
+Java 8 – Convert LocalDate and LocalDateTime to Date
+Java 8 – Unable to obtain LocalDateTime from TemporalAccessor
+Java 8 – Convert ZonedDateTime to Timestamp
+Java – Display all ZoneId and its UTC offset
+Java 8 – Convert LocalDateTime to Timestamp
+Java – How to change date format in a String
+Check if the date is older than 6 months
+Java – How to compare dates
+Java – How to calculate elapsed time
+Java 8 – MinguoDate examples (Taiwan calendar)
+Java 8 – HijrahDate, How to calculate the Ramadan date (Islamic calendar)
+Java Date Time Tutorials
+
+//5. Java 8 Tips
+Java 8 Optional In Depth
+Java 8 How to sort a Map
+Java 8 Convert List to Map
+Java 8 Filter a Map examples
+Java 8 Convert Map to List
+Java 8 StringJoiner example
+Java 8 Math Exact examples
+Java 8 forEach print with Index
+Java 8 Convert Optional<String> to String
+Java – How to print a Pyramid
+Java – Check if Array contains a certain value?
+Java – How to join Arrays
+Java – Generate random integers in a range
+Java – How to print a name 10 times?
+Java – How to search a string in a List?
+Java – How to get keys and values from Map
+Java – Convert File to String
+Java – Convert Array to ArrayList
+Java – How to check if a String is numeric
+Java – How to join List String with commas
+Java – Convert comma-separated String to a List
+Java Prime Numbers examples
+How to tell Maven to use Java 8
+java.lang.UnsupportedClassVersionError
+Java Fibonacci examples
+How to loop a Map in Java
+Java Regular Expression Examples
+How to read file in Java – BufferedReader
