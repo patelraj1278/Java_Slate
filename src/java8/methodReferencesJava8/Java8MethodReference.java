@@ -2,10 +2,7 @@ package java8.methodReferencesJava8;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Collectors;
 
 public class Java8MethodReference {
@@ -104,7 +101,6 @@ public class Java8MethodReference {
         // method reference
         Supplier<Invoice> obj4 = Invoice::new;
         Invoice invoice2 = obj4.get();
-
     }
 
     //4.2 Reference to a constructor which accepts an argument – Invoice(BigDecimal unitPrice)
@@ -123,6 +119,46 @@ public class Java8MethodReference {
         invoices.forEach(System.out::println);
     }
 
+    public void java8MethodReference3a(){
+        // lambda
+        int result = playOneArgument("mkyong",x -> x.length()); //true
+        // method reference
+        int result2 =playOneArgument("mkyong",String::length); //true
+
+        // lambda
+        Boolean result3 = playTwoArgumentString("mkyong","y",(a,b) -> a.contains(b));  //true
+        // method reference
+        Boolean result4 =playTwoArgumentString("mkyong","y",String::contains); //true
+
+        // lambda
+        Boolean result5 = playTwoArgumentString("mkyong","y",(a,b) -> a.startsWith(b));  //false
+        // method reference
+        Boolean result6 =playTwoArgumentString("mkyong","y",String::startsWith); //false
+
+        System.out.println(result6);
+
+    }
+
+    public void java8MethodReference3b(){
+        Invoice obj = new Invoice("A001", BigDecimal.valueOf(1.99), 3);
+
+        InvoiceCalculator formula = new InvoiceCalculator();
+
+        // lambda
+        BigDecimal result = calculate(formula,obj,(f,o) -> f.normal(o)); // 5.97
+
+        // method reference
+        BigDecimal result2 = calculate(formula, obj, InvoiceCalculator::normal); // 5.97
+
+        // lambda
+        BigDecimal result3 = calculate(formula, obj, (f, o) -> f.promotion(o));     // 5.37
+
+        // method reference
+        BigDecimal result4 = calculate(formula, obj, InvoiceCalculator::promotion); // 5.37
+
+        System.out.println(result4);
+    }
+
 
     public static void main(String [] args){
         Java8MethodReference jmr = new Java8MethodReference();
@@ -131,8 +167,14 @@ public class Java8MethodReference {
         //jmr.staticMethodRefernce3();
         //jmr.instanceMethodRefernce1();
         //jmr.constructorMethodReference1();
-        jmr.constructorMethodReference2();
+        //jmr.constructorMethodReference2();
+        //jmr.java8MethodReference3a();
+        jmr.java8MethodReference3b();
 
+        }
+
+        static <R> R playOneArgument(String s1, Function<String, R> func) {
+            return func.apply(s1);
         }
 
         private static <R> R playTwoArgument(Integer i1, Integer i2,
@@ -148,6 +190,19 @@ public class Java8MethodReference {
             }
             return result;
         }
+
+        //Arbitary Method reference Example - java8MethodReference3a
+        static Boolean playTwoArgumentString(String s1, String s2, BiPredicate<String, String> func) {
+            return func.test(s1, s2);
+        }
+
+        //Arbitary Method reference Example - java8MethodReference3b
+        static BigDecimal calculate(InvoiceCalculator formula, Invoice s1,
+                                    BiFunction<InvoiceCalculator, Invoice, BigDecimal> func) {
+            return func.apply(formula, s1);
+        }
+
+
     }
 
 
