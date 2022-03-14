@@ -32,3 +32,37 @@ Java 8 BiPredicate examples
 Java 8 Consumer examples
 Java 8 BiConsumer examples
 Java 8 Supplier Examples
+
+
+#https://mkyong.com/java8/java-8-method-references-double-colon-operator/
+
+There are four kinds of method references:
+
+Reference to a static method ClassName::staticMethodName
+Reference to an instance method of a particular object Object::instanceMethodName
+Reference to an instance method of an arbitrary object of a particular type ContainingType::methodName–
+Reference to a constructor ClassName::new
+
+In Java 8, the double colon (::) operator is called method references. Refer to the following examples:
+
+Anonymous class to print a list.
+
+
+List<String> list = Arrays.asList("node", "java", "python", "ruby");
+list.forEach(new Consumer<String>() {       // anonymous class
+    @Override
+    public void accept(String str) {
+        System.out.println(str);
+    }
+});
+Anonymous class -> Lambda expressions.
+
+
+List<String> list = Arrays.asList("node", "java", "python", "ruby");
+list.forEach(str -> System.out.println(str)); // lambda
+Lambda expressions -> Method references.
+
+
+List<String> list = Arrays.asList("node", "java", "python", "ruby");
+list.forEach(System.out::println);          // method references
+Anonymous Class -> Lambda expression -> Method Reference
