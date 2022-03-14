@@ -1,4 +1,4 @@
-package java8.collectors;
+package java8.collectorsJava8;
 
 import java8.consumerJava8.Hosting;
 

@@ -1,4 +1,4 @@
-package java8;
+package java8.forEachJava8;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
