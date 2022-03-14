@@ -4,10 +4,8 @@ https://www.oracle.com/java/technologies/javase/8-whats-new.html
 
 D:Java 8 forEach examples
 D:Java 8 Convert List to Map
-Java 8 Lambda : Comparator example
-Java 8 method references, double colon (::) operator
-Java 8 Streams filter examples
-Java 8 Streams map() examples
+
+
 
 
 //1. Functional Interface
@@ -22,7 +20,7 @@ Java 8 BiConsumer examples
 Java 8 Supplier Examples
 
 //2. Lambda Expressions & Method References
-Java 8 Lambda : Comparator example
+D:Java 8 Lambda : Comparator example
 Java 8 method references, double colon (::) operator
 
 //3. Streams

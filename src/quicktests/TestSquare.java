@@ -6,29 +6,36 @@ public class TestSquare {
 
     public String injectMethod(String template, HashMap<String, String> input) {
         System.out.println("Current date time in milliseconds : "+new Date().getTime());
-         for (Map.Entry<String, String> set :
+
+        //Java 7
+        /*for (Map.Entry<String, String> set :
                  input.entrySet()) {
                    template = template.replace("{"+set.getKey()+"}", set.getValue());
-        }
+        }*/
+
+        //Java 8
+        input.entrySet().stream()
+                .forEach( i -> {
+                    template.replace(i.getKey(), i.getValue());
+            });
+
         System.out.println("Current date time in milliseconds : "+new Date().getTime());
         return template;
     }
+
 
     public static void main(String[] args) {
 
         TestSquare s = new TestSquare();
 
         HashMap<String, String> input = new HashMap<>();
-        input.put("name", "Ryan");
-        input.put("age", "35");
-        input.put("miles", "50000");
+        input.put("{name}", "Ryan");
+        input.put("{age}", "35");
+        input.put("{miles}", "50000");
 
         System.out.println(s.injectMethod("Hi, my name is {name} and I am {age} years old", input));
         //System.out.println(s.injectMethod("My car has {miles} miles on it", input)); // My car has 50,000 miles on it
-
     }
-
-
 }
 
 
