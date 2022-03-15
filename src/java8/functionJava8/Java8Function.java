@@ -58,6 +58,7 @@ public class Java8Function {
         jf.java8ListToListUsingFunction();
     }
 
+    //Here apply will call getLength
     public <T,R> Map<T,R> convertListToMap(List<T> list,Function<T,R> func){
         Map<T, R> result = new HashMap<>();
 
