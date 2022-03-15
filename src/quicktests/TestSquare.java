@@ -1,6 +1,8 @@
 package quicktests;
 
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class TestSquare {
 
@@ -13,13 +15,20 @@ public class TestSquare {
                    template = template.replace("{"+set.getKey()+"}", set.getValue());
         }*/
 
+        //template = findAndReplace(template,input,this::findAndReplace);
+
+        System.out.println("Current date time in milliseconds : "+new Date().getTime());
+        return template;
+    }
+
+
+    public String findAndReplace(String template, HashMap<String, String> input, BiFunction<String,HashMap<String, String>,String> func){
         //Java 8
         input.entrySet().stream()
                 .forEach( i -> {
-                    template.replace(i.getKey(), i.getValue());
-            });
-
-        System.out.println("Current date time in milliseconds : "+new Date().getTime());
+                    func.apply(template,input);
+                    //template.replace(i.getKey(), i.getValue());
+                });
         return template;
     }
 

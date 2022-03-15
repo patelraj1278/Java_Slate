@@ -177,7 +177,7 @@ public class Java8MethodReference {
             return func.apply(s1);
         }
 
-        private static <R> R playTwoArgument(Integer i1, Integer i2,
+        static <R> R playTwoArgument(Integer i1, Integer i2,
                                              BiFunction<Integer, Integer, R> func) {
             return func.apply(i1, i2);
         }
