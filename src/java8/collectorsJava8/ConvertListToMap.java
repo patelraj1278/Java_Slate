@@ -1,6 +1,6 @@
 package java8.collectorsJava8;
 
-import java8.consumerJava8.Hosting;
+import java8.functionJava8.consumerJava8.Hosting;
 
 import java.util.*;
 import java.util.stream.Collectors;

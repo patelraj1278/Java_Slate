@@ -1,4 +1,4 @@
-package java8.consumerJava8;
+package java8.functionJava8.consumerJava8;
 
 public class Hosting {
 

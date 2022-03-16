@@ -140,3 +140,38 @@ In Java 8, Predicate is a functional interface, which accepts an argument and re
 public interface Predicate<T> {
   boolean test(T t);
 }
+
+
+In Java 8, BiPredicate is a functional interface, which accepts two arguments and returns a boolean, basically this BiPredicate is same with the Predicate, instead, it takes 2 arguments for the test.
+
+-----BiPredicate.java
+@FunctionalInterface
+public interface BiPredicate<T, U> {
+    boolean test(T t, U u);
+}
+
+In Java 8, Consumer is a functional interface; it takes an argument and returns nothing.
+
+----Consumer.java
+@FunctionalInterface
+public interface Consumer<T> {
+  void accept(T t);
+}
+
+In Java 8, BiConsumer is a functional interface; it takes two arguments and returns nothing.
+
+---BiConsumer.java
+@FunctionalInterface
+public interface BiConsumer<T, U> {
+  void accept(T t, U u);
+}
+
+
+In Java 8, Supplier is a functional interface; it takes no arguments and returns a result.
+
+----Supplier.java
+
+@FunctionalInterface
+public interface Supplier<T> {
+    T get();
+}
