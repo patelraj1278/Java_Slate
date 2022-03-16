@@ -53,18 +53,6 @@ public class Java8Predicate {
         OptionalLong oLong = list.stream().mapToLong(tl).max();
         System.out.println(oLong.getAsLong()); // [10] as Long
 
-        //takewhile
-        //Reduce
-        //Skip
-        //Peek
-        //noneMatch
-        //mapMulti
-        //Spliterator
-        //Sequencial
-        //dropWhile
-        //distinct
-        //flatMap
-
     }
 
     public void java8OneOrMorePredicateUsingOr(){

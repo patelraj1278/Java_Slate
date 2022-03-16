@@ -107,3 +107,17 @@ Java Fibonacci examples
 How to loop a Map in Java
 Java Regular Expression Examples
 How to read file in Java – BufferedReader
+
+##Pending
+
+//takewhile
+//Reduce
+//Skip
+//Peek
+//noneMatch
+//mapMulti
+//Spliterator
+//Sequencial
+//dropWhile
+//distinct
+//flatMap
