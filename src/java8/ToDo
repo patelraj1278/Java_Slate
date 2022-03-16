@@ -12,10 +12,10 @@ D:Java 8 BiFunction examples
 D:Java 8 UnaryOperator Examples
 D:Java 8 BinaryOperator examples
 D:Java 8 Predicate examples
-Java 8 BiPredicate examples
-Java 8 Consumer examples
-Java 8 BiConsumer examples
-Java 8 Supplier Examples
+D:Java 8 BiPredicate examples
+D:Java 8 Consumer examples
+D:Java 8 BiConsumer examples
+D:Java 8 Supplier Examples
 
 //2. Lambda Expressions & Method References
 D:Java 8 Lambda : Comparator example
