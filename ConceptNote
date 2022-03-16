@@ -131,3 +131,12 @@ BiFunction.java
 public interface BiFunction<T, U, R> {
       R apply(T t, U u);
 }
+
+
+In Java 8, Predicate is a functional interface, which accepts an argument and returns a boolean. Usually, it used to apply in a filter for a collection of objects.
+-----Predicate.java
+
+@FunctionalInterface
+public interface Predicate<T> {
+  boolean test(T t);
+}
