@@ -98,6 +98,31 @@ public class Java8Predicate {
         System.out.println(retList);
     }
 
+    public void java8OneOrMorePredicateUsingChain(){
+        Predicate<String> startWithA = x -> x.startsWith("a");
+        boolean result = startWithA.or(x -> x.startsWith("m")).test("mkyong");
+        System.out.println(result);     // true
+
+        // !(start with "a" and length is 3)
+        boolean result2 = startWithA.and(x -> x.length() == 3).negate().test("abc");
+        System.out.println(result2);    // false
+    }
+
+    public void java8OneOrMorePredicateInObject(){
+        Hosting h1 = new Hosting(1, "amazon", "aws.amazon.com");
+        Hosting h2 = new Hosting(2, "linode", "linode.com");
+        Hosting h3 = new Hosting(3, "liquidweb", "liquidweb.com");
+        Hosting h4 = new Hosting(4, "google", "google.com");
+        List<Hosting> list = Arrays.asList(new Hosting[]{h1, h2, h3, h4});
+
+        List<Hosting> result = HostingRespository.filterHosting(list,x -> x.getName().startsWith("g"));
+        System.out.println("result : " + result);  // google
+        List<Hosting> result2 = HostingRespository.filterHosting(list, HostingRespository.isDeveloperFriendly());
+        System.out.println("result2 : " + result2); // linode
+
+
+    }
+
 
     public static void main(String [] args){
         Java8Predicate jp = new Java8Predicate();
@@ -107,12 +132,28 @@ public class Java8Predicate {
         //jp.java8OneOrMorePredicateUsingAnd();
         //jp.java8OneOrMorePredicateUsingOr();
         //jp.java8OneOrMorePredicateUsingNegate();
-        jp.java8OneOrMorePredicateUsingTest();
+        //jp.java8OneOrMorePredicateUsingTest();
+        //jp.java8OneOrMorePredicateUsingChain();
+        jp.java8OneOrMorePredicateInObject();
+
     }
 }
 
 class StringProcessor{
     static List<String> filter(List<String> list, Predicate<String> predicate){
         return list.stream().filter(predicate::test).collect(Collectors.toList());
+    }
+}
+
+class HostingRespository{
+    static List<Hosting> filterHosting(List<Hosting> hosting,
+                                       Predicate<Hosting> predicate) {
+        return hosting.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
+    }
+
+    static Predicate<Hosting> isDeveloperFriendly() {
+        return n -> n.getName().equals("linode");
     }
 }
