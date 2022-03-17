@@ -1,8 +1,10 @@
 package java8.streams;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 //1.1 Review the below structure. It consists of a 2 levels Stream or a 2d arrays.
@@ -66,7 +68,6 @@ public class StreamPracticeFlatMap {
         // print array
         result.forEach(x -> System.out.println(Arrays.toString(x)));
 
-
         //Or
         String[][] strArray1 = new String[][]{{"a","b"},{"c","d"},{"e","f"},{"g","h"}};
         List<String> result1 = Stream.of(strArray1).flatMap(Stream::of).map(x -> x.toUpperCase()).collect(Collectors.toList());
@@ -80,8 +81,123 @@ public class StreamPracticeFlatMap {
         Stream<List<Object>>  -> flatMap ->	Stream<Object>
          */
     }
+    /*
+    This example uses .stream() to convert a List into a stream of objects, and each object contains a set of books, and we can use flatMap to produces a stream containing all the book in all the objects.
+
+    In the end, we also filter out the book containing the word python and collect a Set to remove the duplicated book.
+
+
+     */
+    public void findAllBooksFlatMap(){
+
+        Developer o1 = new Developer();
+        o1.setName("mkyong");
+        o1.addBook("Java 8 in Action");
+        o1.addBook("Spring Boot in Action");
+        o1.addBook("Effective Java (3nd Edition)");
+
+        Developer o2 = new Developer();
+        o2.setName("zilap");
+        o2.addBook("Learning Python, 5th Edition");
+        o2.addBook("Effective Java (3nd Edition)");
+
+        List<Developer> list = new ArrayList<>();
+        list.add(o1);
+        list.add(o2);
+
+        Set<String> collect =
+                list.stream()
+                        .map(x -> x.getBook())                              //  Stream<Set<String>>
+                        .flatMap(x -> x.stream())                           //  Stream<String>
+                        .filter(x -> !x.toLowerCase().contains("python"))   //  filter python book
+                        .collect(Collectors.toSet());                       //  remove duplicated
+
+        collect.forEach(System.out::println);
+
+        //Or
+
+        Set<String> collect2 = list.stream()
+                //.map(x -> x.getBook())
+                .flatMap(x -> x.getBook().stream())                 //  Stream<String>
+                .filter(x -> !x.toLowerCase().contains("python"))   //  filter python book
+                .collect(Collectors.toSet());
+
+        collect2.forEach(System.out::println);
+
+
+    }
+    /*
+        4. flatMap example – Order and LineItems
+            This example is similar to the official flatMap JavaDoc example.
+
+            The orders is a stream of purchase orders, and each purchase order contains a collection of line items, then we can use flatMap to produce a Stream or Stream<LineItem> containing all the line items in all the orders. Furthermore, we also add a reduce operation to sum the line items’ total amount.
+     */
+    public void sumOfLineItems(){
+        List<Order> orders = findAll();
+
+        // sum the line items' total amount
+        BigDecimal sumOfLineItems = orders.stream()
+                .flatMap(order -> order.getLineItems().stream())    //  Stream<LineItem>
+                .map(line -> line.getTotal())                       //  Stream<BigDecimal>
+                .reduce(BigDecimal.ZERO, BigDecimal::add);          //  reduce to sum all
+
+
+        // sum the order's total amount
+        BigDecimal sumOfOrder = orders.stream()
+                .map(order -> order.getTotal())                     //  Stream<BigDecimal>
+                .reduce(BigDecimal.ZERO, BigDecimal::add);          //  reduce to sum all
+
+        System.out.println(sumOfLineItems);                         // 3194.20
+        System.out.println(sumOfOrder);                             // 3194.20
+
+    }
+
+    /*
+    6. flatMap and primitive type
+    For primitive types like int, long, double, etc. Java 8 Stream also provide related flatMapTo{primative type} to flat the Stream of primitive type; the concept is the same.
+     */
+    public void flatMapAndPrimitive(){
+        int[] array = {1, 2, 3, 4, 5, 6};
+        //Stream<int[]>
+        Stream<int[]> streamArray = Stream.of(array);
+        //Stream<int[]> -> flatMap -> IntStream
+        IntStream intStream = streamArray.flatMapToInt(x -> Arrays.stream(x));
+
+        long[] array1 = {1, 2, 3, 4, 5, 6};
+
+        Stream<long[]> longArray = Stream.of(array1);
+
+        LongStream longStream = longArray.flatMapToLong(x -> Arrays.stream(x));
+
+        System.out.println(longStream.count());
+    }
+
+
+
     public static void main(String [] args){
         StreamPracticeFlatMap spm = new StreamPracticeFlatMap();
         spm.flatMapUsage1();
+        spm.findAllBooksFlatMap();
+        spm.sumOfLineItems();
+        spm.flatMapAndPrimitive();
+    }
+
+
+    // create dummy records
+    private static List<Order> findAll() {
+
+        LineItem item1 = new LineItem(1, "apple", 1, new BigDecimal("1.20"), new BigDecimal("1.20"));
+        LineItem item2 = new LineItem(2, "orange", 2, new BigDecimal(".50"), new BigDecimal("1.00"));
+        Order order1 = new Order(1, "A0000001", Arrays.asList(item1, item2), new BigDecimal("2.20"));
+
+        LineItem item3 = new LineItem(3, "monitor BenQ", 5, new BigDecimal("99.00"), new BigDecimal("495.00"));
+        LineItem item4 = new LineItem(4, "monitor LG", 10, new BigDecimal("120.00"), new BigDecimal("1200.00"));
+        Order order2 = new Order(2, "A0000002", Arrays.asList(item3, item4), new BigDecimal("1695.00"));
+
+        LineItem item5 = new LineItem(5, "One Plus 8T", 3, new BigDecimal("499.00"), new BigDecimal("1497.00"));
+        Order order3 = new Order(3, "A0000003", Arrays.asList(item5), new BigDecimal("1497.00"));
+
+        return Arrays.asList(order1, order2, order3);
+
     }
 }

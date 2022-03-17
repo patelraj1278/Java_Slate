@@ -61,6 +61,7 @@ public class StreamPracticeMap {
 
     public static void main(String []  args){
         StreamPracticeMap sp = new StreamPracticeMap();
+        //sp.listOfStringToUpperCase();
         //sp.listOfStringsOperation();
         sp.listOfObjectToListOfStings();
     }

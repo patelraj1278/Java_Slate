@@ -26,8 +26,8 @@ D:Java 8 Streams filter examples
 D:Java 8 Streams map() examples
 D:Java 8 flatMap example
 Java 8 Parallel Streams Examples
-Java 8 Stream.iterate examples
-Java 8 Stream Collectors groupingBy examples
+D:Java 8 Stream.iterate examples
+D:Java 8 Stream Collectors groupingBy examples
 Java 8 Filter a null value from a Stream
 Java 8 Convert a Stream to List
 Java 8 Stream findFirst() and findAny()

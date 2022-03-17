@@ -15,22 +15,16 @@ public class TestSquare {
                    template = template.replace("{"+set.getKey()+"}", set.getValue());
         }*/
 
-        //template = findAndReplace(template,input,this::findAndReplace);
+        //JAVA 8
+        input.forEach((x,y) -> {
+            Function<String,String> func = temp -> temp.replace(x,y);
+            func.apply(template);
+        });
 
         System.out.println("Current date time in milliseconds : "+new Date().getTime());
         return template;
     }
 
-
-    public String findAndReplace(String template, HashMap<String, String> input, BiFunction<String,HashMap<String, String>,String> func){
-        //Java 8
-        input.entrySet().stream()
-                .forEach( i -> {
-                    func.apply(template,input);
-                    //template.replace(i.getKey(), i.getValue());
-                });
-        return template;
-    }
 
 
     public static void main(String[] args) {
