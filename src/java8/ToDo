@@ -22,9 +22,9 @@ D:Java 8 Lambda : Comparator example
 D:Java 8 method references, double colon (::) operator
 
 //3. Streams
-Java 8 Streams filter examples
-Java 8 Streams map() examples
-Java 8 flatMap example
+D:Java 8 Streams filter examples
+D:Java 8 Streams map() examples
+D:Java 8 flatMap example
 Java 8 Parallel Streams Examples
 Java 8 Stream.iterate examples
 Java 8 Stream Collectors groupingBy examples
