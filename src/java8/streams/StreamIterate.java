@@ -31,6 +31,14 @@ public class StreamIterate {
                 .sum();
 
         System.out.println("Fibonacci 10 sum : " + sum);
+
+        /*
+        2. Java 9
+        The stream.iterate was enhanced in Java 9. It supports a predicate (condition) as second argument, and the stream.iterate will stop if the predicate is false.
+         */
+
+        Stream.iterate(1, n -> n < 20 , n -> n * 2)
+                .forEach(x -> System.out.println(x));
     }
     public static void main(String [] args){
         StreamIterate spm = new StreamIterate();
