@@ -162,7 +162,10 @@ public class StreamPracticeFlatMap {
         Stream<int[]> streamArray = Stream.of(array);
         //Stream<int[]> -> flatMap -> IntStream
         IntStream intStream = streamArray.flatMapToInt(x -> Arrays.stream(x));
+        intStream.forEach(x -> System.out.println(x));
 
+
+        //flatMapToLong -> LongStream
         long[] array1 = {1, 2, 3, 4, 5, 6};
 
         Stream<long[]> longArray = Stream.of(array1);
