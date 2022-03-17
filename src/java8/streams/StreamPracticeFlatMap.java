@@ -1,5 +1,9 @@
 package java8.streams;
 
+import java8.streams.model.Developer;
+import java8.streams.model.LineItem;
+import java8.streams.model.Order;
+
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;

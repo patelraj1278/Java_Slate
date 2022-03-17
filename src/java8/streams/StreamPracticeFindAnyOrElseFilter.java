@@ -1,5 +1,7 @@
 package java8.streams;
 
+import java8.streams.model.Person;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

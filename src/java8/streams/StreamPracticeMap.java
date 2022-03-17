@@ -1,5 +1,8 @@
 package java8.streams;
 
+import java8.streams.model.Staff;
+import java8.streams.model.StaffPublic;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;

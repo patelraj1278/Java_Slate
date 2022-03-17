@@ -1,4 +1,4 @@
-package java8.streams;
+package java8.streams.model;
 
 import java.util.HashSet;
 import java.util.Set;
