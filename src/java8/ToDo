@@ -28,17 +28,17 @@ D:Java 8 flatMap example
 Java 8 Parallel Streams Examples
 D:Java 8 Stream.iterate examples
 D:Java 8 Stream Collectors groupingBy examples
-Java 8 Filter a null value from a Stream
-Java 8 Convert a Stream to List
-Java 8 Stream findFirst() and findAny()
-Java 8 Stream.reduce() examples
-Java 8 Convert a Stream to List
-Java 8 How to Sum BigDecimal using Stream?
+D:Java 8 Filter a null value from a Stream
+D:Java 8 Convert a Stream to List
+D:Java 8 Stream findFirst() and findAny()
+D:Java 8 Stream.reduce() examples
+D:Java 8 Convert a Stream to List
+D:Java 8 How to Sum BigDecimal using Stream?
 Java 8 Stream – Read a file line by line
-Java 8 Stream – Convert List<List<String>> to List<String>
-Java 8 Stream – The peek() is not working with count()?
-Java 8 Should we close the Stream after use?
-Java 8 Convert a Stream to Array
+D:Java 8 Stream – Convert List<List<String>> to List<String>
+D:Java 8 Stream – The peek() is not working with count()?
+D:Java 8 Should we close the Stream after use?
+D:Java 8 Convert a Stream to Array
 Java 8 How to convert IntStream to Integer array
 Java 8 How to convert IntStream to int or int array
 Java 8 How to sort list with stream.sorted()
