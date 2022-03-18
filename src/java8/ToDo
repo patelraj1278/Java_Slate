@@ -41,11 +41,11 @@ D:Java 8 Should we close the Stream after use?
 D:Java 8 Convert a Stream to Array
 D:Java 8 How to convert IntStream to Integer array
 D:Java 8 How to convert IntStream to int or int array
-Java 8 How to sort list with stream.sorted()
-Java – How to sum all the stream integers
-Java – How to convert a primitive Array to List
-Java – How to convert Array to Stream
-Java – Stream has already been operated upon or closed
+D:Java 8 How to sort list with stream.sorted()
+D:Java – How to sum all the stream integers
+D:Java – How to convert a primitive Array to List
+D:Java – How to convert Array to Stream
+D:Java – Stream has already been operated upon or closed
 
 //4. New Date Time APIs
 Java – How to get current date time
