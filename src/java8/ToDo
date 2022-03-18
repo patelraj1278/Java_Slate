@@ -39,8 +39,8 @@ D:Java 8 Stream – Convert List<List<String>> to List<String>
 D:Java 8 Stream – The peek() is not working with count()?
 D:Java 8 Should we close the Stream after use?
 D:Java 8 Convert a Stream to Array
-Java 8 How to convert IntStream to Integer array
-Java 8 How to convert IntStream to int or int array
+D:Java 8 How to convert IntStream to Integer array
+D:Java 8 How to convert IntStream to int or int array
 Java 8 How to sort list with stream.sorted()
 Java – How to sum all the stream integers
 Java – How to convert a primitive Array to List
@@ -111,13 +111,10 @@ How to read file in Java – BufferedReader
 ##Pending
 
 //takewhile
-//Reduce
 //Skip
-//Peek
 //noneMatch
 //mapMulti
 //Spliterator
 //Sequencial
 //dropWhile
 //distinct
-//flatMap
