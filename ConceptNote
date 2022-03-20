@@ -427,6 +427,8 @@ public interface Supplier<T> {
                                 .collect(Collectors.toList())) // List<List<String>>
                         .flatMap(List::stream)					// List<String>
                         .collect(Collectors.toList());
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        int sum = integers.stream().mapToInt(Integer::intValue).sum();
 
     Map
 
@@ -495,6 +497,9 @@ public interface Supplier<T> {
         int[] result2 = IntStream.concat(Arrays.stream(int1), Arrays.stream(int2)).toArray();
         int[] result3 = IntStream.concat(Arrays.stream(int1),IntStream.concat(Arrays.stream(int2), Arrays.stream(int3))).toArray();
 
+      Reduce
+        BigDecimal sum =invoices.stream().map(x -> x.getQty().multiply(x.getPrice())).reduce(BigDecimal.ZERO,(a,b) -> a.add(b));
+        BigDecimal sumOfLineItems = orders.stream().flatMap(order -> order.getLineItems().stream()).map(line -> line.getTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);          //  reduce to sum all
 
       References
         Static Method Reference - list.forEach(SimplePrinter::print);
@@ -507,12 +512,50 @@ public interface Supplier<T> {
         int[] stream1 = IntStream.rangeClosed(1, 5).toArray();
         int i = Arrays.stream(num).findFirst().getAsInt()
         Stream<Integer> stream2 = Stream.of(1, 2, 3, 4, 5);
+        List<String> result1 = Stream.of(strArray1).flatMap(Stream::of).map(x -> x.toUpperCase()).collect(Collectors.toList());
 
       Stream common
          Optional<String> result = list.stream().filter(x -> !x.equalsIgnoreCase("node")).findFirst();
          Optional<Integer> any = list.stream().filter(x -> x > 1).findAny();
          Stream.iterate(0, n -> n + 1).limit(10).forEach(x -> System.out.println(x));
+         long count1 = l1.stream().filter(x->!x.isEmpty()).peek(System.out::println).count();
+         Optional<String> collect1 = lines.stream().filter(x -> x.equalsIgnoreCase("mkyong")).findAny();
+         List<String> filteredlines =  lines.stream().filter(x -> x.equalsIgnoreCase("mkyong")).collect(Collectors.toList());
+         String collect2 = lines.stream().filter(x -> x.equalsIgnoreCase("abc")).findAny().orElse("Raj");
+         String collect3 = lines.stream().filter(x -> x.equalsIgnoreCase("abc1")).findAny().orElseGet(() -> "Raj2");
+         Person p = newList.stream().filter(x -> x.getName().equalsIgnoreCase("Heman")).findAny().orElse(new Person("Prisha",3));
+          List<String> collect = persons.stream().map(Person::getName).collect(Collectors.toList());
 
       Consumer
+          List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
           Consumer<Integer> consumer = (Integer x) -> System.out.println(x);
-          map.forEach((k, v) -> System.out.println(k + ":" + v));
+          forEach(list,consumer);
+          static <T> void forEach(List<T> list, Consumer<T> consumer) {
+                  for (T t : list) {
+                      consumer.accept(t);
+                  }
+              }
+      BiConsumer
+          addTwo(1, 2, (x, y) -> System.out.println(x + y));
+          static <T> void addTwo(T a1, T a2, BiConsumer<T,T> c){
+                  c.accept(a1,a2);
+              }
+
+      Function
+         Map<String, Integer> map = convertListToMap(list, x -> x.length());
+         public <T,R> Map<T,R> convertListToMap(List<T> list,Function<T,R> func){
+                Map<T, R> result = new HashMap<>();
+
+                for(T t: list){
+                    result.put(t, func.apply(t));
+                }
+                return result;
+            }
+        List<String> returnList1 = convertListToList(list, x-> x.toLowerCase());
+        public <T,R> List<R> convertListToList(List<T> list, Function<T,R> func){
+                List<R> result = new ArrayList<>();
+                for(T t : list){
+                    result.add(func.apply(t));
+                }
+                return result;
+            }
