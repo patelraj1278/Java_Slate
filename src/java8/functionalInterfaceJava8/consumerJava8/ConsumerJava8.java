@@ -1,4 +1,4 @@
-package java8.functionJava8.consumerJava8;
+package java8.functionalInterfaceJava8.consumerJava8;
 
 
 import java.util.Arrays;

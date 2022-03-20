@@ -1,4 +1,4 @@
-package java8.lambdaComparatorJava8;
+package java8.lambdaJava8.lambdaComparatorJava8;
 
 import java.math.BigDecimal;
 import java.util.*;

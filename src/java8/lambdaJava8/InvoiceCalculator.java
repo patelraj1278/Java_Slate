@@ -1,4 +1,4 @@
-package java8.methodReferencesJava8;
+package java8.lambdaJava8;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

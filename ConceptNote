@@ -175,3 +175,102 @@ In Java 8, Supplier is a functional interface; it takes no arguments and returns
 public interface Supplier<T> {
     T get();
 }
+
+#Lambda Expression
+    Method Reference
+    Constructor Reference
+    Static Reference
+
+#Java 8 Functional Interface
+    #Java 8 Function
+        LongToIntFunction
+        DoubleToIntFunction
+        IntToLongFunction
+        DoubleToLongFunction
+        IntToDoubleFunction
+        LongToDoubleFunction
+        Function<T,R>
+        IntFunction<R>
+        LongFunction<R>
+        DoubleFunction<R>
+        ToIntFunction<T>
+        ToLongFunction<T>
+        ToDoubleFunction<T>
+    #Java 8 BiFunction
+        BiFunction<T,U,R>
+        ToIntBiFunction<T,U>
+        ToLongBiFunction<T,U>
+        ToDoubleBiFunction<T,U>
+    #Java 8 BinaryOperator
+        IntBinaryOperator
+        LongBinaryOperator
+        DoubleBinaryOperator
+        BinaryOperator<T>
+    #Java 8 UnaryOperator
+        IntUnaryOperator
+        LongUnaryOperator
+        DoubleUnaryOperator
+        UnaryOperator<T>
+    #Java 8 Predicate
+        IntPredicate
+        LongPredicate
+        DoublePredicate
+        Predicate<T>
+    #Java 8 BiPredicate
+        BiPredicate<T,U>
+    #Java 8 Consumer
+        IntConsumer LongConsumer
+        DoubleConsumer Consumer<T>
+        ObjIntConsumer<T>
+        ObjLongConsumer<T>
+        ObjDoubleConsumer<T>
+    #Java 8 BiConsumer
+        BiConsumer<T,U>
+    #Java 8 Supplier
+        IntSupplier
+        LongSupplier
+        DoubleSupplier
+        BooleanSupplier
+        Supplier<T>
+
+
+#Java 8 Streams
+
+
+
+#Java 8 Comparator<T>
+    -Comparator factory methods
+        comparing and variants of primitives naturalOrder and reverseOrder
+        null friendly Comparator
+    -Combining Comparators thenComparing and reverse
+
+#Java 8 Optional<T>
+    Some convenient methods
+        Optional.ofNullable()
+        Optional.empty()
+        Optional.of()
+        void ifPresent(Consumer<T> action)
+        boolean isPresent()
+        T orElse(T other)
+        T orElseGet(Supplier<T> supplier)
+        Optional<T> filter(Predicate<T> test)
+        Optional<U> map(Function<T,U> mapper)
+        Optional<U> flatMap(Function<T, Optional<U>> mapper)
+    Where does Java Optional fits?
+        Method Parameter
+        Method Return Type
+        Constructor Parameter
+        Variable Declaration
+        Class Level
+
+#Java 8 Spliterator and its primitive variants
+    Spliterator<E>
+    IntSpliterator
+    LongSpliterator
+    DoubleSpliterator
+
+#Java 8 Statistics, StringJoiner
+    IntSummaryStatistics
+    LongSummaryStatistics
+    DoubleSummaryStatistics
+    StringJoiner

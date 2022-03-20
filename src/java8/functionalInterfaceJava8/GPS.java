@@ -1,4 +1,4 @@
-package java8.functionJava8;
+package java8.functionalInterfaceJava8;
 
 class GPS {
 
