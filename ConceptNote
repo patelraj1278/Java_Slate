@@ -421,7 +421,12 @@ public interface Supplier<T> {
                               .forEach(v -> {
                                   System.out.println(v.toLowerCase());
                               });
-
+        List<String> collect1 = numbers1.stream()
+                        .map(x -> new Scanner(x).findAll("\\D+")
+                                .map(m -> m.group())
+                                .collect(Collectors.toList())) // List<List<String>>
+                        .flatMap(List::stream)					// List<String>
+                        .collect(Collectors.toList());
 
     Map
 
@@ -464,7 +469,8 @@ public interface Supplier<T> {
                        .stream()
                        .filter(x -> predicate.test(x.getValue()))
                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
+      Map<String, Long> result =items.stream().collect(Collectors.groupingBy(x -> x.toUpperCase(),Collectors.counting()));
+      Map<String, Integer> sum = items.stream().collect(Collectors.groupingBy(Item::getName, Collectors.summingInt(Item::getQty)));
 
       ForEach
         list.stream().filter(Objects::nonNull).forEach(System.out::println);
@@ -494,6 +500,18 @@ public interface Supplier<T> {
         Static Method Reference - list.forEach(SimplePrinter::print);
         Instance Method Reference - list.sort(provider::compareByAge);
         Constructor Reference - List<Invoice> invoices = fakeInvoice(list, Invoice::new);
+
+      Stream Converter
+        String[] result = Arrays.stream(lines.split("\\s+")).map(String::toUpperCase).toArray(String[]::new); //Stream -> String[]
+        Integer[] result = Arrays.stream(num).map(x -> x * 2).boxed().toArray(Integer[]::new);
+        int[] stream1 = IntStream.rangeClosed(1, 5).toArray();
+        int i = Arrays.stream(num).findFirst().getAsInt()
+        Stream<Integer> stream2 = Stream.of(1, 2, 3, 4, 5);
+
+      Stream common
+         Optional<String> result = list.stream().filter(x -> !x.equalsIgnoreCase("node")).findFirst();
+         Optional<Integer> any = list.stream().filter(x -> x > 1).findAny();
+         Stream.iterate(0, n -> n + 1).limit(10).forEach(x -> System.out.println(x));
 
       Consumer
           Consumer<Integer> consumer = (Integer x) -> System.out.println(x);
