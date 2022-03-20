@@ -544,13 +544,12 @@ public interface Supplier<T> {
       Function
          Map<String, Integer> map = convertListToMap(list, x -> x.length());
          public <T,R> Map<T,R> convertListToMap(List<T> list,Function<T,R> func){
-                Map<T, R> result = new HashMap<>();
-
-                for(T t: list){
+               Map<T, R> result = new HashMap<>();
+               for(T t: list){
                     result.put(t, func.apply(t));
                 }
                 return result;
-            }
+         }
         List<String> returnList1 = convertListToList(list, x-> x.toLowerCase());
         public <T,R> List<R> convertListToList(List<T> list, Function<T,R> func){
                 List<R> result = new ArrayList<>();
@@ -559,3 +558,93 @@ public interface Supplier<T> {
                 }
                 return result;
             }
+
+
+      BiFunction
+        BiFunction<String,String,String> biFunc1 = (i1,i2) -> i1.replace(i1,i2);
+        Function<String,String> func1 =  d -> String.valueOf(d);
+        System.out.println(genericMethod("Raj","Patel",biFunc1,func1));
+        public static <A1, A2, R1, R2> R2 genericMethod(A1 a1, A2 a2,
+                                                      BiFunction<A1, A2, R1> func,
+                                                      Function<R1, R2> func2) {
+            return func.andThen(func2).apply(a1, a2);
+        }
+
+        BiFunction<Integer, Integer, Integer> func = (x1, x2) -> x1 + x2;
+        Integer result = func.apply(2, 3);
+
+
+
+      Predicate
+        Predicate<Integer> noGreaterThanFive = x -> x < 5;
+        Predicate<Integer> greateThanTwo = x -> x > 2;
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> collect1 =list.stream().filter(noGreaterThanFive).filter(greateThanTwo).collect(Collectors.toList());
+        class StringProcessor{
+            static List<String> filter(List<String> list, Predicate<String> predicate){
+                return list.stream().filter(predicate::test).collect(Collectors.toList());
+            }
+        }
+
+      BiPredicate
+        BiPredicate<String, Integer> filter = (x, y) -> {
+                    return x.length() == y;
+                };
+        boolean result = filter.test("mkyong",6);
+
+        List<Domain> result2 = filterBadDomain(domains, (domain, score) -> score == 0);
+        List<Domain> result3 = filterBadDomain(domains, (domain, score) -> domain.startsWith("i") && score > 5);
+        static <T extends Domain> List<T> filterBadDomain(List<T> list, BiPredicate<String, Integer> biPredicate){
+                return list.stream()
+                        .filter(x -> biPredicate.test(x.getName(), x.getScore()))
+                        .collect(Collectors.toList());
+            }
+
+        BinaryOperator -  the BiFunction<Integer, Integer, Integer> which accepts and returns the same type, can be replaced with BinaryOperator<Integer>.
+            Comparator<Developer> comparing = Comparator.comparing(Developer::getSalary);
+            BinaryOperator<Developer> bo = BinaryOperator.maxBy(comparing);
+            Developer result = find(list, bo);
+            public static Developer find(List<Developer> list, BinaryOperator<Developer> accumulator) {
+                    Developer result = null;
+                    for (Developer t : list) {
+                        if (result == null) {
+                            result = t;
+                        } else {
+                            result = accumulator.apply(result, t);
+                        }
+                    }
+
+                    return result;
+                }
+
+            Integer result = math(Arrays.asList(numbers), 0, (a, b) -> a + b);
+            public static <T> T math(List<T> list, T init, BinaryOperator<T> accumulator) {
+                    T result = init;
+                    for (T t : list) {
+                        result = accumulator.apply(result, t);
+                    }
+                    return result;
+                }
+
+        UnaryOperator - the Function<Integer, Integer> which accepts and returns the same type, can be replaced with UnaryOperator<Integer>.
+            List<Integer> result = math(list, x -> x * 2);
+            public static <T> List<T> math(List<T> list, UnaryOperator<T> uo){
+                    List<T> result = new ArrayList<>();
+                    for (T t : list) {
+                        result.add(uo.apply(t));
+                    }
+                    return result;
+                }
+
+         Supplier
+            Employee emp1 = factory(() -> new Employee("mkyong"));
+            public static Employee factory(Supplier<? extends Employee> s){
+                    Employee employee = s.get();
+                    if (employee.getName() == null || "".equals(employee.getName())) {
+                        employee.setName("default");
+                    }
+                    employee.setSalary(BigDecimal.ONE);
+                    employee.setStart(LocalDate.of(2017, 8, 8));
+
+                    return employee;
+                }
