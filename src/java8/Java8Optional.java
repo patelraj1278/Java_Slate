@@ -49,5 +49,6 @@ public class Java8Optional {
         Java8Optional jo = new Java8Optional();
         jo.java8Optional1();
         jo.java8Optional2();
+        jo.java8Optional3();
     }
 }
