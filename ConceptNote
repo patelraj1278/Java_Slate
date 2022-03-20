@@ -395,3 +395,8 @@ public interface Supplier<T> {
     LocalDate, LocalTime, LocalDateTime
     ZonedDateTime, OffsetTime, OffsetDateTime
     MonthDay, YearMonth, Year
+
+#Java 8  Changes in interfaces
+    static methods in interfaces
+    default methods in interfaces
+    functional interfaces
