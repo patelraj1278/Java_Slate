@@ -404,7 +404,7 @@ public interface Supplier<T> {
 ==========================================================================================
 #Java 8 Quick Snap Shot
 ==========================================================================================
-    List
+    List - Stream,collect,toMap,sorted,Comparator.comparing,map,flatMap,mapToInt,forEach
         list.stream().collect(Collectors.toMap(Hosting::getId,Hosting::getName)); //Here To Map Need Key & Values
         list.stream().collect(Collectors.toMap(Hosting::getName, Hosting::getWebsites, (existing,replacement) -> existing, TreeMap::new));
         list.stream().sorted(Comparator.comparing(java8.collectorsJava8.Hosting::getWebsites).reversed())
