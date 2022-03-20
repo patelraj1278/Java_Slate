@@ -1,3 +1,5 @@
+
+======================================LAMNDA======================================================================
 ##https://www.developer.com/microsoft/start-using-java-lambda-expressions/
 Lambda Expressions Syntax
 The basic syntax of a lambda is either:
@@ -13,27 +15,8 @@ The following are examples of Java lambda expressions:
 5.  (String s) -> System.out.print(s) 		// takes a string and prints it to console without returning anything
 
 ##https://mkyong.com/tutorials/java-8-tutorials/
-Let us see the six basic function interfaces.
 
-Interface	        Signature	            Examples
-UnaryOperator<T>	T apply(T t)	        String::toLowerCase, Math::tan
-BinaryOperator<T>	T apply(T t1, T t2)	    BigInteger::add, Math::pow
-Function<T, R>	    R apply(T t)	        Arrays::asList, Integer::toBinaryString
-Predicate<T, U>	    boolean test(T t, U u)	String::isEmpty, Character::isDigit
-Supplier<T>	        T get()	                LocalDate::now, Instant::now, TreeMap::new
-Consumer<T>	        void accept(T t)	    System.out::println, Error::printStackTrace
-
-Java 8 Function examples
-Java 8 BiFunction examples
-Java 8 BinaryOperator examples
-Java 8 UnaryOperator Examples
-Java 8 Predicate examples
-Java 8 BiPredicate examples
-Java 8 Consumer examples
-Java 8 BiConsumer examples
-Java 8 Supplier Examples
-
-
+=====================================JAVA 8 REFERENCES=======================================================================
 #https://mkyong.com/java8/java-8-method-references-double-colon-operator/
 
 There are four kinds of method references:
@@ -67,6 +50,26 @@ List<String> list = Arrays.asList("node", "java", "python", "ruby");
 list.forEach(System.out::println);          // method references
 Anonymous Class -> Lambda expression -> Method Reference
 
+=====================================Functional Interfaces=======================================================================
+Java 8 Function examples
+Java 8 BiFunction examples
+Java 8 BinaryOperator examples
+Java 8 UnaryOperator Examples
+Java 8 Predicate examples
+Java 8 BiPredicate examples
+Java 8 Consumer examples
+Java 8 BiConsumer examples
+Java 8 Supplier Examples
+
+Let us see the six basic function interfaces.
+
+Interface	        Signature	            Examples
+UnaryOperator<T>	T apply(T t)	        String::toLowerCase, Math::tan
+BinaryOperator<T>	T apply(T t1, T t2)	    BigInteger::add, Math::pow
+Function<T, R>	    R apply(T t)	        Arrays::asList, Integer::toBinaryString
+Predicate<T, U>	    boolean test(T t, U u)	String::isEmpty, Character::isDigit
+Supplier<T>	        T get()	                LocalDate::now, Instant::now, TreeMap::new
+Consumer<T>	        void accept(T t)	    System.out::println, Error::printStackTrace
 
 #Function Interface
 
@@ -176,6 +179,7 @@ public interface Supplier<T> {
     T get();
 }
 
+========================================QUICK GUIDE====================================================================
 #Lambda Expression
     Method Reference
     Constructor Reference
@@ -235,14 +239,117 @@ public interface Supplier<T> {
 
 
 #Java 8 Streams
-
-
+    #Types of Stream
+        Sequential
+        Parallel
+    #Stream<T>, IntStream, LongStream, DoubleStream
+        1) Stream has a source (creating stream) -
+            -static methods in Stream<T>
+                static <T> Stream<T> concat(Stream<T> s1, Stream<T> s2) static <T> Stream<T> empty()
+                static <T> Stream<T> generate(Supplier<T> supplier)
+                static <T> Stream<T> of(T element)
+                static <T> Stream<T> of(T... elements)
+                static <T> Stream<T> ofNullable(T element)
+                static <T> Stream<T> iterate(T seed, UnaryOperator<T> function)
+                static <T> Stream<T> iterate(T seed, Predicate<T> hasNext, UnaryOperator<T> f)
+            -Creating streams from arrays and collections Arrays class static method
+                public static <T> Stream<T> stream(T[] array)
+            -default methods in Collection<E>
+                default Stream<E> stream()
+                default Stream<E> parallelStream()
+            -Creating Stream (in API)
+                -method java.io.BufferedReader
+                    Stream<String> lines()
+                -methods in java.nio.file.Files
+                    static Stream<String> lines(Path path)
+                    static Stream<String> lines(Path path, Charset cs)
+                    static Stream<Path> list(Path dir)
+                    static Stream<Path> find(Path start, int maxDepth, BiPredicate<Path, BasicFileAttributes> matcher, FileVisitOption... options)
+                    static Stream<Path> walk(Path start, int maxDepth, FileVisitOption... options)
+                    static Stream<Path> walk(Path start, ileVisitOption... options)
+                -methods in CharSequence
+                    IntStream codePoints()
+                    IntStream chars()
+                -method in java.util.regex.Pattern
+                    Stream<String> splitAsStream(CharSequence input)
+                -method in java.util.regex.Matcher (from Java 9 onwards)
+                    Stream<MatchResult> results()
+        -(2,3,4)Stream operations are divided into intermediate and terminal operations, and are combined to form stream pipelines.
+        2) Stream as a pipeline of operations
+        3) Stream intermediate operations
+            Stream<T> distinct()
+            Stream<T> filter(Predicate<T> test)
+            Stream<T> skip(long n)
+            Stream<T> limit(long n)
+            Stream<T> dropWhile(Predicate<T> test) (Java 9 onwards)
+            Stream<T> takeWhile(Predicate<T> test) (Java 9 onwards)
+            <U> Stream<U> map(Function<T,U> mapper)
+            IntStream mapToInt(ToIntFunction<T> mapper)
+            LongStream mapToLong(ToLongFunction<T> mapper)
+            DoubleStream mapToDouble(ToDoubleFunction<T> f)
+            Stream<T> peek(Consumer<T> action)
+            Stream<T> sorted(Comparator<T> comparator)
+            <U> Stream<U> flatMap(Function<T,Stream<U> f)
+            IntStream flatMapToInt(Function<T, IntStream> f)
+            LongStream flatMapToLong(Function<T, LongStream> f)
+            DoubleStream flatMapToDouble(Function<T, DoubleStream> f)
+        4) Stream terminal operations
+            boolean allMatch(Predicate<T> test)
+            boolean anyMatch(Predicate<T> test)
+            boolean noneMatch(Predicate<T> test
+            long count()
+            Optional<T> max(Comparator<T> comparator)
+            Optional<T> min(Comparator<T> comparator)
+            int sum() for primitive variants
+            double average() for primitive variants
+            Optional<T> findFirst()
+            Optional<T> findAny()
+            void forEach(Consumer<T> action)
+            void forEachOrdered(Consumer<T> action)
+            Object[] toArray()
+            <A> A[] toArray(IntFunction<A[]> arrayCreator)
+            #reduce() (Advanced usage of Stream)
+                T reduce(T identity, BinaryOperator<T> accumulator)
+                Optional<T> reduce(BinaryOperator<T> accumulator)
+                <U> U reduce(U identity, BiFunction<U,T,U> accumulator, BinaryOperator<U> combiner)
+            #collect() (Advanced usage of Stream)
+                <R> R collect(Supplier<R> supplier, BiConsumer<R,T> accumulator, BiConsumer<R,R> combiner)
+                <R,A> R collect(Collector<T,A,R> collector)
+                    #The Collector<T,A,R>
+                        Supplier<A> supplier()
+                        BiConsumer<A,T> accumulator()
+                        BinaryOperator<A> combiner()
+                        Function<A,R> finisher()
+                    # Creating Collector using Collectors or Using Collectors
+                        averagingInt()
+                        averagingLong()
+                        averagingDouble()
+                        summingInt()
+                        summingLong()
+                        summingDouble()
+                        summarizingInt()
+                        summarizingLong()
+                        summarizingDouble()
+                        counting()
+                        maxBy()
+                        minBy()
+                        reducing()
+                        collectingAndThen()
+                        mapping()
+                        groupingBy()
+                        partitioningBy()
+                        toCollection()
+                        toSet()
+                        toList()
+                        toMap()
 
 #Java 8 Comparator<T>
     -Comparator factory methods
-        comparing and variants of primitives naturalOrder and reverseOrder
+        comparing and variants of primitives
+        naturalOrder and reverseOrder
         null friendly Comparator
-    -Combining Comparators thenComparing and reverse
+    -Combining Comparators
+        thenComparing and reverse
 
 #Java 8 Optional<T>
     Some convenient methods
@@ -274,3 +381,17 @@ public interface Supplier<T> {
     LongSummaryStatistics
     DoubleSummaryStatistics
     StringJoiner
+
+#Default methods in Collection<E> interface
+    public default void forEach(Consumer<E> action)
+    public default Spliterator<E> spliterator()
+    public default void removeIf(Predicate<E> test)
+    public default Stream<E> stream()
+    public default Stream<E> parallelStream(
+
+#Java 8 Date & Time (java.time package)
+    Clock and Instant
+    Duration, Period
+    LocalDate, LocalTime, LocalDateTime
+    ZonedDateTime, OffsetTime, OffsetDateTime
+    MonthDay, YearMonth, Year

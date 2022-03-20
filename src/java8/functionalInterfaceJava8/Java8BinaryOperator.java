@@ -114,6 +114,7 @@ public class Java8BinaryOperator {
                 result = accumulator.apply(result, t);
             }
         }
+
         return result;
     }
 
