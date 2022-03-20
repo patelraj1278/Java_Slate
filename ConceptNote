@@ -320,7 +320,7 @@ public interface Supplier<T> {
                         BiConsumer<A,T> accumulator()
                         BinaryOperator<A> combiner()
                         Function<A,R> finisher()
-                    # Creating Collector using Collectors or Using Collectors
+                    # Creating Collector using Collectors
                         averagingInt()
                         averagingLong()
                         averagingDouble()
@@ -387,7 +387,7 @@ public interface Supplier<T> {
     public default Spliterator<E> spliterator()
     public default void removeIf(Predicate<E> test)
     public default Stream<E> stream()
-    public default Stream<E> parallelStream(
+    public default Stream<E> parallelStream()
 
 #Java 8 Date & Time (java.time package)
     Clock and Instant
