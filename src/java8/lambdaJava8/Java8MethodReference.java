@@ -113,7 +113,7 @@ public class Java8MethodReference {
         // lambda
         // List<Invoice> invoices = fakeInvoice(list, (price) -> new Invoice(price));
 
-        // method reference
+        // method Reference
         List<Invoice> invoices = fakeInvoice(list, Invoice::new);
 
         invoices.forEach(System.out::println);

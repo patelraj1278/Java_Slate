@@ -400,3 +400,101 @@ public interface Supplier<T> {
     static methods in interfaces
     default methods in interfaces
     functional interfaces
+
+==========================================================================================
+#Java 8 Quick Snap Shot
+==========================================================================================
+    List
+        list.stream().collect(Collectors.toMap(Hosting::getId,Hosting::getName)); //Here To Map Need Key & Values
+        list.stream().collect(Collectors.toMap(Hosting::getName, Hosting::getWebsites, (existing,replacement) -> existing, TreeMap::new));
+        list.stream().sorted(Comparator.comparing(java8.collectorsJava8.Hosting::getWebsites).reversed())
+                        .collect(Collectors.toMap(Hosting::getName,Hosting::getWebsites,(oldValue,newValue) -> oldValue,LinkedHashMap
+                        ::new));
+        listDevs.sort((Developer o1, Developer o2)->o1.getNo().compareTo(o2.getNo()));
+        Comparator<Developer> cd = (o1, o2) -> o1.getNo().compareTo(o2.getNo()); /listDevs.stream().sorted(cd.reversed()).forEach(developer -> System.out.println(developer));
+        List<Integer> result = new ArrayList(map.keySet());
+        List<String> result2 = new ArrayList(map.values());
+        List<Integer> result1 = map1.keySet().stream().collect(Collectors.toList());
+        List<String> result3 = map1.values().stream().collect(Collectors.toList());
+        List<Integer> result4 = map1.keySet().stream().filter(x -> x != 10).collect(Collectors.toList());
+        list.stream().filter(v -> v!=null)
+                              .forEach(v -> {
+                                  System.out.println(v.toLowerCase());
+                              });
+
+
+    Map
+
+      strMap.forEach( (k,v) -> {
+                        if (k != null && v!= null) {
+                            System.out.println("Key : " + k + ", Value : " + v);
+                        }
+      map.entrySet().stream()
+                      //sort a Map by key and stored in resultSortedKey
+                      .sorted(Map.Entry.<Integer, String>comparingByKey().reversed())
+                      .peek(e -> resultSortedKey.add(e.getKey()))
+                      .map(x -> x.getValue())
+                      // filter banana and return it to resultValues
+                      .filter(x -> !"banana".equalsIgnoreCase(x))
+                      .collect(Collectors.toList());
+
+      unsortMap.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,(oldValue, newValue) -> oldValue, LinkedHashMap::new));
+      unsortMap.entrySet().stream()
+                      .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,(oldValue, newValue) -> oldValue, LinkedHashMap::new));
+      unsortMap.entrySet().stream()
+                      .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                      .forEachOrdered(x -> result2.put(x.getKey(), x.getValue()));
+      map.entrySet().stream()
+                      .filter(map -> "aws.amazon.com".equals(map.getValue()))
+                      .map(map -> map.getValue())
+                      .collect(Collectors.joining());
+      Map<Integer, String> collect = map.entrySet().stream()
+                      .filter(map -> map.getKey() == 2)
+                      .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+      Map<Integer, String> collect2 = HOSTING.entrySet().stream()
+                      .filter(map -> map.getKey() <= 3)
+                      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+      Map<Integer, String> filteredMap = filterByValue(HOSTING, x -> x.contains("linode"));
+                  System.out.println(filteredMap);
+       // Generic Map filterbyvalue, with predicate
+           public static <K, V> Map<K, V> filterByValue(Map<K, V> map, Predicate<V> predicate) {
+               return map.entrySet()
+                       .stream()
+                       .filter(x -> predicate.test(x.getValue()))
+                       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+
+      ForEach
+        list.stream().filter(Objects::nonNull).forEach(System.out::println);
+        list.stream().filter(v -> v!=null).forEach(v -> {System.out.println(v.toLowerCase());});
+
+
+      StringJoiner
+        StringJoiner sj = new StringJoiner(","); //aaa,bbb,ccc
+        StringJoiner sj1 = new StringJoiner("/", "prefix-", "-suffix"); //prefix-2016/02/26-suffix
+        String result1 = String.join(", ", list); //java, python, nodejs, ruby
+        String result = list.stream().map(x -> x).collect(Collectors.joining(" | ")); ////java | python | nodejs | ruby
+        String result1 = list1.stream().map(x -> x.getName()).collect(Collectors.joining(", ", "{", "}"));
+
+      Optional
+        Optional<String> gender = Optional.of("MALE"); / gender.get()
+        Optional.empty()
+        Optional.ofNullable(answer1)
+        Optional<String> nonEmptyGender = Optional.of("male"); /nonEmptyGender.map(String::toUpperCase)
+        Optional<Optional<String>> nonEmptyOtionalGender = Optional.of(Optional.of("male")); / nonEmptyOtionalGender.flatMap(gender -> gender.map(String::toUpperCase))
+
+      Concat
+        int[] result2 = IntStream.concat(Arrays.stream(int1), Arrays.stream(int2)).toArray();
+        int[] result3 = IntStream.concat(Arrays.stream(int1),IntStream.concat(Arrays.stream(int2), Arrays.stream(int3))).toArray();
+
+
+      References
+        Static Method Reference - list.forEach(SimplePrinter::print);
+        Instance Method Reference - list.sort(provider::compareByAge);
+        Constructor Reference - List<Invoice> invoices = fakeInvoice(list, Invoice::new);
+
+      Consumer
+          Consumer<Integer> consumer = (Integer x) -> System.out.println(x);
+          map.forEach((k, v) -> System.out.println(k + ":" + v));
