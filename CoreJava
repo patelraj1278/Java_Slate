@@ -1,0 +1,90 @@
+-OOPS Concepts
+    -Encapsulation in Java
+         Important points about encapsulation in Java.
+         1. "Whatever changes encapsulate it" is a famous design principle.
+         2. Encapsulation helps in loose coupling and high cohesion of code.
+         3. Encapsulation in Java is achieved using access modifiers private, protected, and public.
+         4. Factory pattern, Singleton pattern in Java makes good use of Encapsulation.
+    -Polymorphism in Java
+        -something which can take many forms
+        -In Java programming whole concept of interface is based on Polymorphism
+        -Java has excellent support of polymorphism in terms of Inheritance, method overloading, and method overriding.
+        -Method overriding allows Java to invoke a method based on a particular object at run-time instead of declared type while coding.
+        -Method overloading and method overriding use concept of Polymorphism in Java where method name remains the same in two classes but an actual method called by JVM depends upon an object at run time and done by dynamic binding in Java.
+    -Inheritance
+        -The class which extends another class becomes Child of the class it extends and inherits all its functionality which is not private or package-private given where Child class is created.
+        -Java Sub Class IS-A Super class like Mango IS-A Fruit.
+        -Inheritance in Java is supported using extends and implements keyword
+        -If you do not want to allow Inheritance for your class than you can make it final.
+        -Constructor in Java are not inherited by Sub Class. In face Constructors are chained, first statement in constructor is always a call to another constructor, either implicitly or explicitly. If you don't call any other constructor compiler will insert super(), which calls no argument constructor of super class in Java. this keyword represents the current instance of a class and the super keyword represent an instance of super class in Java.
+        -Private members of Super class is not visible to Sub class.
+        -Java has a special access modifier known as protected which is meant to support Inheritance in Java. Any protected member including protected method and field are only accessible in Child class or Sub class outside the package on which they are declared.
+        When to Use Inheritance ?
+            -Policy to decide whether to use Inheritance or not is to check "IS-A" relationship. For example, all above examples of Inheritance satisfy IS-A rule e.g. HashSet IS-A Set.
+             Conversely if you find HAS-A relationship between two classes than use Composition e.g. Car HAS-A Seat, So Car class should be composed with a Seat and Seat should not extend Car here.
+    -Abstraction
+        -An abstract class is something which is incomplete and you can not create an instance of the abstract class. If you want to use it you need to make it complete or concrete by extending it. A class is called concrete if it does not contain any abstract method and implements all abstract method inherited from the abstract class or interface it has implemented or extended.
+        -An abstract method in Java doesn't have the body , it's just a declaration. In order to use an abstract method, you need to override that method in sub class.
+        -when do you use abstraction? ( most important in my view )
+            when you know something needs to be there but not sure how exactly it should look like.
+        -Abstraction Using Interface in Java.Interfaces are by default abstract and only contains public, static, final constant or abstract methods
+        -ABSTRACT - If you know some of the behavior while designing class and that would remain common across all subclasses add that into an abstract class.
+        -INTERFACE - you can go for java interface if you only know the name of methods your class should have e.g. for Server it should have start() and stop() method but we don't know how exactly these start and stop method will work.
+        -It's not necessary for an abstract class to have abstract method. We can mark a class as abstract even if it doesn't declare any abstract methods
+
+
+
+
+
+
+Overloading & Overriding
+Static binding & Dynamic Binding
+Abstract class & Interface
+this & super keyword in Java
+Private Method
+Static Method
+Final Method
+Exception
+String Class
+Immutable Class & Object
+Comparator & Comparable
+Equals & Hashcode Method
+Enum
+Singleton
+Collection Interface
+Thread Concept
+Transient & Volatile Keyword
+Serialization
+IO Concept
+JDK Version
+Dead Lock & Race Condition
+JVM
+When class is loaded
+Design Pattern
+
+
+Java Pass by Value & Pass by Reference
+Composition In Java
+Nested classes
+Access modifier
+
+DataTypes
+Try-Catch-Finally
+Member Types : instance variables, class variables, intance method, class method (static) , contructors,initilizer block,class initilizer block, static nested class,inner class,member interface
+Object class
+Member of Interface
+
+
+#Concept Hacks
+
+-the public class name must match the file name
+-Method overloading is resolved using static binding in Java at compile time while method overriding is resolved using dynamic binding in Java at runtime.
+-You can not override static, final, and private methods in Java but you can overload static, final, or private methods in Java.
+-The overriding method can not throw a higher Exception than the original or overridden method.This means if the original method throws IOException then the overriding method can not throw super class of IOException like Exception but it can throw any sub-class of IOException or simply does not throw an Exception.This rule only applies to check Exception in Java, overridden method is free to throw any unchecked Exception.
+-you're allowed to change the return type in the overriding method as long as the new return type is a subtype of the declared return type of the overridden (super class)
+class Alpha { Alpha doStuff(char c) { return new Alpha(); } } class Beta extends Alpha { Beta doStuff(char c) { // legal override in Java 1.5 return new Beta(); } }
+-Classical example of Constructor overloading is ArrayList in Java. ArrayList has three constructors one is empty, the other takes a collection object and one takes initial Capacity. these overloaded constructors allow flexibility while creating an ArrayList object.
+-Static binding in Java occurs during Compile time while Dynamic binding occurs during Runtime.private, final and static methods and variables use static binding and are bonded by the compiler while virtual methods are bonded during runtime based upon runtime object.
+-Static binding uses Type(Class in Java)  information for binding while Dynamic binding uses Object to resolve to bind.
+-Overloaded methods are bonded using static binding while overridden methods are bonded using dynamic binding at runtime.
+

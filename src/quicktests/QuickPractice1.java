@@ -73,6 +73,25 @@ public class QuickPractice1 {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,(oldValue, newValue) -> oldValue, LinkedHashMap::new));
         sortedempMapWithKey.forEach((k,v) -> System.out.println(k+""+v));
 
+        int[] inputArray = {1,2,3,4};
+        List<Integer> newList = Arrays.stream(inputArray).boxed().collect(Collectors.toList());
+        Integer i = newList.stream().max(Comparator.naturalOrder()).get();
+        List<Integer> newList1 =newList.stream().filter(a -> a > 2).collect(Collectors.toList());
+
+        newList.forEach(System.out::println);
+        System.out.println(i);
+        newList1.forEach(System.out::println);
+
+        int[] intArray1 = {3, 6, -2, -5, 7, 3};
+
+        List<Integer> bucket = new ArrayList<>();
+        Arrays.stream(intArray1).reduce((a,b) -> {
+            bucket.add(a*b);
+            return b;
+        });
+        bucket.forEach(System.out::println);
+        System.out.println(bucket.stream().max(Comparator.naturalOrder()));
+        System.out.println(bucket.stream().max(Integer::compareTo));
     }
 
 
