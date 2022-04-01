@@ -144,3 +144,39 @@ public class SynchornizationMistakes {
     }
 }
 #Final Keyword in Java
+-Once you make a reference final you are not allowed to change that reference and compiler will verify this and raise a compilation error if you try to re-initialized final variables in Java.
+-Final variables are by default read-only.
+-A Java method with the final keyword is called a final method and it can not be overridden in the subclass.You should make a method final in Java if you think it’s complete and its behavior should remain constant in sub-classes.
+-Java class with the final modifier is called the final class in Java. The final class is complete in nature and can not be sub-classed or inherited.
+-Final keyword improves performance. Not just JVM can cache the final variables but also applications can cache frequently use final variables
+-Final variables are safe to share in a multi-threading environment without additional synchronization overhead.
+-Final keyword allows JVM to an optimized method, variable or class.
+-Final keyword helps to write an immutable class. Immutable classes are the one which can not be modified once it gets created and String is a primary example of an immutable and final class
+-The local final variable must be initialized during declaration.
+-All variables declared inside the Java interface are implicitly final
+-Final and abstract are two opposite keywords and a final class can not be abstract in Java.
+-Final methods are bonded during compile time also called static binding.
+-Making a collection reference variable final means only reference can not be changed but you can add, remove or change object inside collection.
+private final List loans = new ArrayList();
+loans.add(“home loan”);  //valid
+loans.add("personal loan"); //valid
+loans = new Vector();  //not valid
+#Checked vs Unchecked Exception in Java
+-Checked Exception in Java is all those Exception which requires being catches and handled during compile time.
+-All the Exception which are direct sub Class of Exception but not inherit RuntimeException are Checked Exception.
+-Example of checked Exception in Java API
+ Following are some Examples of Checked Exception in Java library:
+ IOException
+ SQLException
+ DataAccessException
+ ClassNotFoundException
+ InvocationTargetException
+-Unchecked Exception in Java is those Exceptions whose handling is not verified during Compile time. Unchecked Exceptions mostly arise due to programming errors like accessing the method of a null object, accessing elements outside an array bonding, or invoking methods with illegal arguments.
+Example of unchecked Exception in Java API
+Here are few examples of Unchecked Exception in Java library:
+NullPointerException
+ArrayIndexOutOfBound
+IllegalArgumentException
+IllegalStateException
+
+
