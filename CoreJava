@@ -126,3 +126,5 @@ Example of marker interface is Serializable, Cloneable, and Remote interface.Loo
 -Nested static class in Java is a static member of any top level class.
 -Since to create instance of any nested class you require instance of outer class but that is not required in case of static nested class in Java.You can have an instance of nested static class without any instance of outer class.
 -Normally we make a class static in Java when we want a single resource to be shared between all instances
+#Static and non-static synchronized method Java
+-For those who are not familiar static synchronized method locked on class object e.g. for string class, it's String.class while instance synchronized method locks on the current instance of Object denoted by “this” keyword in Java.Since both of these objects are different they have a different lock so while one thread is executing the static synchronized method, the other thread in java doesn’t need to wait for that thread to return instead it will acquire a separate lock denoted byte .class literal and enter into the static synchronized method.
