@@ -118,6 +118,8 @@ Example of marker interface is Serializable, Cloneable, and Remote interface.Loo
 -you can not use non-static variable inside a static method.it will result in compilation error.
 -Static variables are bonded using static binding at compile time so they are comparatively faster than there non-static counter part which were bonded during runtime.
 -static variable initialized when class is loaded into JVM on the other hand instance variable has a different value for each instance and they get created when an instance of an object is created either by using the new() operator or using reflection like Class.newInstance().So if you try to access a non-static variable without any instance compiler will complain because those variables are not yet created and they don't have any existence until an instance is created and they are associated with any instance
+-A static variable is shared by all instances of the class, while an instance variable is unique to each instance of the class.
+-A static variable's memory is allocated at compile time, they are loaded at load time and initialized at class initialization time. In the case of an instance variable all of the above is done at run time.
 -You can still access any non-static variable inside any static method or block by creating an instance of class in Java and using that instance to reference instance variable. This is the only legitimate way to access non static variable on static context.
 -Static fields are initialized at the time of class loading in Java, opposite to instance variable which is initialised when you create instance of a particular class.
 -Static keyword can also be used to create static block in Java which holds piece of code to executed when class is loaded in Java.
@@ -126,5 +128,18 @@ Example of marker interface is Serializable, Cloneable, and Remote interface.Loo
 -Nested static class in Java is a static member of any top level class.
 -Since to create instance of any nested class you require instance of outer class but that is not required in case of static nested class in Java.You can have an instance of nested static class without any instance of outer class.
 -Normally we make a class static in Java when we want a single resource to be shared between all instances
-#Static and non-static synchronized method Java
+#Mixing - Static and non-static synchronized method Java
 -For those who are not familiar static synchronized method locked on class object e.g. for string class, it's String.class while instance synchronized method locks on the current instance of Object denoted by “this” keyword in Java.Since both of these objects are different they have a different lock so while one thread is executing the static synchronized method, the other thread in java doesn’t need to wait for that thread to return instead it will acquire a separate lock denoted byte .class literal and enter into the static synchronized method.
+public class SynchornizationMistakes {
+    private static int count = 0;
+
+    //locking on this object lock
+    public synchronized int getCount(){
+        return count;
+    }
+
+    //locking on .class object lock
+    public static synchronized void increment(){
+        count++;
+    }
+}
