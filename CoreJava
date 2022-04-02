@@ -182,4 +182,37 @@ IllegalStateException
 -compareTo in Java is in the same league of equals() and hashcode() and used to implement natural order of object, compareTo is slightly different to compare() method of Comparator interface which is used to implement custom sorting order.
 -compareTo() method is defined in interface java.lang.Comparable and it is used to implement natural sorting on java classes. natural sorting means the sort order which naturally applies on object e.g. lexical order for String, numeric order for Integer or Sorting employee by there ID, etc
 -CompareTo method must return negative number if current object is less than other object, positive number if current object is greater than other object and zero if both objects are equal to each other.
+#Equal and Hashcode
+-equals() method is used to compare Objects for equality while hashCode is used to generate an integer code corresponding to that object.
+-Default implementation of equals() class provided by java.lang.Object compares memory location and only return true if two reference variable is pointing to the same memory location i.e. essentially they are the same object.
+-HashMap and Hashtable in Java rely on the equals() and hashCode() method for comparing keys and values
+#Equals and hashCode contract in Java
+Equals Rule
+1) Reflexive: Object must be equal to itself.
+2) Symmetric : if a.equals(b) is true then b.equals(a) must be true.
+3) Transitive : if a.equals(b) is true and b.equals(c) is true then c.equals(a) must be true.
+if((obj == null) || (obj.getClass() != this.getClass())) { return false; }
+
+Hashcode Rule
+1) If two objects are equal by equals() method then there hashcode must be same.
+2) If two objects are not equal by equals() method then there hashcode could be same or different.
+
+
+#Enum
+-A feature that is used to represent a fixed number of well-known values in Java
+-The best feature of Enum is you can use Enum in Java inside Switch statements like int or char primitive data type.
+-Two new collection classes EnumMap and EnumSet are added to the collection package to support Java Enum.These classes are a high-performance implementation of the Map and Set interface in Java and we should use this whenever there is an opportunity.
+Enum in Java is type-safe, provides meaningful String names and has their own namespace
+Enum constants - Enum constants are implicitly static and final and you can not change their value once created.
+Enum is type-safe you can not assign anything else other than predefined Enum constants to an Enum variable. It is a compiler error to assign something else
+Enum in Java are reference types like class or interface and you can define constructor, methods, and variables inside java Enum which makes it more powerful than Enum
+Enum - Variable
+Enum - Method
+Enum - Constructor - The constructor of the enum in java must be private any other access modifier will result in a compilation error.You can not create an instance of enums by using a new operator
+Enum Instance - An instance of Enum in Java is created when any Enum constants are first called or referenced in code.
+Enum Interface - An instance of Enum in Java is created when any Enum constants are first called or referenced in code.
+Enum Abstract Method - You can define abstract methods inside Enum in Java.and can also provide a different implementation for different instances of enum in java.
+Enum built-in Method - Enum has so many useful built-in methods like values(), the valueOf(), name(), and ordinal(),
+Enum can override methods also.
+Real-world Examples of Enum in Java - Enum as Thread Safe Singleton,Strategy Pattern using Enum,Enum as replacement of Enum String or int pattern,Enum as State Machine
 
