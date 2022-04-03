@@ -26,5 +26,6 @@ public class ExceptionExample {
     {
         Parent childObject = new Child();
         childObject.display();
+
     }
 }
