@@ -87,10 +87,11 @@ Member of Interface
 class Alpha { Alpha doStuff(char c) { return new Alpha(); } } class Beta extends Alpha { Beta doStuff(char c) { // legal override in Java 1.5 return new Beta(); } }
 #Constructor Overloading
 -Classical example of Constructor overloading is ArrayList in Java. ArrayList has three constructors one is empty, the other takes a collection object and one takes initial Capacity. these overloaded constructors allow flexibility while creating an ArrayList object.
-#Static Binding vs Dynamic Binding
+#Static Binding vs Dynamic Binding - https://javahungry.blogspot.com/2018/11/method-overriding-in-java-with-examples.html
 -Static binding in Java occurs during Compile time while Dynamic binding occurs during Runtime.private, final and static methods and variables use static binding and are bonded by the compiler while virtual methods are bonded during runtime based upon runtime object.
 -Static binding uses Type(Class in Java)  information for binding while Dynamic binding uses Object to resolve to bind.
 -Overloaded methods are bonded using static binding while overridden methods are bonded using dynamic binding at runtime.
+#Variable Shadowing & Hiding - https://javahungry.blogspot.com/2020/02/variable-shadowing-and-variable-hiding.html
 #Interface
 -the interface is the only way to implement multiple inheritances at the Type level.
 -All variables declared inside interface is implicitly public final variable or constants.
@@ -179,6 +180,11 @@ NullPointerException
 ArrayIndexOutOfBound
 IllegalArgumentException
 IllegalStateException
+
+Rule 1. The overriding method can throw any unchecked(runtime) exception regardless of whether the overridden method declares the exception.
+Rule 2. The overriding method must not throw checked exceptions that are new or broader than those declared by the overridden method. For example, a method that declares a FileNotFoundException can not be overridden by a method that declares a SQLException, Exception, or any other non-runtime exception unless it's a subclass of FileNotFoundException.
+The overriding method can throw narrower or fewer exceptions. Just because an overridden method "takes risks" doesn't mean that the overriding subclass' exception takes the same risks.
+Bottom line: an overriding method doesn't have to declare any exceptions that it will never throw, regardless of what the overridden method declares.
 #How to write immutable class in Java
 -This Java class is immutable because its state can not be changed once created. You can see that all of it’s fields are final.
 -Immutable objects are by default thread safe, can be shared without synchronization in concurrent environment.
