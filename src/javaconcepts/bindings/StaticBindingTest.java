@@ -8,7 +8,14 @@ public class StaticBindingTest {
         Collection c = new HashSet();
         StaticBindingTest et = new StaticBindingTest();
         et.sort(c);
+        // Creating objects of static inner classes
+        // inside main() method
+        superclass A = new superclass();
+        superclass B = new subclass();
 
+        // Calling method over above objects
+        A.print();
+        B.print();
     }
 
     //overloaded method takes Collection argument
@@ -22,6 +29,34 @@ public class StaticBindingTest {
     public Collection sort(HashSet hs){
         System.out.println("Inside HashSet sort method");
         return hs;
+    }
+
+    // Static nested inner class
+    // Class 1
+    public static class superclass {
+
+        // Method of inner class
+        static void print()
+        {
+
+            // Print statement
+            System.out.println(
+                    "print() in superclass is called");
+        }
+    }
+
+    // Static nested inner class
+    // Class 2
+    public static class subclass extends superclass {
+
+        // Method of inner class
+        static void print()
+        {
+
+            // print statement
+            System.out.println(
+                    "print() in subclass is called");
+        }
     }
 
 }

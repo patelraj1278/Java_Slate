@@ -107,6 +107,11 @@ Example of marker interface is Serializable, Cloneable, and Remote interface.Loo
 #Private Keyword
 -Private members (both fields and methods) are only accessible inside class they are declared or inside inner classes.
 -Top level classes can not be private in Java.
+-private methods are well encapsulated in class
+-you cannot override private methods in Java
+-private keyword can be applied to fields, methods and inner class in Java.
+-private methods or variables are not accessible outside of Class, they can be accessed via reflection by using setAccessible(true) and changing there private visibility.
+-private members allows Compiler and JVM to optimize it for better performance.
 #Static Variable,Static Method,Static Nested Class in Java
 -Can create static method, static class and static variable in Java
 -static keyword is like any other keyword a simple keyword which can be applied to Java method , nested class or member variable inside a class. static variable in Java belong to whole Class than individual Object
@@ -186,6 +191,7 @@ IllegalStateException
 -equals() method is used to compare Objects for equality while hashCode is used to generate an integer code corresponding to that object.
 -Default implementation of equals() class provided by java.lang.Object compares memory location and only return true if two reference variable is pointing to the same memory location i.e. essentially they are the same object.
 -HashMap and Hashtable in Java rely on the equals() and hashCode() method for comparing keys and values
+
 #Equals and hashCode contract in Java
 Equals Rule
 1) Reflexive: Object must be equal to itself.
