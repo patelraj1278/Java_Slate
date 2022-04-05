@@ -318,8 +318,56 @@ Thread State -NEW,RUNNABLE,WAIT,TIMED WAIT,BLOCK,TERMINATED
 Difference between Daemon and Non-Daemon thread in Java
     1) JVM doesn't wait for any daemon thread to finish before existing.
     2) Daemon Thread is treated differently than User Thread when JVM terminates, finally, blocks are not called, Stacks are not unwounded and JVM just exits.
--Difference between Wait and Sleep, Yield in Java -sleep() and yield() methods are defined in thread class while wait() is defined in the Object class.
+-Difference between Wait and Sleep, Yield in Java -
+-sleep() and yield() methods are defined in thread class while wait() is defined in the Object class.
 -This difference is more obvious from the fact that, when a thread calls the wait() method, it releases the monitor or lock it was holding on that object, but when a thread calls the sleep() method, it never releases the monitor even if it is holding.
 -yield(), it's little different than wait() and sleep(), it just releases the CPU hold by Thread to give another thread an opportunity to run though it's not guaranteed who will get the CPU.It totally depends upon thread scheduler and it's even possible that the thread which calls the yield() method gets the CPU again.
 -Thread.sleep() method is a static method and applies on the current thread, while wait() is an instance-specific method and only got wake up if some other thread calls notify method on the same object. waiting thread can be awake by calling notify and notifyAll while sleeping thread can not be awakened by calling notify method.
 -The major difference between yield and sleep in Java is that yield() method pauses the currently executing thread temporarily for giving a chance to the remaining waiting threads of the same priority to execute. If there is no waiting thread or all the waiting threads have a lower priority then the same thread will continue its execution.
+-Unlike wait() method in Java, sleep() method of Thread class doesn't relinquish the lock it has acquired.
+
+Sleep (Thread Class static method)- sleep() method of Thread class doesn't relinquish the lock it has acquired.
+Yield (Thread Class instance method)- Release CPU hold by Thread to give another thread an opportunity to run.it's even possible that the thread which calls the yield() method gets the CPU again.
+Wait (Object Class instance method)- when a thread calls the wait() method, it releases the monitor or lock it was holding on that object
+Notify,NotifyAll (Object Class instance method)-  Wait and notify is not just normal methods or synchronization utility, more than that they are communication mechanism between two threads in Java. And Object class is the correct place to make them available for every object if this mechanism is not available via any java keyword like synchronized.
+Join - This java thread join method puts the current thread on wait until the thread on which it’s called is dead. If the thread is interrupted, it throws InterruptedException.
+
+-Wait and notify is not just normal methods or synchronization utility, more than that they are communication mechanism between two threads in Java. And Object class is the correct place to make them available for every object if this mechanism is not available via any java keyword like synchronized.
+-Locks are made available on per Object basis, which is another reason wait and notify is declared in Object class rather then Thread class.
+-if we don't call wait() or notify() method from synchronized context we will receive IllegalMonitorStateException in Java
+-wait(), notify(), or notifyAll() method mostly for inter-thread communication in Java
+-Calling notify() or notifyAll() methods issues a notification to a single or multiple threads that a condition has changed and once the notification thread leaves the synchronized block, all the threads which are waiting for fight for object lock on which they are waiting and lucky thread returns from wait() method after reacquiring the lock and proceed further.
+-notify() method doesn't provide any way to choose a particular thread, that's why it's only useful when you know that there is only one thread is waiting.
+-notifyAll() sends a notification to all threads and allows them to compete for locks, which ensures that at least one thread will proceed further.
+
+Produce Consumer thread example to understand the scenario better:
+
+   1. The Producer thread tests the condition (buffer is full or not) and confirms that it must wait (after finding buffer is full).
+
+   2. The Consumer thread sets the condition after consuming an element from a buffer.
+
+   3. The Consumer thread calls the notify () method; this goes unheard since the Producer thread is not yet waiting.
+
+   4. The Producer thread calls the wait () method and goes into a waiting state.
+
+How to Stop Thread in Java-
+    Earlier there was a stop method that exists in Thread Class but Java deprecated that method citing some safety reasons.
+    Using a flag to stop Thread is a very popular way of stopping the thread and it's also safe because it doesn't do anything special rather than helping run() method to finish itself.
+    Thread in Java will stop once the run() method is finished. Another important point is that you can not restart a Thread which run() method has finished already, you will get an IllegalStateException
+Processes vs Threads -
+    Threads are used for small tasks, whereas processes are used for more ‘heavyweight’ tasks – basically the execution of applications.
+    a thread could be considered a ‘lightweight’ process
+    a process can consist of multiple threads,
+
+Volatile Keyword
+-You can use the Volatile variable if you want to read and write long and double variables atomically. long and double both are 64-bit data types and by default writing of long and double is not atomic and platform dependence.
+-A volatile variable can be used as an alternative way of achieving synchronization in Java in some cases, like Visibility. with volatile variable, it's guaranteed that all reader threads will see the updated value of the volatile variable once the write operation is completed, without volatile keyword different reader thread may see different values.
+-volatile variable can be used to inform the compiler that a particular field is subject to be accessed by multiple threads, which will prevent the compiler from doing any reordering or any kind of optimization which is not desirable in a multi-threaded environment.
+
+Transient vs Volatile
+-transient keyword is used along with instance variables to exclude them from the serialization process. if a field is transient its value will not be persisted.For example, if you have a field called "interest" whose value can be derived from other fields like principal, rate, time, etc then there is no need to serialize it.Another good example of a transient keyword is "Logger" since most of the time you have a logger instance for logging in Java but you certainly don't want it to serialize
+- volatile keyword can also be used in variables to indicate compiler and JVM that always read its value from the main memory and follow happens-before relationship on the visibility of volatile variables among multiple threads.Volatile only ensures that the access is atomically, while Atomics ensure that the operation is atomically
+
+-Callable's call() method can return value and throw Exception, which was not possible with Runnable's run() method.
+-A FutureTask object can be used to wrap a Callable or Runnable object. Since FutureTask also implements Runnable, it can be submitted to an Executor for execution.The result can only be retrieved when the computation has been completed; the get methods will block if the computation has not yet been completed.
+
