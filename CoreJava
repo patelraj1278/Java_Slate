@@ -364,10 +364,26 @@ Volatile Keyword
 -A volatile variable can be used as an alternative way of achieving synchronization in Java in some cases, like Visibility. with volatile variable, it's guaranteed that all reader threads will see the updated value of the volatile variable once the write operation is completed, without volatile keyword different reader thread may see different values.
 -volatile variable can be used to inform the compiler that a particular field is subject to be accessed by multiple threads, which will prevent the compiler from doing any reordering or any kind of optimization which is not desirable in a multi-threaded environment.
 
+Serialization
+-Java serialization is the process which is used to serialize an object in java by storing an object’s state into a file with an extension .ser and recreating object's state from that file, this reverse process is called deserialization.
+-Object Serialization in Java is a process used to convert Object into a binary format which can be persisted into a disk or sent over the network to any other running Java virtual machine;the reverse process of creating object from the binary stream is called deserialization in Java.
+-Java provides Serialization API for serializing and deserializing object which includes java.io.Serializable, java.io.Externalizable, ObjectInputStream and ObjectOutputStream etc.
+-Making a class Serializable in Java is very easy, Your Java class just needs to implements java.io.Serializable interface and JVM will take care of serializing objects in the default format.
+-It doesn't have any method and also called Marker Interface in Java.
+-If you don't want any field to be part of object's state then declare it either static or transient based on your need and it will not be included during Java serialization process.
+-Java Serialization is done by java.io.ObjectOutputStream class.To store any object via serialization mechanism we call ObjectOutputStream.writeObject(saveThisobject) and to deserialize that object we call ObjectInputStream.readObject() method.
+
+
+Transient Keyword
+Static variables are not serialized ( atleast with standard serializers ) so there is no sense marking a variable static as well as transient.
+Marking final variable as transient will disable its participation in serialization or deserialization. Final has no relevance with transient in terms of serialization.
+
 Transient vs Volatile
 -transient keyword is used along with instance variables to exclude them from the serialization process. if a field is transient its value will not be persisted.For example, if you have a field called "interest" whose value can be derived from other fields like principal, rate, time, etc then there is no need to serialize it.Another good example of a transient keyword is "Logger" since most of the time you have a logger instance for logging in Java but you certainly don't want it to serialize
-- volatile keyword can also be used in variables to indicate compiler and JVM that always read its value from the main memory and follow happens-before relationship on the visibility of volatile variables among multiple threads.Volatile only ensures that the access is atomically, while Atomics ensure that the operation is atomically
+-volatile keyword can also be used in variables to indicate compiler and JVM that always read its value from the main memory and follow happens-before relationship on the visibility of volatile variables among multiple threads.Volatile only ensures that the access is atomically, while Atomics ensure that the operation is atomically
 
+
+Thread Concurrency -Callable & FutureTask
 -Callable's call() method can return value and throw Exception, which was not possible with Runnable's run() method.
 -A FutureTask object can be used to wrap a Callable or Runnable object. Since FutureTask also implements Runnable, it can be submitted to an Executor for execution.The result can only be retrieved when the computation has been completed; the get methods will block if the computation has not yet been completed.
 
