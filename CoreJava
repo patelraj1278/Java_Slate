@@ -281,3 +281,45 @@ Note : Use String if you require immutability, use StringBuffer in java if you n
 What is the String pool in Java? -When the Java program creates a new String using String literal, JVM checks for that String in the pool and if String literal is already present in the pool then the same object is returned instead of creating a whole new object.
 String pool check is only performed when you create String as literal, if you create String using the new() operator, a new String object will be created even if String with the same content is available in the pool.
 Intern method : the String object created by the new() operator is by default not added in the String pool as opposed to String literal. The intern method allows putting a String object into a pool.
+
+
+#Thread
+-Thread vs Runnable - Java doesn't support multiple inheritances, which means you can only extend one class in Java so once you extended the Thread class you lost your chance and can not extend or inherit another class in Java.
+The Runnable interface represents a Task that can be executed by either plain Thread or Executors or any other means. so logical separation of Task as Runnable than Thread is a good design decision.
+-How to make Thread in Java?
+There are two ways of implementing threading in Java
+1) By extending java.lang.Thread class, or
+2) By implementing java.lang.Runnable interface. -> Override public void run() method
+-Java thread is state based so it remains in predefined state at any given time and state transition occurs by calling different thread method.
+-Thread will be said to go on dead state once execution of run() method finished and you can not start that thread again.
+-you can not call start() method twice on the thread object.once started, the second call of start() will throw IllegalStateException
+-only difference between the start() and run() method in Thread is that start creates a new thread while the run doesn't create any thread and simply executes in the current thread like a normal method call.
+Thread State -NEW,RUNNABLE,WAIT,TIMED WAIT,BLOCK,TERMINATED
+-Make code Thread-Safe in Java -
+    Use the synchronized keyword in Java ,
+    Use Atomic Integer since atomic operations are thread-safe,
+    Immutable objects are by default thread-safe because their state can not be modified once created e.g. Read-only or final variables in Java
+    Atomic operations in Java are thread-safe
+    local variables are also thread-safe because each thread has there own copy
+    Volatile keyword in Java can also be used to instruct thread not to cache variables and read from main memory and can also instruct JVM not to reorder or optimize code from threading perspective.
+    Example of thread-safe class in Java: Vector, Hashtable, ConcurrentHashMap, String, etc.
+-Synchronization in Java is possible by using the Java keywords "synchronized" and "volatile”.
+-Concurrent access of shared objects in Java introduces two kinds of errors: thread interference and memory consistency errors and to avoid these errors you need to properly synchronize your Java object to allow mutual exclusive access of critical section to two threads.
+-The synchronized keyword in Java provides locking, which ensures mutually exclusive access to the shared resource and prevents data race.
+-synchronized keyword involves locking and unlocking. before entering into a synchronized method or block thread needs to acquire the lock, at this point it reads data from main memory than cache and when it releases the lock, it flushes write operation into main memory which eliminates memory inconsistency errors.
+-Instead of synchronized variable in Java, you can have java volatile variable, which will instruct JVM threads to read the value of the volatile variable from main memory and don’t cache it locally.
+-Block synchronization in Java is preferred over method synchronization
+-static synchronized method locked on class object lock and nonstatic synchronized method locks on current object (this).
+-you can not use Java synchronized keyword with constructor
+-You cannot apply java synchronized keyword with variables
+-Daemon thread in Java is those thread that runs in the background and is mostly created by JVM for performing background tasks like Garbage collection and other housekeeping tasks.
+-Any thread created by the main thread, which runs the main method in Java is by default non-daemon because Thread inherits its daemon nature from the Thread which creates.It will remain non-daemon until explicitly made daemon by calling setDaemon(true).
+-Thread.setDaemon(true) makes a Thread daemon but it can only be called before starting Thread in Java. It will throw IllegalThreadStateException if the corresponding Thread is already started and running.
+Difference between Daemon and Non-Daemon thread in Java
+    1) JVM doesn't wait for any daemon thread to finish before existing.
+    2) Daemon Thread is treated differently than User Thread when JVM terminates, finally, blocks are not called, Stacks are not unwounded and JVM just exits.
+-Difference between Wait and Sleep, Yield in Java -sleep() and yield() methods are defined in thread class while wait() is defined in the Object class.
+-This difference is more obvious from the fact that, when a thread calls the wait() method, it releases the monitor or lock it was holding on that object, but when a thread calls the sleep() method, it never releases the monitor even if it is holding.
+-yield(), it's little different than wait() and sleep(), it just releases the CPU hold by Thread to give another thread an opportunity to run though it's not guaranteed who will get the CPU.It totally depends upon thread scheduler and it's even possible that the thread which calls the yield() method gets the CPU again.
+-Thread.sleep() method is a static method and applies on the current thread, while wait() is an instance-specific method and only got wake up if some other thread calls notify method on the same object. waiting thread can be awake by calling notify and notifyAll while sleeping thread can not be awakened by calling notify method.
+-The major difference between yield and sleep in Java is that yield() method pauses the currently executing thread temporarily for giving a chance to the remaining waiting threads of the same priority to execute. If there is no waiting thread or all the waiting threads have a lower priority then the same thread will continue its execution.
