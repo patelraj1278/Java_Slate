@@ -382,8 +382,33 @@ Transient vs Volatile
 -transient keyword is used along with instance variables to exclude them from the serialization process. if a field is transient its value will not be persisted.For example, if you have a field called "interest" whose value can be derived from other fields like principal, rate, time, etc then there is no need to serialize it.Another good example of a transient keyword is "Logger" since most of the time you have a logger instance for logging in Java but you certainly don't want it to serialize
 -volatile keyword can also be used in variables to indicate compiler and JVM that always read its value from the main memory and follow happens-before relationship on the visibility of volatile variables among multiple threads.Volatile only ensures that the access is atomically, while Atomics ensure that the operation is atomically
 
+Atomicity, Visibility and Ordering
+Atomicity - : it is usually thought of in terms of mutual exclusion.
+Visibility - Visibility determines when the effects of one thread can be seen by another.
+Ordering - Ordering determines when actions in one thread can be seen to occur out of order with respect to another.
+
+Advantage of a new Lock interface
+-The major advantage of lock interfaces on multi-threaded and concurrent programming is they provide two separate locks for reading and writing which enables you to write high-performance data structures
+
+Common problems you have faced in multi-threading environment
+-Memory-interference, race conditions, deadlock, livelock, and starvation are an example of some problems comes in multi-threading and concurrent programming.
 
 Thread Concurrency -Callable & FutureTask
 -Callable's call() method can return value and throw Exception, which was not possible with Runnable's run() method.
 -A FutureTask object can be used to wrap a Callable or Runnable object. Since FutureTask also implements Runnable, it can be submitted to an Executor for execution.The result can only be retrieved when the computation has been completed; the get methods will block if the computation has not yet been completed.
+-The main difference between these two is that Callable's call() method can return value and throw Exception, which was not possible with Runnable's run() method. Callable return Future object, which can hold the result of the computation.
+
+
+Thread Pool
+-Thread pool is a pool of already created worker thread ready to do the job.
+-Thread pool in Java is a pool of worker threads, which is ready to perform any task given to them, mostly in the form of implementation of Runnable or Callable interface.
+-One example of using a thread pool is creating a web server, which processes client requests.
+-If only one thread is used to process client requests then it subsequently limits how many clients can access the server concurrently. In order to support a large number of clients, you may decide to use one thread per request paradigm, in which each request is processed by a separate thread, but this requires Thread to be created when the request arrived.  Since the creation of Thread is a time-consuming process, it delays request processing.
+It also limits the number of clients based upon how many threads per JVM is allowed, which is obviously a limited number. Thread pool solves this problem for you, It creates Threads and manages them. Instead of creating Thread and discarding them once the task is done, thread-pool reuses threads in form of a worker thread.
+-The core of this thread pool framework is Executor interface which defines an abstraction of task execution with method execute(Runnable task) and ExecutorService which extends Executor to add various life-cycle and thread pool management facilities like shutting down thread pool.
+-Executor framework also provides a static utility class called Executors ( similar to Collections) which provides several static factory methods to create various types of Thread Pool implementation in Java e.g. fixed-size thread pool, cached thread pool, and scheduled thread pool. Runnable and Callable interfaces are used to represent tasks executed by worker thread managed in these Thread pools.
+
+
+ConcurrentHashMap - https://javarevisited.blogspot.com/2020/09/10-examples-of-concurrenthashmap-in-java.html#axzz7PaXJVRPl
+putIfAbsent- This is a useful method that can be used to only insert elements if it's not already present in the map or dictionary. 
 

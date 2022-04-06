@@ -15,10 +15,13 @@ public class BlockingQueueExample {
 }
 
 
-class Producer extends Thread { private BlockingQueue<Integer> sharedQueue;
+class Producer extends Thread {
+    private BlockingQueue<Integer> sharedQueue;
     public Producer(BlockingQueue<Integer> aQueue) {
         super("PRODUCER"); this.sharedQueue = aQueue;
-    } public void run() {
+    }
+
+    public void run() {
         // no synchronization needed
         for (int i = 0; i < 10; i++) {
             try {
@@ -35,7 +38,9 @@ class Consumer extends Thread {
     private BlockingQueue<Integer> sharedQueue;
     public Consumer(BlockingQueue<Integer> aQueue) {
         super("CONSUMER"); this.sharedQueue = aQueue;
-    } public void run() {
+    }
+
+    public void run() {
         try {
             while (true) {
                 Integer item = sharedQueue.take();
