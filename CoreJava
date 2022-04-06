@@ -372,6 +372,7 @@ Serialization
 -It doesn't have any method and also called Marker Interface in Java.
 -If you don't want any field to be part of object's state then declare it either static or transient based on your need and it will not be included during Java serialization process.
 -Java Serialization is done by java.io.ObjectOutputStream class.To store any object via serialization mechanism we call ObjectOutputStream.writeObject(saveThisobject) and to deserialize that object we call ObjectInputStream.readObject() method.
+-serialization & Externalizable - In the case of Serializable, the default serialization process is used.the case of Externalizable custom Serialization process is used which is implemented by the application.Externalizable interface provides complete control of serialization process to application. readExternal() and writeExternal() supersede any specific implementation of writeObject and readObject methods.
 
 
 Transient Keyword
@@ -410,5 +411,44 @@ It also limits the number of clients based upon how many threads per JVM is allo
 
 
 ConcurrentHashMap - https://javarevisited.blogspot.com/2020/09/10-examples-of-concurrenthashmap-in-java.html#axzz7PaXJVRPl
-putIfAbsent- This is a useful method that can be used to only insert elements if it's not already present in the map or dictionary. 
+putIfAbsent- This is a useful method that can be used to only insert elements if it's not already present in the map or dictionary.
 
+Race conditions - occur when two threads operate on the same object without proper synchronization and their operation interleaves on each other.The Classical example of the Race condition is incrementing a counter since increment is not an atomic operation and can be further divided into three steps like reading, update, and write.
+What is a deadlock? - when two or more threads are waiting for each other to release the resource they need (lock) and get stuck for infinite time, the situation is called deadlock. It will only happen in the case of multitasking or multi-threading.
+
+Difference between JRE, JDK, and JVM
+In short, there are few differences between JRE, JDK, and JVM:
+
+1)  JRE and JDK come as installers while JVM is bundled with them.
+2)  JRE only contains an environment to execute a java program but doesn’t contain other tools for compiling a java program.
+3)  JVM comes along with both JDK and JRE and is created when you execute the Java program by giving the “java” command.
+
+When class is loaded in Java - static initialization.
+When a class is initialized in Java -After class loading, initialization of the class takes place which means initializing all static members of the class.
+1) an instance of the class is created using either a new() keyword or using reflection using class.forName(), which may throw ClassNotFoundException in Java.
+2) a static method of a class is invoked.
+3) a static field of Class is assigned.
+4) a static field of a class is used which is not a constant variable.
+5) if Class is a top-level class and an assert statement lexically nested within the class is executed.
+
+How Class is initialized in Java
+Its also important to know in which order various fields (static and non-static), block (static an non static), various classes (subclass and superclass) and various interfaces (sub interface, implementation class and super interface) is initialized in Java.
+
+1) Classes are initialized from top to bottom so field declared on top initialized before field declared in bottom
+2) Super Class is initialized before Sub Class or derived class in Java
+3) If Class initialization is triggered due to access of static field, only Class which has declared static field is initialized and it doesn't trigger initialization of super class or sub class even if static field is referenced by Type  of Sub Class, Sub Interface or by implementation class of interface.
+4) interface initialization in Java doesn't cause super interfaces to be initialized.
+5) static fields are initialized during static initialization of class while non static fields are initialized when an instance of the class is created. It means static fields are initialized before non-static fields in Java.
+6) non-static fields are initialized by constructors in Java. sub class constructor implicitly call super class constructor before doing any initialization, which guarantees that non static or instance variables of super class is initialized before sub class.
+
+1. Here class initialization occurs because a static field is accessed which is not a compile time constant. had you declare "familyName" compile time constant using the final keyword in Java (as shown in commented section) class initialization of super class would not have occurred.
+2) Only super class is initialized even though the static field is referenced using sub type.
+
+Heap space in Java
+whenever we create an object using a new operator or by any other means the object is allocated memory from Heap and When the object dies or garbage collected, memory goes back to Heap space in Java
+
+Java Heap and Garbage Collection
+As we know objects are created inside heap memory and Garbage Collection is a process that removes dead objects from Java Heap space and returns memory back to Heap in Java
+
+Java Heap dump
+Java Heap dump is a snapshot of Java Heap Memory at a particular time. This is very useful to analyze or troubleshoot any memory leak in Java or any java.lang.OutOfMemoryError.
