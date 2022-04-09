@@ -1,4 +1,4 @@
-package javaconcepts.collection;
+package javaconcepts.collectioninterface;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
