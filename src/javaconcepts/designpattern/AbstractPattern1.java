@@ -1,23 +1,18 @@
 package javaconcepts.designpattern;
 
-public class AbstractPattern1 {
-}
-
-
 /*
 Step 1
         Create an interface for Shapes.
  */
-interface Shape {
+interface Shape1 {
     void draw();
 }
-
 
 /*
 Step 2
         Create concrete classes implementing the same interface.
  */
-class RoundedRectangle implements Shape {
+class RoundedRectangle implements Shape1 {
     @Override
     public void draw() {
         System.out.println("Inside RoundedRectangle::draw() method.");
@@ -25,14 +20,14 @@ class RoundedRectangle implements Shape {
 }
 
 
-class RoundedSquare implements Shape {
+class RoundedSquare implements Shape1 {
     @Override
     public void draw() {
         System.out.println("Inside RoundedSquare::draw() method.");
     }
 }
 
-class Rectangle implements Shape {
+class Rectangle1 implements Shape1 {
     @Override
     public void draw() {
         System.out.println("Inside Rectangle::draw() method.");
@@ -45,8 +40,8 @@ Step 3
 
  */
 
-abstract class AbstractFactory {
-    abstract Shape getShape(String shapeType) ;
+abstract class AbstractFactory1 {
+    abstract Shape1 getShape(String shapeType) ;
 }
 
 
@@ -54,22 +49,22 @@ abstract class AbstractFactory {
 Step 4
         Create Factory classes extending AbstractFactory to generate object of concrete class based on given information.
  */
-class ShapeFactory extends AbstractFactory {
+class ShapeFactory1 extends AbstractFactory1 {
     @Override
-    public Shape getShape(String shapeType){
+    public Shape1 getShape(String shapeType){
         if(shapeType.equalsIgnoreCase("RECTANGLE")){
-            return new Rectangle();
+            return new Rectangle1();
         }else if(shapeType.equalsIgnoreCase("SQUARE")){
-            return new Square();
+            //return new Square();
         }
         return null;
     }
 }
 
 
-class RoundedShapeFactory extends AbstractFactory {
+class RoundedShapeFactory extends AbstractFactory1 {
     @Override
-    public Shape getShape(String shapeType){
+    public Shape1 getShape(String shapeType){
         if(shapeType.equalsIgnoreCase("RECTANGLE")){
             return new RoundedRectangle();
         }else if(shapeType.equalsIgnoreCase("SQUARE")){
@@ -85,11 +80,11 @@ Step 5
         Create a Factory generator/producer class to get factories by passing an information such as Shape
  */
 class FactoryProducer {
-    public static AbstractFactory getFactory(boolean rounded){
+    public static AbstractFactory1 getFactory(boolean rounded){
         if(rounded){
             return new RoundedShapeFactory();
         }else{
-            return new ShapeFactory();
+            return new ShapeFactory1();
         }
     }
 }
@@ -102,23 +97,23 @@ Step 6
 class AbstractFactoryPatternDemo {
     public static void main(String[] args) {
         //get shape factory
-        AbstractFactory shapeFactory = FactoryProducer.getFactory(false);
+        AbstractFactory1 shapeFactory = FactoryProducer.getFactory(false);
         //get an object of Shape Rectangle
-        Shape shape1 = shapeFactory.getShape("RECTANGLE");
+        Shape1 shape1 = shapeFactory.getShape("RECTANGLE");
         //call draw method of Shape Rectangle
         shape1.draw();
         //get an object of Shape Square
-        Shape shape2 = shapeFactory.getShape("SQUARE");
+        Shape1 shape2 = shapeFactory.getShape("SQUARE");
         //call draw method of Shape Square
         shape2.draw();
         //get shape factory
-        AbstractFactory shapeFactory1 = FactoryProducer.getFactory(true);
+        AbstractFactory1 shapeFactory1 = FactoryProducer.getFactory(true);
         //get an object of Shape Rectangle
-        Shape shape3 = shapeFactory1.getShape("RECTANGLE");
+        Shape1 shape3 = shapeFactory1.getShape("RECTANGLE");
         //call draw method of Shape Rectangle
         shape3.draw();
         //get an object of Shape Square
-        Shape shape4 = shapeFactory1.getShape("SQUARE");
+        Shape1 shape4 = shapeFactory1.getShape("SQUARE");
         //call draw method of Shape Square
         shape4.draw();
 
