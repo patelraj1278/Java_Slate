@@ -179,6 +179,39 @@ public class StreamPracticeFlatMap {
         System.out.println(longStream.count());
     }
 
+    /*
+        3D Streams Iteration
+     */
+    public void flatMapAndStream(){
+        int[][][] data = {
+                {
+                        {1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9}
+                },
+                {
+                        {1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9}
+                }
+        };
+
+        IntStream result = Arrays.stream(data).flatMap(Stream::of).flatMapToInt(Arrays::stream);
+        result.forEach(System.out::println);
+
+        //To better help understand what is going on above, you can split the method invocations as follows:
+
+        // the call to Arrays.stream yields a Stream<int[][]>
+        Stream<int[][]> result1 = Arrays.stream(data);
+
+        // the call to flatMap yields a Stream<int[]>
+        Stream<int[]> result2 = result1.flatMap(Arrays::stream);
+        result2.forEach(System.out::println);
+
+        // the call to flatMapToInt yields a IntStream
+        IntStream intStream = result2.flatMapToInt(Arrays::stream);
+    }
+
 
 
     public static void main(String [] args){
@@ -187,6 +220,7 @@ public class StreamPracticeFlatMap {
         spm.findAllBooksFlatMap();
         spm.sumOfLineItems();
         spm.flatMapAndPrimitive();
+        spm.flatMapAndStream();
     }
 
 
