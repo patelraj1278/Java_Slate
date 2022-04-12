@@ -15,6 +15,10 @@ public class Java8UnaryOperator {
         Integer result = func.apply(2);
         System.out.println(result);         // 4
 
+        Function<Integer, String> func1 = x -> x.toString();
+        String result1 = func1.apply(2);
+        System.out.println(result1);         // 4
+
         UnaryOperator<Integer> uo = x -> x * 2;
         Integer result2 = func.apply(3);
         System.out.println(result2);

@@ -22,7 +22,7 @@ public class Java8BinaryOperator {
         // BinaryOperator
         BinaryOperator<Integer> func2 = (x1, x2) -> x1 + x2;
 
-        Integer result2 = func.apply(2, 3);
+        Integer result2 = func2.apply(2, 3);
 
         System.out.println(result2); // 5
 
