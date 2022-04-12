@@ -64,12 +64,17 @@ Java 8 Supplier Examples
 Let us see the six basic function interfaces.
 
 Interface	        Signature	            Examples
+Function<T, R>	    R apply(T t)	        Arrays::asList, Integer::toBinaryString
+BiFunction<T, U, R> R apply(T t, U u);
 UnaryOperator<T>	T apply(T t)	        String::toLowerCase, Math::tan
 BinaryOperator<T>	T apply(T t1, T t2)	    BigInteger::add, Math::pow
-Function<T, R>	    R apply(T t)	        Arrays::asList, Integer::toBinaryString
 Predicate<T, U>	    boolean test(T t, U u)	String::isEmpty, Character::isDigit
+BiPredicate<T, U>   boolean test(T t, U u);
 Supplier<T>	        T get()	                LocalDate::now, Instant::now, TreeMap::new
+BiSupplier<T, R>    T getFirst(); R getSecond();
 Consumer<T>	        void accept(T t)	    System.out::println, Error::printStackTrace
+BiConsumer<T, U>    void accept(T t, U u);
+
 
 #Function Interface
 

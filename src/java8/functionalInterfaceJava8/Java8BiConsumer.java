@@ -16,6 +16,7 @@ public class Java8BiConsumer {
     public void biConsumer2(){
         addTwo(1, 2, (x, y) -> System.out.println(x + y));          // 3
         addTwo("Node", ".js", (x, y) -> System.out.println(x + y)); // Node.js
+        concat(2,"1",(x,y) -> System.out.println(x + y));
     }
 
     //Takes two Integer & return Integer by doing math operation
@@ -74,4 +75,6 @@ public class Java8BiConsumer {
     static <Integer> void math(Integer a1, Integer a2, BiConsumer<Integer, Integer> c) {
         c.accept(a1, a2);
     }
+
+    static <T,R> void  concat(T t1, R r1, BiConsumer<T,R> c) {c.accept(t1,r1);}
 }

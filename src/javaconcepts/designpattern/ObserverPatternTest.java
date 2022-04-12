@@ -83,7 +83,7 @@ class Internet implements Observer {
     }
 }
 
-public class ObserverTest {
+class ObserverTest {
 
     /*
     My Example is very Simple you have a Loan on which interest rate is subject to change and when it changes, Loan notifies to Newspaper or Internet media to display a new loan interest rate
