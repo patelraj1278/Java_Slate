@@ -26,7 +26,7 @@ public class Java8FilterMap {
         //Map -> Stream -> Filter -> String
         result = HOSTING.entrySet().stream()
                 .filter(map -> "aws.amazon.com".equals(map.getValue()))
-                .map(map -> map.getValue())
+                .map(map -> map.getValue()) // Here .map() is nothing but just perform Function<T,R> where it takes T as a paramter & returns R as a response.
                 .collect(Collectors.joining());
 
         System.out.println("With Java 8 : " + result);
