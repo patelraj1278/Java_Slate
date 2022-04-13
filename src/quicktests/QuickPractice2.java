@@ -2,6 +2,7 @@ package quicktests;
 
 import java.util.Arrays;
 import java.util.function.BiPredicate;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class QuickPractice2 {
@@ -26,6 +27,10 @@ public class QuickPractice2 {
         return doMatching(c1,c2,biPred);
     }
 
+    public void findOddNumberFromRange(){
+        IntStream.rangeClosed(0,11).filter(x -> x % 2 != 0 && x != 0).forEach(System.out::println);
+    }
+
     public static boolean doMatching(char[] c1, char[] c2 , BiPredicate<String,String> biPred){
             return biPred.test(String.valueOf(c1),String.valueOf(c2));
     }
@@ -34,5 +39,6 @@ public class QuickPractice2 {
 
         QuickPractice2 qp = new QuickPractice2();
         System.out.println(qp.anagramOrNot());
+        qp.findOddNumberFromRange();
     }
 }
