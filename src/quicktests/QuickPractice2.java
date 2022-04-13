@@ -1,17 +1,10 @@
 package quicktests;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Spliterator;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class QuickPractice2 {
-
-
     public boolean anagramOrNot(){
         String s1 = "hello";
         String s2 = "eholl";
