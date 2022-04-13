@@ -23,9 +23,7 @@ public class QuickPractice2 {
                 return false;
             }
         };
-
         return doMatching(c1,c2,biPred);
-
     }
 
     public static boolean doMatching(char[] c1, char[] c2 , BiPredicate<String,String> biPred){
