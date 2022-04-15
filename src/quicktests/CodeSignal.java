@@ -1,10 +1,8 @@
 package quicktests;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class CodeSignal {
@@ -33,24 +31,24 @@ public class CodeSignal {
     }
 
     public void codeSignal2(String input){
-        //System.out.println(input);
+        System.out.println("input->"+input);
         char[] ch = input.toCharArray();
-        List<String> strList = new ArrayList<>();
+        List<String> strList = new LinkedList<>();
         if(input.length() > 0) {
             for (int i = 0; i < ch.length; i++) {
                 //System.out.println(input.substring(0,i));
-                //System.out.println(input.substring(i+1, input.length()));
                 if (isPalindrome(input.substring(0, i)) && input.substring(0, i).length() > 2) {
                     strList.add("-"+input.substring(0, i)+"-");
-                    codeSignal2(input.substring(i+1, input.length()));
+                    codeSignal2(input.substring(i));
+                }else if(input.substring(0, i).length() == 0){
+                    strList.add("-"+input.substring(0, i)+"-");
                 }
             }
         }
-        //strList.stream().forEach(System.out::println);
-
+        strList.stream().forEachOrdered(System.out::println);
     }
 
-    public void codeSignal3(){
+    public void stringSubStringOp(){
         String hello = "Hello";
         char[] ch = hello.toCharArray();
         for (int i = 0; i < ch.length; i++) {
@@ -74,6 +72,6 @@ public class CodeSignal {
         CodeSignal qp =  new CodeSignal();
         //qp.codeSignal1(new int[]{8, 5, 6, 16, 5},1,3); //[false, false, true, false, true].
         qp.codeSignal2("aaacodedoc");
-        qp.codeSignal3();
+        //qp.stringSubStringOp();
     }
 }
