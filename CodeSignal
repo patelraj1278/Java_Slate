@@ -1,0 +1,105 @@
+===============CodeSignal1===============
+/*
+boolean[] solution(int[] numbers, int left, int right) {
+
+    Predicate<Integer> pred1 = x -> x % 2 == 0;
+    Predicate<Integer> pred2 = x -> x >= left && x <= right;
+
+    List<Integer> inputList = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+    boolean[] result = compute(inputList,left,right,pred1,pred2);
+
+    return result;
+}
+
+public static boolean[] compute(List<Integer> inputList, int left, int right,Predicate<Integer> pred1,Predicate<Integer> pred2){
+
+    boolean[] bArr = new boolean[inputList.size()];
+    for(int i=0 ; i < inputList.size()-1 ; i++){
+        bArr[i] = pred1.and(pred2).test(inputList.get(i));
+    }
+
+    return bArr;
+}
+
+You are given an array of integers numbers and two integers left and right. You task is to calculate a boolean array result, where result[i] = true if there exists an integer x, such that numbers[i] = (i + 1) * x and left ≤ x ≤ right. Otherwise, result[i] should be set to false.
+
+Example
+
+For numbers = [8, 5, 6, 16, 5], left = 1, and right = 3, the output should be solution(numbers, left, right) = [false, false, true, false, true].
+
+For numbers[0] = 8, we need to find a value of x such that 1 * x = 8, but the only value that would work is x = 8 which doesn't satisfy the boundaries 1 ≤ x ≤ 3, so result[0] = false.
+For numbers[1] = 5, we need to find a value of x such that 2 * x = 5, but there is no integer value that would satisfy this equation, so result[1] = false.
+For numbers[2] = 6, we can choose x = 2 because 3 * 2 = 6 and 1 ≤ 2 ≤ 3, so result[2] = true.
+For numbers[3] = 16, there is no an integer 1 ≤ x ≤ 3, such that 4 * x = 16, so result[3] = false.
+For numbers[4] = 5, we can choose x = 1 because 5 * 1 = 5 and 1 ≤ 1 ≤ 3, so result[4] = true.
+Input/Output
+
+[execution time limit] 3 seconds (java)
+
+[input] array.integer numbers
+
+An array of integers.
+
+Guaranteed constraints:
+1 ≤ numbers.length ≤ 100,
+1 ≤ numbers[i] ≤ 106.
+
+[input] integer left
+
+An integer representing the lower bound for x.
+
+Guaranteed constraints:
+1 ≤ left ≤ 104.
+
+[input] integer right
+
+An integer representing the upper bound for x.
+
+Guaranteed constraints:
+1 ≤ left ≤ right ≤ 104.
+
+[output] array.boolean
+
+A boolean array result described above.
+ */
+
+
+============CodeSignal 2============
+
+
+/*
+You are given a string s. Consider the following algorithm applied to this string:
+
+Take all the prefixes of the string, and choose the longest palindrome between them.
+If this chosen prefix contains at least two characters, cut this prefix from s and go back to the first step with the updated string. Otherwise, end the algorithm with the current string s as a result.
+Your task is to implement the above algorithm and return its result when applied to string s.
+
+Note: you can click on the prefixes and palindrome words to see the definition of the terms if you're not familiar with them.
+
+Example
+
+For s = "aaacodedoc", the output should be solution(s) = "".
+
+The initial string s = "aaacodedoc" contains only three prefixes which are also palindromes - "a", "aa", "aaa". The longest one between them is "aaa", so we cut if from s.
+Now we have string "codedoc". It contains two prefixes which are also palindromes - "c" and "codedoc". The longest one between them is "codedoc", so we cut if from the current string and obtain the empty string.
+Finally the algorithm ends on the empty string, so the answer is "".
+For s = "codesignal", the output should be solution(s) = "codesignal".
+The initial string s = "codesignal" contains the only prefix, which is also palindrome - "c". This prefix is the longest, but doesn't contain two characters, so the algorithm ends with string "codesignal" as a result.
+
+For s = "", the output should be solution(s) = "".
+
+Input/Output
+
+[execution time limit] 3 seconds (java)
+
+[input] string s
+
+A string consisting of English lowercase letters.
+
+Guaranteed constraints:
+0 ≤ s.length ≤ 1000.
+
+[output] string
+
+The result of the described algorithm.
+ */

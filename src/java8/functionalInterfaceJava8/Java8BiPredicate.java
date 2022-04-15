@@ -60,6 +60,8 @@ public class Java8BiPredicate {
         return list.stream()
                 .filter(x -> biPredicate.test(x.getName(), x.getScore()))
                 .collect(Collectors.toList());
+
+
     }
 
 }

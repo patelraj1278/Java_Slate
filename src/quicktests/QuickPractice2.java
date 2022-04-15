@@ -1,7 +1,9 @@
 package quicktests;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -35,10 +37,37 @@ public class QuickPractice2 {
             return biPred.test(String.valueOf(c1),String.valueOf(c2));
     }
 
+    public boolean[] codeSignal1(int[] numbers, int left, int right){
+        List<Integer> inputList = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+        boolean[] result = compute(inputList,left,right);
+        System.out.println(Arrays.toString(result));
+        return result;
+    }
+
+    static boolean[] compute(List<Integer> inputList, int left, int right){
+
+        boolean[] bArr = new boolean[inputList.size()];
+        for(int i=0 ; i <= inputList.size()-1 ; i++){
+            if(inputList.get(i) % (i+1) == 0){
+                int pre = inputList.get(i) / (i+1);
+                if(pre >= left && pre <= right){
+                    bArr[i]= true;
+                }else{
+                    bArr[i]= false;
+                }
+            }
+        }
+        return bArr;
+    }
+
     public static void main(String [] args){
 
         QuickPractice2 qp = new QuickPractice2();
-        System.out.println(qp.anagramOrNot());
-        qp.findOddNumberFromRange();
+        //System.out.println(qp.anagramOrNot());
+        //qp.findOddNumberFromRange();
+        qp.codeSignal1(new int[]{8, 5, 6, 16, 5},1,3); //[false, false, true, false, true].
     }
+
+
 }
+
