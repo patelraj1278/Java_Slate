@@ -3,7 +3,10 @@ package quicktests;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CodeSignal {
 
@@ -59,6 +62,62 @@ public class CodeSignal {
 
     }
 
+    public int[] codeSignal3(int[] a){
+
+            List<Integer> iList = new ArrayList<>();
+            String strArr = Arrays.stream(a).boxed()
+                    .map(x -> String.valueOf(x))
+                    .reduce("", (a1,b1) -> a1 + b1);
+
+            iList=strArr.chars()
+                    .mapToObj(c -> Character.getNumericValue(c))
+                    .collect(Collectors.toList());
+
+            Map<Integer,Long> iMap = iList.stream()
+                    .collect(Collectors.groupingBy(x -> x.intValue(),Collectors.counting()));
+            iMap.entrySet().stream().forEach(System.out::println);
+
+            iMap.entrySet().stream().max(Map.Entry.comparingByValue()).stream().forEach(x -> {
+                System.out.println("Found Entry which has Max Value From Map : "+x.getValue());
+            });
+
+            long maxValue =iMap.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
+            System.out.println("Max Value :"+maxValue);
+
+            iMap.entrySet().stream().filter(e -> e.getValue() == maxValue).forEach(x -> {
+                System.out.println("Find All Keys Which has Max Value in Map Entry :"+x.getKey());
+            });
+
+            List<Integer> resultKeys = iMap.entrySet().stream()
+                    .filter(e -> e.getValue() == maxValue)
+                    .map(x -> x.getKey())
+                    .collect(Collectors.toList());
+            resultKeys.forEach(System.out::println);
+
+            return iMap.entrySet().stream()
+                .filter(e -> e.getValue() == maxValue)
+                    .mapToInt(x -> x.getKey().intValue())
+                    .toArray();
+            //return intArr;
+    }
+
+
+    public int[] codeSignal4(int n, int[] a){
+        int[] b = new int[a.length];
+        for(int i=0;i < a.length; i++){
+            if((i-1) >= 0 && (i+1) < a.length) {
+                b[i] = a[i-1]+a[i]+a[i+1];
+            }else if((i-1) < 0){
+                b[i] = a[i]+a[i+1];
+            }else if((i+1) >= a.length){
+                b[i] = a[i-1]+a[i];
+            }
+        }
+        Arrays.stream(b).boxed().forEach(System.out::println);
+        return b;
+    }
+
+
     public boolean isPalindrome(String checkString){
         StringBuilder sb = new StringBuilder();
         sb.append(checkString);
@@ -71,7 +130,9 @@ public class CodeSignal {
     public static void main(String [] args){
         CodeSignal qp =  new CodeSignal();
         //qp.codeSignal1(new int[]{8, 5, 6, 16, 5},1,3); //[false, false, true, false, true].
-        qp.codeSignal2("aaacodedoc");
+        //qp.codeSignal2("aaacodedoc");
         //qp.stringSubStringOp();
+        qp.codeSignal3(new int[]{25, 2, 3, 57, 38, 41});
+        qp.codeSignal4(5, new int[]{4, 0, 1, -2, 3});
     }
 }

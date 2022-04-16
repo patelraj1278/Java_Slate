@@ -120,7 +120,7 @@ public class TestBank {
         //Java 8: Create the Collector using the four components
         Collector<Account,?,List<Account>> accountListCollector = Collector.of(
                 ArrayList<Account>::new,    // supplier
-//                        (accountList, account) -> accountList.add(account),
+//                        (accountList, account) -> accountList.add(account), // accumulator
                 ArrayList::add, // accumulator
                 (list1, list2) -> {list1.addAll(list2); return list1;}, // combiner
                 Collections::unmodifiableList); // finisher
