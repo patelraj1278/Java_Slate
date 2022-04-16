@@ -1,5 +1,7 @@
 
-======================================LAMNDA======================================================================
+#Java8 Quick Snapshot
+
+======================================LAMNDA========================================================
 ##https://www.developer.com/microsoft/start-using-java-lambda-expressions/
 Lambda Expressions Syntax
 The basic syntax of a lambda is either:
@@ -16,7 +18,8 @@ The following are examples of Java lambda expressions:
 
 ##https://mkyong.com/tutorials/java-8-tutorials/
 
-=====================================JAVA 8 REFERENCES=======================================================================
+==================JAVA 8 REFERENCES========================
+
 #https://mkyong.com/java8/java-8-method-references-double-colon-operator/
 
 There are four kinds of method references:
@@ -50,7 +53,7 @@ List<String> list = Arrays.asList("node", "java", "python", "ruby");
 list.forEach(System.out::println);          // method references
 Anonymous Class -> Lambda expression -> Method Reference
 
-=====================================Functional Interfaces=======================================================================
+=====================Functional Interfaces=======================
 Java 8 Function examples
 Java 8 BiFunction examples
 Java 8 BinaryOperator examples
@@ -64,16 +67,26 @@ Java 8 Supplier Examples
 Let us see the six basic function interfaces.
 
 Interface	        Signature	            Examples
-Function<T, R>	    R apply(T t)	        Arrays::asList, Integer::toBinaryString
-BiFunction<T, U, R> R apply(T t, U u);
 UnaryOperator<T>	T apply(T t)	        String::toLowerCase, Math::tan
 BinaryOperator<T>	T apply(T t1, T t2)	    BigInteger::add, Math::pow
+Function<T, R>	    R apply(T t)	        Arrays::asList, Integer::toBinaryString
 Predicate<T, U>	    boolean test(T t, U u)	String::isEmpty, Character::isDigit
-BiPredicate<T, U>   boolean test(T t, U u);
 Supplier<T>	        T get()	                LocalDate::now, Instant::now, TreeMap::new
-BiSupplier<T, R>    T getFirst(); R getSecond();
 Consumer<T>	        void accept(T t)	    System.out::println, Error::printStackTrace
-BiConsumer<T, U>    void accept(T t, U u);
+
+
+#Splitrator
+Important points of Spliterator:
+* Java Spliterator is a Java Collection API interface.
+* Spliterator is a new feature in Java 8's java.util package.
+* It has Parallel Programming capabilities.
+* Both Collection API and Stream API classes can benefit from it.
+* It contains information about the Collection of API objects.
+* This Iterator cannot be used with Map supported classes.
+* It supports Parallel Processing by using the tryAdvance() function to iterate items separately in multiple Threads.
+* It iterates items sequentially in a single thread using the forEachRemaining() function.
+* To allow Parallel Processing, it divides itself into Sub-Spliterators using the trySplit() function.
+* Spliterator is capable of both sequential and parallel processing.
 
 
 #Function Interface
@@ -184,7 +197,7 @@ public interface Supplier<T> {
     T get();
 }
 
-========================================QUICK GUIDE====================================================================
+===============QUICK GUIDE======================
 #Lambda Expression
     Method Reference
     Constructor Reference
@@ -380,6 +393,15 @@ public interface Supplier<T> {
     IntSpliterator
     LongSpliterator
     DoubleSpliterator
+	Methods:
+		int characteristics()
+		long estimateSize() -
+		default long getExactSizeIfKnown() 
+		default comparator getComparator()
+		default boolean hasCharacteristics(int characteristic) 
+		boolean tryAdvance(Consumer action) 
+		Default void forEachRemaining(Consumer action)
+		Spliterator trySplit() 
 
 #Java 8 Statistics, StringJoiner
     IntSummaryStatistics
