@@ -1,8 +1,10 @@
 package quicktests;
 
-import java.util.Arrays;
-import java.util.List;
+import java8.collectorsJava8.Hosting;
+
+import java.util.*;
 import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -60,12 +62,51 @@ public class QuickPractice2 {
         return bArr;
     }
 
+    //ListToMap
+    public void convertListToMap(){
+        List<Hosting> list = new ArrayList<>();
+        list.add(new Hosting(1, "liquidweb.com", 80000));
+        list.add(new Hosting(2, "linode.com", 90000));
+        list.add(new Hosting(3, "digitalocean.com", 120000));
+        list.add(new Hosting(4, "aws.amazon.com", 200000));
+        list.add(new Hosting(5, "mkyong.com", 1));
+
+
+        Map<Integer,String> imap = list.stream().collect(Collectors.toMap(x -> x.getId(), x -> x.getName() ,(old, existing) -> old, HashMap::new));
+
+        imap.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(x -> x.getKey(),y -> y.getValue()));
+
+        imap.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach((x) -> {
+            System.out.println(x.getKey());
+            System.out.println(x.getValue());
+        });
+        List<String> iList = imap.entrySet().stream().map(x -> x.getValue()).collect(Collectors.toList());
+        iList.forEach(System.out::println);
+
+        iList.stream().sorted(Comparator.naturalOrder());
+        list.stream().sorted(Comparator.comparing(Hosting::getId)).collect(Collectors.toList());
+
+        int[] i = new int[]{3,5,1,4,7};
+        Arrays.sort(i);
+        int i1 = Arrays.stream(i).boxed().sorted(Integer::compareTo).reduce(1, Integer::min ).intValue();
+        System.out.println(i1);
+
+        Stream.iterate(0, (x) -> x+1).limit(10).forEach(System.out::println);
+
+        IntStream.rangeClosed(0,10)
+                .filter(x -> x != 5)
+                .forEach(System.out::println);
+    }
+
     public static void main(String [] args){
 
         QuickPractice2 qp = new QuickPractice2();
         //System.out.println(qp.anagramOrNot());
         //qp.findOddNumberFromRange();
         qp.codeSignal1(new int[]{8, 5, 6, 16, 5},1,3); //[false, false, true, false, true].
+        qp.convertListToMap();
     }
 
 
