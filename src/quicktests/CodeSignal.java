@@ -117,6 +117,68 @@ public class CodeSignal {
         return b;
     }
 
+    boolean[] codeSignal5(int[] numbers, int left, int right) {
+
+        boolean[] b = new boolean[numbers.length];
+        for(int i=0 ; i< numbers.length ; i++){
+            if(numbers[i] != 0){
+                int x = numbers[i]/(i+1);
+                if(numbers[i] % (i+1) == 0 && x >= left && x <= right){
+                    b[i] = true;
+                }else{
+                    b[i] = false;
+                }
+            }else{
+                b[i] = false;
+            }
+        }
+        return b;
+    }
+
+    boolean codeSignal6(int[] numbers) {
+
+        boolean result = false;
+        result = isSortedArray(numbers,numbers.length);
+        return result;
+    }
+
+
+    static boolean isSortedArray(int[] numbers,int arrLength){
+        boolean result = false;
+        if(arrLength == 0 || arrLength == 1){
+            return true;
+        }
+        for(int i=0 ; i< numbers.length ; i++){
+            if((i+1 < numbers.length) && numbers[i] < numbers[i+1]){
+                result= true;
+            }else{
+                StringBuilder sb = new StringBuilder();
+                numbers[i] = Integer.parseInt(sb.append(String.valueOf(numbers[i])).reverse().toString());
+                sb.delete(0,sb.length());
+                if(reSortAttempt(numbers,arrLength)){
+                    result= true;
+                    break;
+                }else{
+                    result= false;
+                    continue;
+                }
+            }
+        }
+        return result;
+    }
+
+    static boolean reSortAttempt(int[] numbers,int arrLength){
+        boolean result = false;
+        for(int i=0 ; i< numbers.length ; i++){
+            if((i+1 < numbers.length) && numbers[i] < numbers[i+1]){
+                result =true;
+            }else{
+                result =false;
+                break;
+            }
+        }
+        return result;
+    }
 
     public boolean isPalindrome(String checkString){
         StringBuilder sb = new StringBuilder();
