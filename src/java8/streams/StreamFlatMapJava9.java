@@ -1,12 +1,11 @@
 package java8.streams;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 //Java 8 Stream – Convert List<List<String>> to List<String>
 public class StreamFlatMapJava9 {
+
 
     //As title, we can use flatMap to convert it.
     public void convertListofListToList(){
@@ -29,8 +28,31 @@ public class StreamFlatMapJava9 {
 
         collect1.forEach(x -> System.out.println(x));
     }
+
+    public void flatMapTest(){
+        Map<String,List<String>> iMap = new HashMap<>();
+        List<String> iList = new ArrayList<>();
+        iList.add("Raj");
+        iList.add("Ami");
+        iList.add("Heman");
+        iMap.put("K1",iList);
+        iMap.entrySet().stream()
+                .flatMap(v -> v.getValue().stream())
+                .forEach(v -> {
+                        System.out.println(v);
+                });
+
+        iMap.forEach((k,v) -> {
+            System.out.println("Key : " + k + ", Value : " + v);
+        });
+
+
+    }
+
+
     public static void main(String[] args){
         StreamFlatMapJava9 sf = new StreamFlatMapJava9();
-        sf.convertListofListToList();
+        //sf.convertListofListToList();
+        sf.flatMapTest();
     }
 }
