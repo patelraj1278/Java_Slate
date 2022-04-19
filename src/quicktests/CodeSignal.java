@@ -138,6 +138,7 @@ public class CodeSignal {
     }
 
 
+
     static boolean isSortedArray(int[] numbers,int arrLength){
         boolean result = false;
         if(arrLength == 0 || arrLength == 1){
@@ -175,6 +176,30 @@ public class CodeSignal {
         return result;
     }
 
+    int codeSignal7(String s) {
+        int count = 0;
+        if(s.length() > 2){
+            for(int i=0 ; i < s.length() ; i++){
+                for(int j=i+1; j < s.length();j++){
+                    for(int k=j+1; k< s.length();k++){
+                        String a =s.substring(i,j);
+                        String b =s.substring(j,k);
+                        String c =s.substring(k);
+                        Set<String> set = new HashSet<>();
+                        set.add(a+b);
+                        set.add(b+c);
+                        set.add(c+a);
+                        if(set.size() == 3){
+                            count++;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        System.out.println("Final Count"+count);
+        return count;
+    }
 
     public boolean isPalindrome(String checkString){
         StringBuilder sb = new StringBuilder();
@@ -190,7 +215,8 @@ public class CodeSignal {
         //qp.codeSignal1(new int[]{8, 5, 6, 16, 5},1,3); //[false, false, true, false, true].
         //qp.codeSignal2("aaacodedoc");
         //qp.stringSubStringOp();
-        qp.codeSignal3(new int[]{25, 2, 3, 57, 38, 41});
-        qp.codeSignal4(5, new int[]{4, 0, 1, -2, 3});
+        //qp.codeSignal3(new int[]{25, 2, 3, 57, 38, 41});
+        //qp.codeSignal4(5, new int[]{9});
+        qp.codeSignal7("xxx");
     }
 }
