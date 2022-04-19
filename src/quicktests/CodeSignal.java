@@ -176,6 +176,28 @@ public class CodeSignal {
         return result;
     }
 
+    public void isPrime(int number){
+        boolean result = true;
+        if(number < 0 || number == 0 || number == 1){
+            result=false;
+        }
+
+        if(number > 2){
+            for(int i= 2 ; i < number ; i++){
+                if(number % i == 0){
+                    result=false;
+                    break;
+                }
+            }
+        }
+
+        if(result){
+            System.out.println("This is Prime Number");
+        }else{
+            System.out.println("This is NOT Prime Number");
+        }
+    }
+
     int codeSignal7(String s) {
         int count = 0;
         if(s.length() > 2){
@@ -217,6 +239,7 @@ public class CodeSignal {
         //qp.stringSubStringOp();
         //qp.codeSignal3(new int[]{25, 2, 3, 57, 38, 41});
         //qp.codeSignal4(5, new int[]{9});
-        qp.codeSignal7("xxx");
+        //qp.codeSignal7("xxx");
+        qp.isPrime(17);
     }
 }
