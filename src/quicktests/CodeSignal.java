@@ -2,6 +2,7 @@ package quicktests;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CodeSignal {
 
@@ -54,7 +55,6 @@ public class CodeSignal {
             System.out.println(hello.substring(1,hello.length()));
             break;
         }
-
     }
 
     public int[] codeSignal3(int[] a){
@@ -232,6 +232,90 @@ public class CodeSignal {
         return false;
     }
 
+    public String reverseString(String s){
+        String result = "";
+        for(int i=s.length()-1 ; i >=0 ; i--){
+            result += s.charAt(i);
+            System.out.println(s.charAt(i));
+        }
+        return result;
+    }
+
+
+    public void printDuplicate(String s){
+        Set<String> list = new HashSet<>();
+        for(int i=0; i < s.length(); i++){
+            for(int j=i+1; j < s.length() ; j++){
+                if(!String.valueOf(s.charAt(i)).equalsIgnoreCase(String.valueOf(s.charAt(j)))){
+                    list.add(String.valueOf(s.charAt(i)));
+                }
+            }
+        }
+        list.stream().forEach(System.out::println);
+    }
+
+    public void checkStringHasDigit(String s){
+        s.chars().forEach(x -> {
+            if(Character.isDigit(x)){
+                System.out.println(Character.getNumericValue(x));
+            }
+        });
+    }
+
+
+    public void containVowel(String s){
+        List<Character> charList = new ArrayList<>();
+        charList.add('a');
+        charList.add('e');
+        charList.add('i');
+        charList.add('o');
+        charList.add('u');
+
+        char [] chArr= s.toCharArray();
+
+        for(int i=0 ; i < chArr.length ; i++){
+            if(charList.contains(chArr[i])){
+                System.out.println(chArr[i]);
+            }
+        }
+
+        Arrays.stream(s.chars().toArray()).map(x -> Character.getNumericValue(x)).forEach(System.out::println);
+    }
+
+    public void printPermutation(String str, String ans){
+        // If string is empty
+        if (str.length() == 0) {
+            System.out.print(ans + " ");
+            return;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            // ith character of str
+            char ch = str.charAt(i);
+            // Rest of the string after excluding
+            // the ith character
+            String ros = str.substring(0, i) +
+                    str.substring(i + 1);
+            // Recursive call
+            printPermutation(ros, ans + ch);
+        }
+    }
+
+    public int lengthOfLastWord(String s) {
+        int count = 0;
+        int idx = s.length() - 1;
+        while (idx >= 0 && s.charAt(idx) == ' ') {
+            idx--;
+            System.out.println(idx);
+        }
+        while (idx >= 0 && s.charAt(idx) != ' ') {
+            idx--;
+            count++;
+        }
+
+        return count;
+    }
+
     public static void main(String [] args){
         CodeSignal qp =  new CodeSignal();
         //qp.codeSignal1(new int[]{8, 5, 6, 16, 5},1,3); //[false, false, true, false, true].
@@ -240,6 +324,13 @@ public class CodeSignal {
         //qp.codeSignal3(new int[]{25, 2, 3, 57, 38, 41});
         //qp.codeSignal4(5, new int[]{9});
         //qp.codeSignal7("xxx");
-        qp.isPrime(17);
+        //qp.isPrime(17);
+        //qp.lengthOfLastWord("   fly me   to   the moon  ");
+        //qp.reverseString("Raj");
+        //qp.printDuplicate("Great responsibility");
+        //qp.checkStringHasDigit("s246t3g");
+        //qp.containVowel("aregr");
+        qp.printPermutation("abbewfe","");
+
     }
 }
