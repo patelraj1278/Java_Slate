@@ -1,7 +1,6 @@
-package quicktests;
+package coderounds.softwaredependency;
 
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class TestSquare {
