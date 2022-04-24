@@ -8,10 +8,6 @@ public class SoftwareDependency {
         REMOVE,
         LIST,
         END;
-
-        COMMAND(){
-
-        }
     }
 
     static void doIt(String[] input) {

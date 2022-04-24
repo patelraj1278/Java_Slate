@@ -1,4 +1,4 @@
-package coderounds.softwaredependency;
+package coderounds;
 
 import java.util.*;
 import java.util.function.Function;
