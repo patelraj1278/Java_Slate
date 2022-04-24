@@ -204,4 +204,160 @@ Since there are five valid ways to split s, the answer is 5.
 
 
 
+======
+
+
+Given two strings s and t, both consisting of lowercase English letters and digits, your task is to calculate how many ways exactly one digit could be removed from one of the strings so that s is lexicographically smaller than t after the removal. Note that we are removing only a single instance of a single digit, rather than all instances (eg: removing 1 from the string a11b1c could result in a1b1c or a11bc, but not abc).
+
+Also note that digits are considered lexicographically smaller than letters.
+
+Example
+
+For s = "ab12c" and t = "1zz456", the output should be solution(s, t) = 1.
+
+Here are all the possible removals:
+
+We can remove the first digit from s, obtaining "ab2c". "ab2c" > "1zz456", so we don't count this removal
+We can remove the second digit from s, obtaining "ab1c". "ab1c" > "1zz456", so we don't count this removal
+We can remove the first digit from t, obtaining "zz456". "ab12c" < "zz456", so we count this removal
+We can remove the second digit from t, obtaining "1zz56". "ab12c" > "1zz56", so we don't count this removal
+We can remove the third digit from t, obtaining "1zz46". "ab12c" > "1zz46", so we don't count this removal
+We can remove the fourth digit from t, obtaining "1zz45". "ab12c" > "1zz45", so we don't count this removal
+The only valid case where s < t after removing a digit is "ab12c" < "zz456". Therefore, the answer is 1.
+
+For s = "ab12c" and t = "ab24z", the output should be solution(s, t) = 3.
+
+There are 4 possible ways of removing the digit:
+
+"ab1c" < "ab24z"
+"ab2c" > "ab24z"
+"ab12c" < "ab4z"
+"ab12c" < "ab2z"
+Three of these cases match the requirement that s < t, so the answer is 3.
+
+Input/Output
+
+[execution time limit] 3 seconds (java)
+
+[input] string s
+
+A string consisting of lowercase English letters and digits 0..9.
+
+Guaranteed constraints:
+1 ≤ s.length ≤ 103.
+
+[input] string t
+
+A string consisting of lowercase English letters and digits 0..9.
+
+Guaranteed constraints:
+1 ≤ t.length ≤ 103.
+
+[output] integer
+
+The number of ways to remove exactly one digit from one of the strings so that s is lexicographically smaller than t after the removal.
+
+
+===
+
+
+int solution(String s, String t) {
+
+    int count = 0;
+    for(int i=0 ; i< s.length() ; i++){
+        if(Character.isDigit(s.charAt(i))){
+            String sStr= "";
+            sStr = s.replace(s.charAt(i), Character.MIN_VALUE);
+            if(sStr.compareTo(t) > 50 || sStr.compareTo(t) < 0){
+                count++;
+            }
+            System.out.println("Result ->"+sStr.compareTo(t) + "String 1-> "+sStr + "String 2->"+t);
+        }
+    }
+
+    for(int i=0 ; i< t.length() ; i++){
+        if(Character.isDigit(t.charAt(i))){
+            String sStr= "";
+            sStr = t.replace(t.charAt(i), Character.MIN_VALUE);
+            if(s.compareTo(sStr) > 50 || s.compareTo(sStr) < 0){
+                count++;
+            }
+            System.out.println("Result ->"+s.compareTo(sStr) + "String 1-> "+s + "String 2->"+sStr);
+        }
+    }
+
+    System.out.println("Count ==> "+count);
+    return count;
+}
+
+
+
+====
+
+A text editor is a type of computer program that edits plain text. It consists of a string with a cursor. In the initial state the string is empty with the cursor at the beginning of the string.
+
+Your task is to simulate the working process of a text editor which can handle four types of operations:
+
+TYPE <text> - insert <text> after the current position of the cursor, where <text> consists of at most 20 characters. The cursor moves to the end of the inserted text.
+
+MOVE_CURSOR <offset> - change the current cursor's position. The offset specifies the direction and the value change - if it's negative the cursor moves to the left, and if it's positive the cursor moves to the right. At all times, the cursor is either located at the beginning of the string (before the first character), between two characters, or at the end of the string (after the last character) - the cursor should always be within the text bounds. If the offset is larger than cursor can move, the cursor will move towards the direction as much, as it can. If the cursor does not change its position after the operation, the operation is considered unsuccessful.
+
+SELECT <start_index> <end_index> - select the substring of the current text [text[start_index] ... text[end_index]] (inclusive indices, 0-based) of length end_index - start_index + 1. It is guaranteed that the indices are valid. The cursor changes its position to the end of the selected area. If the next immediately subsequent operation is not TYPE then the selected area is cleared.
+
+If the next immediately subsequent operation is TYPE then the following updating process is expected during the TYPE operation:
+
+Delete the selected text.
+Insert the new text in the place of the deleted text.
+The cursor position should move to the end of the typed text.
+If this operation is anything other than TYPE, the selected area is cleared (See the examples for details).
+
+UNDO - undo the last successful TYPE or MOVE_CURSOR operation (if there is nothing to undo, this operation does nothing). You cannot undo a SELECT operation. UNDO operation returns back to the text and cursor position to the state, they were before the operations is undone. Note that it's not possible to undo the same operation twice: if the operation has been undone, it's undone forever. However, it is possible to undo several operations one by one.
+
+You are given operations, an array of strings where each is an operation of one of the four types above. Your task is to find the resulting text after performing the given operations.
+
+NOTE: An operation is considered successful if the text or the cursor position is changed. For example, moving the cursor to the left when it stands before all characters is not considered a successful operation.
+
+Example
+
+For operations = ["TYPE Code", "TYPE Signal", "MOVE_CURSOR -3", "SELECT 5 8", "TYPE ou", "UNDO", "TYPE nio"], the output should be solution(operations) = "CodeSignaniol".
+
+Initially the text is empty,
+After the "TYPE Code" operation, the text is "Code|" (where the | symbol represents the cursor position),
+After the "TYPE Signal" operation, the text is "CodeSignal|",
+After the "MOVE_CURSOR -3", the cursor moves three symbols back, so the text is "CodeSig|nal",
+After the "SELECT 5 8" operation, the selected text is "igna", the cursor is moved to the end of selected area "CodeSigna|l",
+After the "TYPE ou" operation, since the previous operation was "SELECT", the selected text is deleted and replaced with the text "ou", the cursor stays after the typed text, so the text is "CodeSou|l",
+After the "UNDO" operation, the last operation "TYPE" is undone and text and cursor is back as it was before the "TYPE" operation, so the text is "CodeSigna|l",
+After the "TYPE nio" operation, the text is "CodeSignanio|l",
+So the final string is "CodeSignaniol".
+For operations = ["TYPE MyCat", "SELECT 2 3", "MOVE_CURSOR -1", "TYPE he", "SELECT 0 1", "TYPE His"], the output should be solution(operations) = "HisCheat".
+
+Initially the text is empty,
+After the "TYPE MyCat" operation, the text is "MyCat|",
+After the "SELECT 2 3" operation, the selected text is "Ca", the cursor is moved after the selected area "MyCa|t",
+After the "MOVE_CURSOR -1", the cursor moves one symbol back, so the text is "MyC|at". Also, the selected area is cleared, as this operation is not "TYPE". No area is selected,
+After the "TYPE he" operation, the text is "MyChe|at", the typed text is inserted where the cursor stands.
+After the "SELECT 0 1" operation, the selected text is "My",
+After the "TYPE His" operation, since the previous operation was "SELECT", the selected text is deleted and replaced with the text "His", the cursor moves to the end of the typed area, so the text is "His|Cheat",
+So the final string is "HisCheat".
+For operations = ["TYPE Nothing", "TYPE Is", "TYPE Permanent", "UNDO", "UNDO", "UNDO", "UNDO"], the output should be solution(operations) = "".
+
+Initially the text is empty,
+After the "TYPE Nothing", "TYPE is", and "TYPE Permanent" operations the text is "NothingIsPermanent",
+Then, after three consequent "UNDO" operations, the text becomes "", the last "UNDO" operation is ignored since there are no more operations to undo.
+Input/Output
+
+[execution time limit] 3 seconds (java)
+
+[input] array.string operations
+
+A sequence of operations. It's guaranteed that all the operations satisfy the format described above.
+
+Guaranteed constraints:
+1 ≤ operations.length ≤ 103.
+
+[output] string
+
+The resulting text after performing the given sequence of operations.
+
 
