@@ -7,7 +7,7 @@ public class SoftwareDependency {
         INSTALL,
         REMOVE,
         LIST,
-        END;
+        END
     }
 
     static void doIt(String[] input) {
