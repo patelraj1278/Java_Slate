@@ -1,5 +1,10 @@
 package coderounds.softwaredependency;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class SoftwareDependency {
 
     enum COMMAND {
@@ -9,6 +14,8 @@ public class SoftwareDependency {
         LIST,
         END;
     }
+
+    private static Map<String, List<String>> allSoftware = new HashMap<>();
 
     static void doIt(String[] input) {
         for (String inp : input) {
@@ -20,6 +27,8 @@ public class SoftwareDependency {
 
             switch (command) {
                 case DEPEND:
+                    final String softwareName = commandTokens[1];
+                    buildDependencies(softwareName, commandTokens);
                     break;
                 case INSTALL:
                     break;
@@ -29,6 +38,22 @@ public class SoftwareDependency {
                     break;
                 case END:
                     break;
+            }
+        }
+    }
+
+    private static void buildDependencies(String softwareName, String[] commandTokens) {
+        //The dependencies of the current command are available from 3rd position onwards
+        for (int i = 2; i < commandTokens.length; i++) {
+            final String currentDependency = commandTokens[i];
+            List<String>  checkDependenciesOfdependency = allSoftware.get(softwareName);
+            if(checkDependenciesOfdependency != null && checkDependenciesOfdependency.contains(softwareName)){
+                    System.out.println(
+                        currentDependency + " depends on " + softwareName + ", ignoring command");
+            }else{
+                List<String>  dependenciesOfdependency = new ArrayList<>();
+                dependenciesOfdependency.add(softwareName);
+                allSoftware.put(softwareName,dependenciesOfdependency);
             }
         }
     }
