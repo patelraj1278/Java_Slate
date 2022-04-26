@@ -7,21 +7,20 @@ public class QuickTest3 {
 
     public void test(int target){
         int[] n = new int[]{3,4,6,7,8,9,1,3};
-        Set<Integer> lst = new HashSet<>();
 
         for(int i=0; i < n.length; i++){
             for(int j=i+1 ; j < n.length ; j++){
                 /*if(n[i] + n[j] == target){
                     System.out.println("Number1 -> :"+ n[i]+ "Number2 -> :"+n[j]);
                 }*/
-                lst.add(n[i] + n[j]);
+                int distance = target - (n[i] + n[j]);
+                if(distance == target){
+                    System.out.println("Number1 -> :"+ n[i]+ "Number2 -> :"+n[j]);
+                }
             }
         }
 
-        for(Integer in : lst){
-            int  result = target - in.intValue();
-            System.out.println(result);
-        }
+
         //lst.stream().forEach(System.out::println);
         //lst.stream().sorted(Comparator.naturalOrder()).forEach(System.out::println);
         //lst.stream().reduce(BinaryOperator.maxBy(Comparator.)).get();
