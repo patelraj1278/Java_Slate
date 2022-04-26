@@ -2,29 +2,43 @@ package quicktests;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
 
 public class QuickTest3 {
+    Map<String,Integer> iMap = new HashMap<>();
 
     public void test(int target){
         int[] n = new int[]{3,4,6,7,8,9,1,3};
-
         for(int i=0; i < n.length; i++){
             for(int j=i+1 ; j < n.length ; j++){
                 /*if(n[i] + n[j] == target){
                     System.out.println("Number1 -> :"+ n[i]+ "Number2 -> :"+n[j]);
                 }*/
                 int distance = target - (n[i] + n[j]);
-                if(distance == target){
-                    System.out.println("Number1 -> :"+ n[i]+ "Number2 -> :"+n[j]);
-                }
-            }
+                String combo = "No1:"+n[i]+"No2:"+n[j];
+                //System.out.println(distance);
+                iMap.put(combo,distance);
+             }
         }
 
+        int result = iMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .mapToInt(x -> x.getValue())
+                .reduce(Integer::min).getAsInt();
+        System.out.println(result);
 
-        //lst.stream().forEach(System.out::println);
-        //lst.stream().sorted(Comparator.naturalOrder()).forEach(System.out::println);
-        //lst.stream().reduce(BinaryOperator.maxBy(Comparator.)).get();
+        int max = iMap.entrySet().stream().mapToInt(x -> x.getValue())
+                .max().getAsInt();
+
+        int min = iMap.entrySet().stream().mapToInt(x -> x.getValue())
+                .min().getAsInt();
+        System.out.println("Max:"+max+"Min:"+min);
+
+
     }
+
+
+
 
 //Shared Experience
 //Equal
