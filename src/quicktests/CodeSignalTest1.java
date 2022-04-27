@@ -12,6 +12,7 @@ public class CodeSignalTest1 {
             if(isPalin(str)){
                 if(str.length() > 2){
                     result=str.substring(i);
+                    System.out.println(result);
                     solution(s.substring(i));
                 }
             }
@@ -33,6 +34,6 @@ public class CodeSignalTest1 {
 
     public static void main(String [] args){
         CodeSignalTest1 cs = new CodeSignalTest1();
-        System.out.println("Result=>"+cs.solution(""));
+        System.out.println("Result=>"+cs.solution("aaacodedocaff"));
     }
 }
