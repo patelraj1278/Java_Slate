@@ -602,7 +602,9 @@ You are given two integer arrays a and b of the same length.
 Let's define the difference between a and b as the sum of absolute differences of corresponding elements:
 
 difference = |a[0] - b[0]| + |a[1] - b[1]| + ... + |a[a.length - 1] - b[b.length - 1]|
-You can replace one element of a with any other element of a. Your task is to return the minimum possible difference between a and b that can be achieved by performing at most one such replacement on a. You can also choose to leave the array intact.
+You can replace one element of a with any other element of a.
+Your task is to return the minimum possible difference between a and b that can be achieved by performing at most one such replacement on a.
+You can also choose to leave the array intact.
 
 Example
 
