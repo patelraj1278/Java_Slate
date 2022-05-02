@@ -60,12 +60,20 @@ public class Java8BiConsumer {
          */
     }
 
+    public void biConsumer5() {
+
+        BiConsumer<Integer,Integer> b = (x,y) -> System.out.println(x - y);
+        findDiff(2,43,b);
+    }
+
+
     public static void main(String[] args) {
         Java8BiConsumer biC = new Java8BiConsumer();
         biC.biConsumer1();
         biC.biConsumer2();
         biC.biConsumer3();
         biC.biConsumer4();
+        biC.biConsumer5();
     }
 
     static <T> void addTwo(T a1, T a2, BiConsumer<T,T> c){
@@ -77,4 +85,6 @@ public class Java8BiConsumer {
     }
 
     static <T,R> void  concat(T t1, R r1, BiConsumer<T,R> c) {c.accept(t1,r1);}
+
+    static <T> void findDiff(T a1, T a2, BiConsumer<T,T> bi){ bi.accept(a1,a2);}
 }

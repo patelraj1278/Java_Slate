@@ -75,7 +75,7 @@ public class StreamGroupBy {
 
     public static void main(String [] args){
         StreamGroupBy sg = new StreamGroupBy();
-        sg.streamGroupBy1();
+        //sg.streamGroupBy1();
         sg.streamGroupBy2();
     }
 }
