@@ -39,7 +39,7 @@ public class QuickTest3 {
 
 
 
-
+//Int : 1
 //Shared Experience
 //Equal
 //ArrayList & LinkedList
@@ -47,6 +47,14 @@ public class QuickTest3 {
 //Find total problem
 //Find closest --> done till distance
 
+//Int : 2
+//Hasmap internally works
+//Kafka huge traffic to topic - how to resolve
+//Functional interface
+//Logging & Exception
+//Spring vs Spring boot
+//Graphl query purpose
+//AWS
 
     public static void main(String [] args){
         QuickTest3 qt = new QuickTest3();
