@@ -141,12 +141,12 @@ class Employee{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public BigDecimal getSalary() {
         return salary;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setSalary(BigDecimal salary) {

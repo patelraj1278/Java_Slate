@@ -1,0 +1,37 @@
+#Implementation
+Enum to HashMap Populate, class have Static contants, Static Methods which expose Hashmap values populated from enum.
+Static initilizer used to populate hashmap from enum.
+
+#Rest
+UricomponentBuilder
+RestTemplate
+
+
+#Java 8
+Objects.nonNull , Objects.isNull , Objects.requireNonNull
+stream().nonMatch(e -> e.xyz().stream().anyMatch(....))
+Stream.concat
+map
+flatMap
+filter
+Collectors.groupingBy
+dDAPostedBalanceList.stream().collect(Collectors.toMap(DDAPostedBalance::getAccountId, Function.identity()));
+map.getOrDefault(key, default)
+cardPostedBalanceList.stream().collect(Collectors.toMap(Pair.of(balance.getArns(),balance.getEncryptedNumber()), Function.identity()));
+sorted(Comparator.comparing(..).thenComparing(Account::getBalance,Comparator.nullsLast(Comparator.reverseOrder()))
+findFirst
+count
+Collector.mapping
+Collectors.toMap with KeyMapper,ValueMapper,BinaryOperator mergeFunction
+ImmutableList.of
+#Thread
+CompletableFuture<Map<Long,DDAPostedBalance>> accountIDToDDAPostedBalanceMapCompletableFuture
+ = CompletableFuture.supplyAsync(() -> getaAccountIDToDDAPostedBalanceMap(...),executer)
+CompletableFuture<Map<Pair<Long,String>,CardPostedPostedBalance>> abc
+= CompletableFuture.supplyAsync(() -> getArn(...),executer)
+CompletableFuture.allOf(accountIDToDDAPostedBalanceMapCompletableFuture,abc).join();
+accountIDToDDAPostedBalanceMapCompletableFuture.get()
+accountIDToDDAPostedBalanceMapCompletableFuture.getNow(null)
+@Async("serviceExecuter")
+CompletableFuture.completedFuture(getAggregates(request))
+@Bean("serviceExecuter") -> ThreadPoolTaskExecuter setup , return Executer
