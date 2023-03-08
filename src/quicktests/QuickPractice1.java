@@ -1,3 +1,4 @@
+/*
 package quicktests;
 
 import java.math.BigDecimal;
@@ -200,4 +201,4 @@ class Department{
                 ", name='" + name + '\'' +
                 '}';
     }
-}
+}*/

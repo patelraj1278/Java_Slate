@@ -69,8 +69,8 @@ Let us see the six basic function interfaces.
 Interface	        Signature	            Examples
 UnaryOperator<T>	T apply(T t)	        String::toLowerCase, Math::tan
 BinaryOperator<T>	T apply(T t1, T t2)	    BigInteger::add, Math::pow
-Function<T, R>	    R apply(T t)	        Arrays::asList, Integer::toBinaryString
-Predicate<T, U>	    boolean test(T t, U u)	String::isEmpty, Character::isDigit
+Function<T, R>	    R apply(T t)  	        Arrays::asList, Integer::toBinaryString
+Predicate<T, U>	    boolean test(T t)	    String::isEmpty, Character::isDigit
 Supplier<T>	        T get()	                LocalDate::now, Instant::now, TreeMap::new
 Consumer<T>	        void accept(T t)	    System.out::println, Error::printStackTrace
 
@@ -456,6 +456,7 @@ public interface Supplier<T> {
                         .collect(Collectors.toList());
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         int sum = integers.stream().mapToInt(Integer::intValue).sum();
+        Arrays.stream(intArray).reduce(0,Integer::sum)
 
     Map
 

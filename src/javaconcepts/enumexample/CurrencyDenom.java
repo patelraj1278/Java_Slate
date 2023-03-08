@@ -38,6 +38,8 @@ public enum CurrencyDenom {
 
     public static void main(String args[]){
         System.out.println(CurrencyDenom.valueOf("QUARTER"));
+        System.out.println(CurrencyDenom.QUARTER.color());
+        System.out.println(CurrencyDenom.PENNY.ordinal());
         System.out.println(CurrencyDenom.QUARTER);
         Arrays.stream(CurrencyDenom.values()).forEach(System.out::println);
 
