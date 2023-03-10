@@ -23,6 +23,10 @@ class Parent {
     //protected static final String familyName = "Lawson";
     protected static String familyName = "Lawson";
 
+    public Parent() {
+        System.out.println("Parent constructor initialized");
+    }
+
     static {
         System.out.println("static block of Super class is initialized");
     }
@@ -44,6 +48,10 @@ class NotUsed {
  * Sub class of Parent, demonstrate when exactly sub class loading and initialization occurs.
  */
 class Child extends Parent {
+    public Child() {
+        System.out.println("Child constructor initialized");
+    }
+
     static {
         System.out.println("static block of Sub class is initialized in Java ");
     }

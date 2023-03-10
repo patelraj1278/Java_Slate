@@ -20,6 +20,7 @@ class volume extends findarea{
         this.height=h;
         System.out.println("Hello from Volume");
     }
+    @Override
     int doublearea() {
         return length * width * height;
     }
@@ -30,6 +31,7 @@ class Rectangle extends findarea {
         super(a,b);
         System.out.println("Hello from Rectangle");
     }
+    @Override
     int doublearea() {
         return length * length ;
     }

@@ -26,7 +26,7 @@ class GFG {
 
     // Static nested inner class
     // Class 1
-    public static class superclass {
+    public static class Superclass {
 
         // Method of inner class 1
         void print()
@@ -40,7 +40,7 @@ class GFG {
 
     // Static nested inner class
     // Class 2
-    public static class subclass extends superclass {
+    public static class Subclass extends Superclass {
 
         // Method of inner class 2
         @Override void print()
@@ -58,11 +58,11 @@ class GFG {
 
         // Creating object of inner class 1
         // with reference to constructor of super class
-        superclass A = new superclass();
+        Superclass A = new Superclass();
 
         // Creating object of inner class 1
         // with reference to constructor of sub class
-        superclass B = new subclass();
+        Superclass B = new Subclass();
 
         // Calling print() method over above objects
         A.print();

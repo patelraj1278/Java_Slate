@@ -20,6 +20,7 @@ public class QuickTest4 {
         intList.forEach(y -> System.out.println("Int Value : "+y.intValue()));
         System.out.println("Int Count ::=>"+intList.stream().count());
 
+
         String s = "efewewgewg";
         System.out.println("Length =>"+s.length());
         //Sort

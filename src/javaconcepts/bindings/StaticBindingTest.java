@@ -10,8 +10,8 @@ public class StaticBindingTest {
         et.sort(c);
         // Creating objects of static inner classes
         // inside main() method
-        superclass A = new superclass();
-        superclass B = new subclass();
+        Superclass A = new Superclass();
+        Superclass B = new Subclass();
 
         // Calling method over above objects
         A.print();
@@ -33,7 +33,7 @@ public class StaticBindingTest {
 
     // Static nested inner class
     // Class 1
-    public static class superclass {
+    public static class Superclass {
 
         // Method of inner class
         static void print()
@@ -47,7 +47,7 @@ public class StaticBindingTest {
 
     // Static nested inner class
     // Class 2
-    public static class subclass extends superclass {
+    public static class Subclass extends Superclass {
 
         // Method of inner class
         static void print()
