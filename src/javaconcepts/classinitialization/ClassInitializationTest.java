@@ -10,7 +10,6 @@ public class ClassInitializationTest {
         //accessing static field of Parent through child, should only initialize Parent
         System.out.println(Child.familyName);
 
-
     }
 }
 
