@@ -32,7 +32,6 @@ public class QueueInterface {
         deque.add("Gautam");
         deque.add("Karan");
         deque.add("Ajay");
-        //Traversing elements
         for (String str : deque) {
             System.out.println(str);
         }

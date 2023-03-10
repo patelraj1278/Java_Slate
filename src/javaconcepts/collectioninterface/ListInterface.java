@@ -36,6 +36,7 @@ public class ListInterface {
         v1.add("Ashish");
         v1.add("Garima");
         Iterator<String> itr2 = v1.iterator();
+
         while (itr2.hasNext()) {
             System.out.println(itr2.next());
         }
@@ -48,6 +49,7 @@ public class ListInterface {
         stack.push("Ashish");
         stack.push("Garima");
         stack.pop();
+        System.out.println("Peek :"+stack.peek());
         Iterator<String> itr3=stack.iterator();
         while(itr3.hasNext()){
             System.out.println(itr3.next());
