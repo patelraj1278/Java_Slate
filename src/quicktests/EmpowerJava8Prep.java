@@ -1,20 +1,20 @@
 package quicktests;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class EmpowerJava8Prep {
 
     public void mostFrequent(){
-        int[] i = {1,4,5,6,7};
-        int[] i1 = new int[5];
-        i1[0] = 3;
-        i1[1] = 1;
-        i1[2] = 2;
-        i1[3] = 4;
-        int[] i2 = new int[]{5,3,2,4,5};
+        int[] i = new int[5];
+        i[0] = 3;
+        i[1] = 1;
+        i[2] = 2;
+        i[3] = 4;
 
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
 
@@ -47,8 +47,20 @@ public class EmpowerJava8Prep {
         System.out.println("Get Min ::"+Arrays.stream(arr).summaryStatistics().getMin());
 
 
+    }
 
+    public void getAccumelator(){
+        int[] i1 = {1,4,5,6,7};
 
+        Collector<Integer, ArrayList<Integer> , List<Integer>> accountListCollector = Collector.of(
+                ArrayList::new, //Supplier - Supplier
+                ArrayList::add, //Accumelator - BiConsumer
+                (l1,l2) -> {l1.addAll(l2); return l1; }, //BinaryOperator - Combiner
+                Collections::unmodifiableList // Function - Finisher
+        );
+
+        List<Integer> resultList = Arrays.stream(i1).boxed().collect(accountListCollector);
+        System.out.println("Final Accumalator Result ::=>"+resultList);
     }
     public List<Integer> getListOfInteger(){
         List<Integer> list = Arrays.asList(5,3,3,5,6);
@@ -94,7 +106,8 @@ public class EmpowerJava8Prep {
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
         //emp.getListOfString();
         //emp.getListOfInteger();
-        emp.mostFrequent();
+        //emp.mostFrequent();
+        emp.getAccumelator();
     }
 
 }

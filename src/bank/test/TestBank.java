@@ -6,6 +6,7 @@ import bank.exceptions.NegativeAmountException;
 import bank.exceptions.NoSuchAccountException;
 
 import java.util.*;
+import java.util.function.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -119,12 +120,13 @@ public class TestBank {
 
         //Java 8: Create the Collector using the four components
         Collector<Account,?,List<Account>> accountListCollector = Collector.of(
-                ArrayList<Account>::new,    // supplier
+                ArrayList<Account>::new,    // <supplier>
 //                        (accountList, account) -> accountList.add(account), // accumulator
-                ArrayList::add, // accumulator
-                (list1, list2) -> {list1.addAll(list2); return list1;}, // combiner
-                Collections::unmodifiableList); // finisher
+                ArrayList::add, // accumulator <BiConsumer>
+                (list1, list2) -> {list1.addAll(list2); return list1;}, // combiner <BinaryOperator>
+                Collections::unmodifiableList); // finisher <Function>
         List<Account> accountList1 = bank.getAccountStream().filter(Account::hasPenalty).collect(accountListCollector);
-        System.out.println(accountList1);
+        System.out.println("unmodifiableList of Account which has hasPenalty =>"+accountList1);
+
     }
 }

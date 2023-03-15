@@ -55,9 +55,9 @@ Anonymous Class -> Lambda expression -> Method Reference
 
 =====================Functional Interfaces=======================
 Java 8 Function examples
+Java 8 UnaryOperator Examples -> UnaryOperator<T> extends Function<T, T>
 Java 8 BiFunction examples
-Java 8 BinaryOperator examples
-Java 8 UnaryOperator Examples
+Java 8 BinaryOperator examples -> BinaryOperator<T> extends BiFunction<T,T,T>
 Java 8 Predicate examples
 Java 8 BiPredicate examples
 Java 8 Consumer examples
@@ -67,13 +67,15 @@ Java 8 Supplier Examples
 Let us see the six basic function interfaces.
 
 Interface	        Signature	            Examples
+Function<T, R>	    R apply(T t)  	        Arrays::asList, Integer::toBinaryString
+BiFunction<T, U, R> R apply(T t, U u)
 UnaryOperator<T>	T apply(T t)	        String::toLowerCase, Math::tan
 BinaryOperator<T>	T apply(T t1, T t2)	    BigInteger::add, Math::pow
-Function<T, R>	    R apply(T t)  	        Arrays::asList, Integer::toBinaryString
 Predicate<T, U>	    boolean test(T t)	    String::isEmpty, Character::isDigit
+BiPredicate<T, U>   boolean test(T t, U u)
 Supplier<T>	        T get()	                LocalDate::now, Instant::now, TreeMap::new
 Consumer<T>	        void accept(T t)	    System.out::println, Error::printStackTrace
-
+BiConsumer<T, U>   void accept(T t, U u)
 
 #Splitrator
 Important points of Spliterator:
