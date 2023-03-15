@@ -30,9 +30,9 @@ public class GFG {
                     return mid;
                 }
                 if(arr[mid] < key){
-                    low = mid + 1;
+                    low = mid + 1; //searching towards Right side since Key is greater than Mid
                 }else{
-                    high = mid - 1;
+                    high = mid - 1; //seaching towards Left Side since Key is Less than Mid
                 }
             }
            return -1;
