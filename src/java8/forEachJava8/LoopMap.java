@@ -35,12 +35,12 @@ public class LoopMap {
             System.out.println(str);
         }*/
 
-        /*//Java 8 Lambda
+        //Java 8 Lambda
         strMap.forEach( (k,v) -> {
             if (k != null && v!= null) {
                 System.out.println("Key : " + k + ", Value : " + v);
             }
-        });*/
+        });
 
         //Java 8 Loop
         //list.forEach(v -> System.out.println(v));
