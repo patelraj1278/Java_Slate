@@ -1,9 +1,7 @@
 package quicktests;
 
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -62,6 +60,7 @@ public class EmpowerJava8Prep {
         List<Integer> resultList = Arrays.stream(i1).boxed().collect(accountListCollector);
         System.out.println("Final Accumalator Result ::=>"+resultList);
     }
+
     public List<Integer> getListOfInteger(){
         List<Integer> list = Arrays.asList(5,3,3,5,6);
         //list.stream().sorted().forEach(System.out::println);
