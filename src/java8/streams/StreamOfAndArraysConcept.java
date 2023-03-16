@@ -32,6 +32,7 @@ public class StreamOfAndArraysConcept {
 
         // 2. Stream.of -> Stream<int[]>
         Stream<int[]> temp = Stream.of(intArray);
+        IntStream.of(intArray).boxed().forEach(x -> System.out.println(x));
         // Cant print Stream<int[]> directly, convert / flat it to IntStream
         IntStream intStream2 = temp.flatMapToInt(x -> Arrays.stream(x));
         intStream2.forEach(x -> System.out.println(x));

@@ -1,11 +1,26 @@
 package quicktests;
 
 import java.util.*;
-import java.util.function.*;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class EmpowerJava8Prep {
+
+    public boolean containsOnlyDigit(String str){
+        /*Boolean b = false;
+        char[] ch = str.toCharArray();
+        for(char c=0; c <ch.length ; c++){
+                if(Character.isDigit(ch[c])){
+                    b = true;
+                    break;
+                }
+        }
+        return b;*/
+        return str.chars().anyMatch(x -> Character.isDigit((char)x));
+
+    }
+
 
     public void mostFrequent(){
         int[] i = new int[5];
@@ -15,6 +30,10 @@ public class EmpowerJava8Prep {
         i[3] = 4;
 
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
+
+        List<Integer> arrList = Arrays.stream(arr).boxed().collect(Collectors.toList());
+        Collections.sort(arrList, Comparator.naturalOrder());
+        arrList.stream().forEach(System.out::println);
 
         System.out.println("Get Min ::"+Arrays.stream(arr).reduce((x,y) -> Integer.min(x,y)).getAsInt());
         System.out.println("Get Sum ::"+Arrays.stream(arr).reduce((x,y) -> Integer.sum(x,y)).getAsInt());
@@ -106,7 +125,8 @@ public class EmpowerJava8Prep {
         //emp.getListOfString();
         //emp.getListOfInteger();
         //emp.mostFrequent();
-        emp.getAccumelator();
+        //emp.getAccumelator();
+        System.out.println(emp.containsOnlyDigit("raj"));
     }
 
 }
