@@ -1,9 +1,12 @@
 package quicktests;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EmpowerJava8Prep {
 
@@ -63,7 +66,6 @@ public class EmpowerJava8Prep {
         System.out.println("Get Average ::"+Arrays.stream(arr).summaryStatistics().getAverage());
         System.out.println("Get Min ::"+Arrays.stream(arr).summaryStatistics().getMin());
 
-
     }
 
     public void getAccumelator(){
@@ -120,13 +122,107 @@ public class EmpowerJava8Prep {
         return list;
     }
 
+    public void mapOperation(){
+        Map<String,List<JobExperienceHistory>> newMap= new HashMap<>();
+        newMap.put("Raj",Arrays.asList(new JobExperienceHistory("JPMC","AWM",BigDecimal.valueOf(100000L)),new JobExperienceHistory("JPMC","CCB",BigDecimal.valueOf(150000L))));
+        newMap.put("Ami",Arrays.asList(new JobExperienceHistory("AMNEAL","R&D",BigDecimal.valueOf(85000L)),new JobExperienceHistory("Novel","Practictioner",BigDecimal.valueOf(20000L))));
+        newMap.put("Heman",Arrays.asList(new JobExperienceHistory("HouseWife","House",BigDecimal.valueOf(25000L))));
+
+        Stream.of(newMap).forEach(x -> {
+                System.out.println("Key :"+x.keySet().size());
+        });
+        newMap.entrySet().forEach(x -> {
+            System.out.println("Key :"+x.getKey());
+        });
+        newMap.entrySet().stream().filter(x -> x.getKey().equalsIgnoreCase("Raj")).forEach(x -> {
+            System.out.println(x.getValue().stream().collect(Collectors.maxBy(Comparator.comparing(JobExperienceHistory::getSalary))).get().getDepartment());
+        });
+
+        newMap.values().stream()
+                .flatMap(x -> x.stream())
+                .sorted(Comparator.comparing(JobExperienceHistory::getSalary))
+                .forEach(x -> {
+                    System.out.println("Sorted :=>"+x.getDepartment());
+                });
+
+        Map<String, List<JobExperienceHistory>>  result = newMap.values().stream()
+                .flatMap(x -> x.stream())
+                .collect(Collectors.groupingBy(JobExperienceHistory::getCompanyName,Collectors.toList()));
+        System.out.println("Group By =>"+result);
+
+        System.out.println("Max By"+newMap.values().stream()
+                .flatMap(x -> x.stream())
+                .collect(Collectors.maxBy(Comparator.comparing(JobExperienceHistory::getSalary))).get());
+
+        Predicate<Integer> pred = x -> x > 50000L;
+        Map<Boolean, List<JobExperienceHistory>> partiotionByHst= newMap.values().stream()
+                .flatMap(x->x.stream())
+                .sorted(Comparator.comparingLong(x-> x.getSalary().longValue()))
+                .collect(Collectors.partitioningBy(x -> x.getSalary().longValue() > 50000L));
+        System.out.println(partiotionByHst);
+
+        LongSummaryStatistics amountSummaryStatistics = newMap.values().stream()
+                .flatMap(x->x.stream())
+                .sorted(Comparator.comparingLong(x-> x.getSalary().longValue()))
+                .collect(Collectors.summarizingLong(x -> x.getSalary().longValue()));
+        System.out.println(amountSummaryStatistics);
+
+
+    }
+
+    class JobExperienceHistory{
+        private String companyName;
+        private String department;
+        private BigDecimal salary;
+
+        @Override
+        public String toString() {
+            return "JobExperienceHistory{" +
+                    "companyName='" + companyName + '\'' +
+                    ", department='" + department + '\'' +
+                    ", salary=" + salary +
+                    '}';
+        }
+
+        public JobExperienceHistory(String companyName, String department, BigDecimal salary) {
+            this.companyName = companyName;
+            this.department = department;
+            this.salary = salary;
+        }
+
+        public String getCompanyName() {
+            return companyName;
+        }
+
+        public void setCompanyName(String companyName) {
+            this.companyName = companyName;
+        }
+
+        public String getDepartment() {
+            return department;
+        }
+
+        public void setDepartment(String department) {
+            this.department = department;
+        }
+
+        public BigDecimal getSalary() {
+            return salary;
+        }
+
+        public void setSalary(BigDecimal salary) {
+            this.salary = salary;
+        }
+    }
+
     public static void main(String [] args){
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
         //emp.getListOfString();
         //emp.getListOfInteger();
         //emp.mostFrequent();
         //emp.getAccumelator();
-        System.out.println(emp.containsOnlyDigit("raj"));
+        //System.out.println(emp.containsOnlyDigit("raj"));
+        emp.mapOperation();
     }
 
 }

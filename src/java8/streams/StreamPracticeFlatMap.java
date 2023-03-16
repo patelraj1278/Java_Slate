@@ -74,7 +74,9 @@ public class StreamPracticeFlatMap {
 
         //Or
         String[][] strArray1 = new String[][]{{"a","b"},{"c","d"},{"e","f"},{"g","h"}};
-        List<String> result1 = Stream.of(strArray1).flatMap(Stream::of).map(x -> x.toUpperCase()).collect(Collectors.toList());
+        List<String> result1 = Stream.of(strArray1)
+                .flatMap(Stream::of)
+                .map(x -> x.toUpperCase()).collect(Collectors.toList());
         System.out.println(result1);
 
         /*
