@@ -154,7 +154,6 @@ public class EmpowerJava8Prep {
                 .flatMap(x -> x.stream())
                 .collect(Collectors.maxBy(Comparator.comparing(JobExperienceHistory::getSalary))).get());
 
-        Predicate<Integer> pred = x -> x > 50000L;
         Map<Boolean, List<JobExperienceHistory>> partiotionByHst= newMap.values().stream()
                 .flatMap(x->x.stream())
                 .sorted(Comparator.comparingLong(x-> x.getSalary().longValue()))
@@ -163,11 +162,15 @@ public class EmpowerJava8Prep {
 
         LongSummaryStatistics amountSummaryStatistics = newMap.values().stream()
                 .flatMap(x->x.stream())
-                .sorted(Comparator.comparingLong(x-> x.getSalary().longValue()))
                 .collect(Collectors.summarizingLong(x -> x.getSalary().longValue()));
         System.out.println(amountSummaryStatistics);
 
-
+        Map<String,BigDecimal> updatedMap=newMap.values().stream().flatMap(x->x.stream())
+                .collect(Collectors.toMap(x->x.getCompanyName(),x->x.getSalary(),(o,n)-> n,HashMap::new));
+        updatedMap.entrySet().forEach(x->{
+            System.out.println("Key::"+x.getKey()+"Value::"+x.getValue());
+        });
+        System.out.println(updatedMap);
     }
 
     class JobExperienceHistory{
