@@ -48,7 +48,7 @@ public class Java8StringJoiner {
         //3.1 Join List<String> example.
         List<String> list = Arrays.asList("java", "python", "nodejs", "ruby");
         //java | python | nodejs | ruby
-        String result = list.stream().map(x -> x).collect(Collectors.joining(" | "));
+        String result = list.stream().map(x -> x.toUpperCase()).collect(Collectors.joining(" | "));
         System.out.println(result);
 
         //3.2 Join List<Object> example.
@@ -77,6 +77,14 @@ public class Java8StringJoiner {
 class Game{
     String name;
     int ranking;
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "name='" + name + '\'' +
+                ", ranking=" + ranking +
+                '}';
+    }
 
     public Game(String name, int ranking) {
         this.name = name;

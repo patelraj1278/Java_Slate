@@ -2,10 +2,10 @@ package quicktests;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class EmpowerJava8Prep {
@@ -165,12 +165,38 @@ public class EmpowerJava8Prep {
                 .collect(Collectors.summarizingLong(x -> x.getSalary().longValue()));
         System.out.println(amountSummaryStatistics);
 
+        JobExperienceHistory hst = newMap.values().stream()
+                .flatMap(x->x.stream())
+                .collect(Collectors.reducing(BinaryOperator.minBy(Comparator.comparing(x->x.getSalary().longValue())))).get();
+        System.out.println("JobExperienceHistory ::>"+hst);
+
         Map<String,BigDecimal> updatedMap=newMap.values().stream().flatMap(x->x.stream())
                 .collect(Collectors.toMap(x->x.getCompanyName(),x->x.getSalary(),(o,n)-> n,HashMap::new));
         updatedMap.entrySet().forEach(x->{
             System.out.println("Key::"+x.getKey()+"Value::"+x.getValue());
         });
         System.out.println(updatedMap);
+    }
+
+    public void randomThought(){
+        int[] i = {1,2,3,4,5};
+        IntStream.rangeClosed(1,11).boxed().filter(x -> x % 2 != 0).forEach(System.out::println);
+        Arrays.stream(i).boxed().filter(x -> x % 2 != 0).forEach(System.out::println);
+        IntSupplier intSupplier = () -> 5;
+        IntStream.iterate(0, x-> x+1)
+                .limit(10)
+                .forEach(System.out::println);
+
+        StringJoiner sj = new StringJoiner(",");
+        sj.add("aaa");
+        sj.add("bbb");
+        sj.add("ccc");
+        StringJoiner sj1 = new StringJoiner(",","start-","-end");
+        sj1.add("aaa");
+        sj1.add("bbb");
+        sj1.add("ccc");
+        System.out.println(sj1);
+
     }
 
     class JobExperienceHistory{
@@ -225,7 +251,8 @@ public class EmpowerJava8Prep {
         //emp.mostFrequent();
         //emp.getAccumelator();
         //System.out.println(emp.containsOnlyDigit("raj"));
-        emp.mapOperation();
+        //emp.mapOperation();
+        emp.randomThought();
     }
 
 }
