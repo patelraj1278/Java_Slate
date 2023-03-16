@@ -196,7 +196,18 @@ public class EmpowerJava8Prep {
         sj1.add("bbb");
         sj1.add("ccc");
         System.out.println(sj1);
+    }
 
+    public void geekForGeeks(){
+        int arr[] = {1, 2, 3, 5};
+        Arrays.sort(arr);
+        List<Integer> intList = new ArrayList<>();
+        for(int i=arr[0]; i<=arr[arr.length-1]; i++){
+            if((i+1) <= arr.length-1 && (arr[i+1] - arr[i]) != 1){
+                intList.add(arr[i]+1);
+            }
+        }
+        intList.forEach(System.out::println);
     }
 
     class JobExperienceHistory{
@@ -252,7 +263,8 @@ public class EmpowerJava8Prep {
         //emp.getAccumelator();
         //System.out.println(emp.containsOnlyDigit("raj"));
         //emp.mapOperation();
-        emp.randomThought();
+        //emp.randomThought();
+        emp.geekForGeeks();
     }
 
 }
