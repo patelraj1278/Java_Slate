@@ -1,6 +1,7 @@
 package quicktests;
 
 import java.math.BigDecimal;
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
@@ -207,7 +208,25 @@ public class EmpowerJava8Prep {
                 intList.add(arr[i]+1);
             }
         }
-        intList.forEach(System.out::println);
+        //intList.forEach(System.out::println);
+
+        int arr1[] = {6, 10, 5, 4, 9, 120, 4, 6, 10};
+        String finalResult="";
+        List<Integer> result = Arrays.stream(arr1).boxed()
+                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet().stream()
+                .filter(x->x.getValue()>1)
+                .map(x->x.getKey())
+                .collect(Collectors.toList());
+
+        for(int i=0;i<arr1.length;i++){
+            if(result.contains(arr1[i])){
+                finalResult=String.valueOf(arr1[i]);
+                break;
+            }
+        }
+        System.out.println(finalResult);
+
     }
 
     class JobExperienceHistory{
