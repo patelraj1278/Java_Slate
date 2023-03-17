@@ -1,13 +1,10 @@
 package javaconcepts.collectioninterface;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class QueueInterface {
     public static void main(String args[]) {
-        PriorityQueue<String> queue = new PriorityQueue<String>();
+        Queue<String> queue = new PriorityQueue<String>();
         queue.add("Amit Sharma");
         queue.add("Vijay Raj");
         queue.add("JaiShankar");
@@ -32,6 +29,9 @@ public class QueueInterface {
         deque.add("Gautam");
         deque.add("Karan");
         deque.add("Ajay");
+        deque.offer("Hello");
+        deque.push("Hi");
+        deque.pop();
         for (String str : deque) {
             System.out.println(str);
         }
