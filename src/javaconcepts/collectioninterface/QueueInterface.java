@@ -16,8 +16,8 @@ public class QueueInterface {
         while (itr.hasNext()) {
             System.out.println(itr.next());
         }
-        queue.remove();
-        queue.poll();
+        queue.remove(); //Remove From Head
+        queue.poll(); //Remove From Head
         System.out.println("after removing two elements:");
         Iterator<String> itr2 = queue.iterator();
         while (itr2.hasNext()) {
@@ -28,10 +28,11 @@ public class QueueInterface {
         Deque<String> deque = new ArrayDeque<String>();
         deque.add("Gautam");
         deque.add("Karan");
-        deque.add("Ajay");
-        deque.offer("Hello");
-        deque.push("Hi");
-        deque.pop();
+        deque.add("Ajay"); //Add to the Tail
+        deque.remove();  //Remove From Head
+        deque.offer("Hello"); //Add to the Tail - Use for Capacity Restricted Queue
+        deque.push("Hi"); //Add to The Head
+        //deque.pop(); //Remove From Tail
         for (String str : deque) {
             System.out.println(str);
         }

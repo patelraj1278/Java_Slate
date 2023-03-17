@@ -15,19 +15,41 @@ public class ListInterface {
         //Traversing list through Iterator
         Iterator itr = list.iterator();
         while (itr.hasNext()) {
-            System.out.println(itr.next());
+            if(!itr.next().equals("Ravi")){
+                itr.remove();
+            }
         }
+        System.out.println(list);
+
 
         //LinkedList
         LinkedList<String> al1 = new LinkedList<String>();
-        al1.add("Ravi");
-        al1.add("Vijay");
-        al1.add("Ravi");
-        al1.add("Ajay");
+        al1.add("1");
+        al1.add("2");
+        al1.add("3");
+        al1.add("4");
+        al1.removeFirst();
+        al1.remove(); //Remove from Head
+        al1.poll();
+        al1.pop();
+        al1.peek();
+
+        //peek
+        //poll
+        //pop
+        //remove
+        //add
+        //offer
+
+        //pop will throw NoSuchElementException() on empty list, whereas poll returns null.
+
+
         Iterator<String> itr1 = al1.iterator();
         while (itr.hasNext()) {
             System.out.println(itr1.next());
+            itr.remove();
         }
+        System.out.println(al1);
 
         //Vector
         Vector<String> v1 = new Vector<String>();
