@@ -1,5 +1,6 @@
 package quicktests;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.security.cert.CollectionCertStoreParameters;
 import java.util.*;
@@ -199,6 +200,89 @@ public class EmpowerJava8Prep {
         System.out.println(sj1);
     }
 
+    public void testSorting(){
+        int[] i = {1,2,3,4,5};
+        Arrays.stream(i).boxed()
+                .sorted(Comparator.reverseOrder())
+                .forEach(System.out::println);
+
+        Map<String,List<JobExperienceHistory>> newMap= new HashMap<>();
+        newMap.put("Raj",Arrays.asList(new JobExperienceHistory("JPMC","AWM",BigDecimal.valueOf(100000L)),new JobExperienceHistory("JPMC","CCB",BigDecimal.valueOf(150000L))));
+        newMap.put("Ami",Arrays.asList(new JobExperienceHistory("AMNEAL","R&D",BigDecimal.valueOf(85000L)),new JobExperienceHistory("Novel","Practictioner",BigDecimal.valueOf(20000L))));
+        newMap.put("Heman",Arrays.asList(new JobExperienceHistory("HouseWife","House",BigDecimal.valueOf(25000L))));
+
+        newMap.entrySet().stream()
+                .map(x->x.getKey())
+                .sorted(Comparator.reverseOrder())
+                .forEach(System.out::println);
+
+        newMap.entrySet().stream()
+                .map(x->x.getValue())
+                .flatMap(x->x.stream())
+                .sorted(Comparator.comparing(x->x.getSalary().longValue(),Comparator.reverseOrder()))
+                .forEach(x->{
+                    System.out.println(x.getCompanyName());
+                });
+
+        newMap.entrySet().stream()
+                .map(x->x.getValue())
+                .flatMap(x->x.stream())
+                .collect(Collectors.groupingBy(JobExperienceHistory::getCompanyName,Collectors.counting()))
+                .entrySet().forEach(System.out::println);
+
+        Map<String,Integer> intMap= new HashMap<>();
+        intMap.put("Raj",1);
+        intMap.put("Ami",2);
+        intMap.put("Heman",3);
+        String result = intMap.entrySet().stream()
+                .collect(Collectors.maxBy(Map.Entry.comparingByValue()))
+                .get().getKey();
+        System.out.println(result);
+
+        Map<String,JobExperienceHistory> empMap= new HashMap<>();
+        empMap.put("Raj",new JobExperienceHistory("JPMC","AWM",BigDecimal.valueOf(0L)));
+        empMap.put("Ami",new JobExperienceHistory("Amneal","R&D",BigDecimal.valueOf(85000L)));
+        empMap.put("Heman",new JobExperienceHistory("House","HS",BigDecimal.valueOf(35000L)));
+
+        Long salarySum = empMap.entrySet().stream()
+                .map(x->x.getValue())
+                .sorted(Comparator.comparingLong(x->x.getSalary().longValue()))
+                .map(x->x.getSalary())
+                .reduce(BigDecimal.ZERO,BigDecimal::add)
+                .longValue();
+        System.out.println(salarySum);
+
+        Map<String,JobExperienceHistory> newEmpMap = empMap.entrySet().stream()
+                .map(x->x.getValue())
+                .collect(Collectors.toMap(JobExperienceHistory::getCompanyName,x->x,(o,n)->n,HashMap::new));
+        System.out.println(newEmpMap);
+
+        String companyName= empMap.entrySet().stream()
+                .map(x->x.getValue())
+                .collect(Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(JobExperienceHistory::getSalary)))).get().getCompanyName();
+        System.out.println(companyName);
+
+        Map<Boolean,List<JobExperienceHistory>> entryJob=empMap.entrySet().stream()
+                .map(x->x.getValue())
+                .collect(Collectors.partitioningBy(x->x.getSalary().longValue() > 50000L));
+        System.out.println(entryJob);
+
+        Double avgSalry = empMap.entrySet().stream()
+                .map(x->x.getValue())
+                .collect(Collectors.summarizingLong(x->x.getSalary().longValue()))
+                .getAverage();
+        System.out.println(avgSalry);
+
+
+        List<Integer> newList = new ArrayList<>();
+        newList.add(5);
+        newList.add(2);
+        newList.add(1);
+        newList.add(4);
+        newList.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+        newList.stream().sorted().forEach(System.out::println);
+    }
+
     public void geekForGeeks(){
         int arr[] = {1, 2, 3, 5};
         Arrays.sort(arr);
@@ -277,6 +361,61 @@ public class EmpowerJava8Prep {
         }
     }
 
+    public void testSortingGeekForGeek(){
+        int arr[] = {2, 5, 2, 8, 5, 6, 8, 8};
+        Arrays.stream(arr).boxed()
+                .sorted((o1,o2)-> o2.compareTo(o1)).forEach(System.out::println);
+
+        Arrays.stream(arr).boxed()
+                .sorted(Comparator.reverseOrder()).forEach(System.out::println);
+
+        Arrays.stream(arr).boxed()
+                .sorted((o1,o2)-> o1.compareTo(o2)).forEach(System.out::println);
+
+        Arrays.stream(arr).boxed()
+                .sorted(Integer::compareTo).forEach(System.out::println);
+
+        Arrays.stream(arr).boxed()
+                .sorted((o1,o2)-> o1.compareTo(o2)).forEach(System.out::println);
+
+        Arrays.stream(arr).boxed()
+                .sorted(new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o2.compareTo(o1);
+                    }
+                }).forEach(System.out::println);
+
+
+        //=== CUSTOM SORTING===//
+        int[] arr1 = { 2, 5, 2, 6, -1, 9999999, 5, 8, 8, 8 };
+        HashMap<Integer,Integer> countMap = new HashMap<>();
+        HashMap<Integer,Integer> indexMap = new HashMap<>();
+        for(int i=0; i< arr1.length;i++){
+            if(countMap.containsKey(arr1[i])){
+                countMap.put(arr1[i],countMap.get(arr1[i])+1);
+            }else{
+                countMap.put(arr1[i],1);
+                indexMap.put(arr1[i],i);
+            }
+        }
+        System.out.println("countMap=>"+countMap);
+        System.out.println("indexMap=>"+indexMap);
+
+        Collections.sort(Arrays.asList(arr), (o1, o2) -> {
+            int freq1= countMap.get(o1);
+            int freq2= countMap.get(o2);
+            if(freq1!=freq2){
+                return freq2-freq1;
+            }else{
+                int index1=indexMap.get(o1);
+                int index2=indexMap.get(o2);
+                return index1-index2;
+            }
+        });
+        Arrays.stream(arr1).forEach(System.out::println);
+    }
+
     public static void main(String [] args){
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
         //emp.getListOfString();
@@ -286,7 +425,9 @@ public class EmpowerJava8Prep {
         //System.out.println(emp.containsOnlyDigit("raj"));
         //emp.mapOperation();
         //emp.randomThought();
-        emp.geekForGeeks();
+        //emp.geekForGeeks();
+        //emp.testSorting();
+        emp.testSortingGeekForGeek();
     }
 
 }
