@@ -14,7 +14,7 @@ public class ComparingExample {
         listStd.add(new Student(3,"Mom",3000));
 
         //sort by salary using comparable
-        Collections.sort(listStd);
+        //Collections.sort(listStd);
         //Java 7
         for(Student s : listStd){
             System.out.println(s);
@@ -36,5 +36,7 @@ public class ComparingExample {
         //Java 8
         listStd.stream().sorted(Comparator.comparing(Student::getSalary)).collect(Collectors.toList()).forEach(System.out::println);
         listStd.stream().sorted(Comparator.comparingInt(Student::getId)).collect(Collectors.toList()).forEach(System.out::println);
+
+        listStd.forEach(System.out::println);
     }
 }

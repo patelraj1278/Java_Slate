@@ -1,8 +1,11 @@
 package dsa.searching;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class EasyProblems {
 
@@ -51,10 +54,61 @@ public class EasyProblems {
         return flag;
     }
 
+    public void findPairWithDiff(int arr[], int diff){
+        for(int i=0; i<arr.length;i++){
+            for(int j=i+1; j<arr.length;j++){
+                    if(Math.abs(arr[i]-arr[j])==diff){
+                        System.out.println("Diff Found=>"+arr[i]+"->"+arr[j]);
+                    }
+            }
+        }
+    }
+
+    public int[] twoSumClosest(int[] nums,int target){
+            Arrays.sort(nums);
+            int left = 0;
+            int right = nums.length-1;
+            int[] result = {-1,-1};
+            int diff = Integer.MAX_VALUE;
+
+            while(left < right){
+                int sum=nums[left] + nums[right];
+                if(Math.abs(sum - target) < diff) {
+                    diff = Math.abs(sum - target);
+                    result[0] = left;
+                    result[1] = right;
+                }
+                if(sum > target) {
+                    right --;
+                }else {
+                    left ++;
+                }
+            }
+        return result;
+    }
+
+    public void threeSortedArr(){
+        int ar1[] = {1, 5, 10, 20, 40, 80};
+        int ar2[] = {6, 5, 7, 20, 80, 100};
+        int ar3[] = {3, 5, 15, 20, 30, 70, 120};
+
+        Integer result =Stream.of(ar1,ar2,ar3)
+                .flatMap(x-> Arrays.stream(x).boxed())
+                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .findFirst().orElse(Map.entry(0,0L)).getKey();
+        System.out.println("Common=>"+result);
+    }
+
     public static void main(String [] args){
         EasyProblems ep = new EasyProblems();
-        ep.findMissingNumber();
+        //ep.findMissingNumber();
         //System.out.println(ep.findMissingNumber_1());
         //ep.findFirstRepeatingElement();
+        ep.findPairWithDiff(new int[]{5, 20, 3, 2, 50, 80},78);
+        int[] result = ep.twoSumClosest(new int[]{1, 2, 3, 4, 5},10);
+        Arrays.stream(result).forEach(System.out::println);
+        ep.threeSortedArr();
     }
 }

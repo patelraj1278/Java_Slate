@@ -13,7 +13,6 @@ public class StackTest {
         System.out.println(st.peek());
         System.out.println(st.pop());
         while(st.iterator().hasNext()){
-            System.out.println(st.empty());
             System.out.println(st.pop());
         }
 

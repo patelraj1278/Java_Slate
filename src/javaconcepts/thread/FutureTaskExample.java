@@ -7,17 +7,20 @@ public class FutureTaskExample {
     public static void main(String[] args) {
         MyCallable callable1 = new MyCallable(1000);
         MyCallable callable2 = new MyCallable(2000);
+        MyRunnableThread runnable1 = new MyRunnableThread();
 
         FutureTask<String> futureTask1 = new FutureTask<String>(callable1);
         FutureTask<String> futureTask2 = new FutureTask<String>(callable2);
+        FutureTask<String> futureTask3 = new FutureTask(runnable1,"The Result");
 
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(3);
         executor.execute(futureTask1);
         executor.execute(futureTask2);
+        executor.execute(futureTask3);
 
         while (true) {
             try {
-                if(futureTask1.isDone() && futureTask2.isDone()){
+                if(futureTask1.isDone() && futureTask2.isDone() && futureTask3.isDone()){
                     System.out.println("Done");
                     //shut down executor service
                     executor.shutdown();
@@ -59,5 +62,13 @@ class MyCallable implements Callable<String> {
         return Thread.currentThread().getName();
     }
 
+}
+
+class MyRunnableThread implements Runnable{
+
+    @Override
+    public void run() {
+        System.out.println("Running Runnable Thread");
+    }
 }
 

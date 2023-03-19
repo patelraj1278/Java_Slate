@@ -4,6 +4,7 @@ import java.util.*;
 
 public class QueueInterface {
     public static void main(String args[]) {
+
         Queue<String> queue = new PriorityQueue<String>();
         queue.add("Amit Sharma");
         queue.add("Vijay Raj");

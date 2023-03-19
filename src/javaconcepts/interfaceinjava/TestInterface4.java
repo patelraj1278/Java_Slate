@@ -21,16 +21,27 @@ class TestInterface4 implements Showable{
 
 //Java 8 Interface added feature
 //Java 8 Default Method in Interface
-interface Drawable{
-    void draw();
+abstract interface  Drawable{
+    public static final String s = null;
+    public abstract  void draw();
     default void msg(){System.out.println("default method");}
 }
 
-interface DrawableOverride extends  Drawable{
+interface DrawableOverride extends  Drawable,Showable{
     default void msg(){System.out.println("default method override");}
 }
 class Rectangle implements DrawableOverride{
     public void draw(){System.out.println("drawing rectangle");}
+
+    @Override
+    public void show() {
+        {System.out.println("Hello interface inheritance ");}
+    }
+
+    @Override
+    public void print() {
+        {System.out.println("Hello interface inheritance");}
+    }
 }
 class TestInterfaceDefault{
     public static void main(String args[]){

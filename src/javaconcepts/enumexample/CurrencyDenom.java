@@ -23,22 +23,22 @@ public enum CurrencyDenom {
         }
     },
     QUARTER(25) {
-        @Override
-        public String color() {
-            return "silver";
-        }
+
     };
 
     private int value;
-    public abstract String color();
+    //public abstract String color();
+    public  String color(){
+        return "default";
+    };
 
     private CurrencyDenom(int value) {
         this.value = value;
     }
 
     public static void main(String args[]){
-        System.out.println(CurrencyDenom.valueOf("QUARTER"));
-        System.out.println(CurrencyDenom.QUARTER.color());
+        System.out.println("Result=>"+CurrencyDenom.valueOf("QUARTER"));
+        System.out.println("Result=>"+CurrencyDenom.QUARTER.color());
         System.out.println(CurrencyDenom.PENNY.ordinal());
         System.out.println(CurrencyDenom.QUARTER);
         Arrays.stream(CurrencyDenom.values()).forEach(System.out::println);

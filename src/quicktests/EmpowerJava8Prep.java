@@ -36,6 +36,8 @@ public class EmpowerJava8Prep {
 
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
 
+
+
         List<Integer> arrList = Arrays.stream(arr).boxed().collect(Collectors.toList());
         Collections.sort(arrList, Comparator.naturalOrder());
         arrList.stream().forEach(System.out::println);
@@ -198,6 +200,18 @@ public class EmpowerJava8Prep {
         sj1.add("bbb");
         sj1.add("ccc");
         System.out.println(sj1);
+
+        List<Employee> employeeList
+                = Arrays.asList(new Employee("Tom Jones", 45, 15000.00),
+                new Employee("Harry Andrews", 45, 7000.00),
+                new Employee("Ethan Hardy", 65, 8000.00),
+                new Employee("Nancy Smith", 22, 10000.00),
+                new Employee("Deborah Sprightly", 29, 9000.00));
+
+            List<String> employeeNamess = employeeList
+                    .stream()
+                    .collect(Collectors.mapping(Employee::getName, Collectors.toList()));
+            employeeNamess.forEach(System.out::println);
     }
 
     public void testSorting(){
@@ -361,6 +375,51 @@ public class EmpowerJava8Prep {
         }
     }
 
+    class Employee {
+
+        private String name;
+        private Integer age;
+        private Double salary;
+
+        public Employee(String name, Integer age, Double salary) {
+            this.name = name;
+            this.age = age;
+            this.salary = salary;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+
+        public Double getSalary() {
+            return salary;
+        }
+
+        public void setSalary(Double salary) {
+            this.salary = salary;
+        }
+//Setters and Getters for name, age & salary go here
+
+        public String toString(){
+            return "Name: "+ this.name
+                    + " Age: "+ this.age;
+        }
+
+        //Standard implementations for overridden hashcode() & equals() goes here
+    }
+
     public void testSortingGeekForGeek(){
         int arr[] = {2, 5, 2, 8, 5, 6, 8, 8};
         Arrays.stream(arr).boxed()
@@ -402,7 +461,7 @@ public class EmpowerJava8Prep {
         System.out.println("countMap=>"+countMap);
         System.out.println("indexMap=>"+indexMap);
 
-        Collections.sort(Arrays.asList(arr), (o1, o2) -> {
+        Collections.sort(Arrays.asList(arr1),(o1, o2)->{
             int freq1= countMap.get(o1);
             int freq2= countMap.get(o2);
             if(freq1!=freq2){
@@ -424,10 +483,10 @@ public class EmpowerJava8Prep {
         //emp.getAccumelator();
         //System.out.println(emp.containsOnlyDigit("raj"));
         //emp.mapOperation();
-        //emp.randomThought();
+        emp.randomThought();
         //emp.geekForGeeks();
         //emp.testSorting();
-        emp.testSortingGeekForGeek();
+        //emp.testSortingGeekForGeek();
     }
 
 }
