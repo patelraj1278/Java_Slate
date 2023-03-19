@@ -24,7 +24,7 @@ public class ComparingExample {
         Collections.sort(listStd, new Comparator<Student>() {
             @Override
             public int compare(Student o1, Student o2) {
-                return o1.getId()-o2.getId();
+                return o2.getId()-o1.getId();
             }
         });
         //Java 7
@@ -32,9 +32,8 @@ public class ComparingExample {
             System.out.println(s);
         }
 
-
         //Java 8
-        listStd.stream().sorted(Comparator.comparing(Student::getSalary)).collect(Collectors.toList()).forEach(System.out::println);
+        listStd.stream().sorted(Comparator.comparing(Student::getSalary).reversed()).collect(Collectors.toList()).forEach(System.out::println);
         listStd.stream().sorted(Comparator.comparingInt(Student::getId)).collect(Collectors.toList()).forEach(System.out::println);
 
         listStd.forEach(System.out::println);
