@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class SearchElement {
 
-    public static String findString(String[] arr, int mostLeft, int mostRight, String toFind){
+    public static String findStringUsingRecussriveSearch(String[] arr, int mostLeft, int mostRight, String toFind){
             if (mostRight < mostLeft){
                 return "NA";
             }
@@ -15,7 +15,23 @@ public class SearchElement {
             if(arr[mostRight] == toFind){
                 return arr[mostRight];
             }
-        return findString(arr,mostLeft+1,mostRight-1,toFind);
+        return findStringUsingRecussriveSearch(arr,mostLeft+1,mostRight-1,toFind);
+    }
+
+    public static int findIntegerUsingBinarySearch(int[] arr, int mostLeft, int mostRight, int toFind){
+        if(mostRight>=mostLeft){
+            int mid= mostLeft + (mostRight-mostLeft) / 2;
+
+            if(arr[mid] == toFind){
+                return mid;
+            }
+            if(arr[mid] > toFind){
+                return findIntegerUsingBinarySearch(arr,mostLeft,mid-1,toFind);
+            }else {
+                return findIntegerUsingBinarySearch(arr,mid+1,mostRight,toFind);
+            }
+        }
+        return -1;
     }
 
     public static int findStringUsingCollectionBinarySearch(String[] arr, String toFind){
@@ -26,22 +42,7 @@ public class SearchElement {
         return -1;
     }
 
-    public static int findIntegerUsingBinarySearch(int[] arr, int mostLeft, int mostRight, int toFind){
-           if(mostRight>=mostLeft){
-                int mid= mostLeft + (mostRight-mostLeft) / 2;
 
-                if(arr[mid] == toFind){
-                    return mid;
-                }
-
-                if(arr[mid] > toFind){
-                    return findIntegerUsingBinarySearch(arr,mostLeft,mid-1,toFind);
-                }else {
-                    return findIntegerUsingBinarySearch(arr,mid+1,mostRight,toFind);
-                }
-        }
-           return -1;
-    }
     public static void main(String [] args){
         String[] str = {"Raj","Ami","Heman","aabc","kfnwe","kwqf","elkfnwel","ejfew"};
         String toFind = "s";
