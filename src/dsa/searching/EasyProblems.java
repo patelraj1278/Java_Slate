@@ -101,14 +101,61 @@ public class EasyProblems {
         System.out.println("Common=>"+result);
     }
 
+    public void findIncreaseAndDecrease(){
+        int arr[] = {120, 100, 80, 20, 0};
+        int result = arr[arr.length-1];
+        for(int i=0; i<arr.length; i++){
+            if((i+1) < arr.length && arr[i] > arr[i+1]){
+                result=arr[i];
+                break;
+            }
+        }
+        System.out.println(result);
+    }
+
+    public void findFrequencyNDevideK(int arr[],int n , int k){
+            int freqCount = Math.round(n/k);
+            System.out.println(freqCount);
+
+            Arrays.stream(arr).boxed()
+                    .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                    .entrySet().stream()
+                    .filter(x->x.getValue() > freqCount)
+                    .collect(Collectors.toList())
+                    .forEach(System.out::println);
+
+        Arrays.stream(arr).boxed()
+                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+
+        NavigableMap<String,String> map = new TreeMap<>();
+        map.put("1","Raj");
+        map.put("2","Ami");
+        map.put("3","Heman");
+        System.out.println(map.firstEntry());
+        System.out.println(map.lastEntry());
+        //System.out.println(map.pollFirstEntry());
+        //System.out.println(map.pollLastEntry());
+        SortedMap<String,String> sMap = map.headMap("Heman");
+        sMap.entrySet().forEach(System.out::println);
+
+
+
+
+    }
+
     public static void main(String [] args){
         EasyProblems ep = new EasyProblems();
         //ep.findMissingNumber();
         //System.out.println(ep.findMissingNumber_1());
         //ep.findFirstRepeatingElement();
-        ep.findPairWithDiff(new int[]{5, 20, 3, 2, 50, 80},78);
-        int[] result = ep.twoSumClosest(new int[]{1, 2, 3, 4, 5},10);
-        Arrays.stream(result).forEach(System.out::println);
-        ep.threeSortedArr();
+        //ep.findPairWithDiff(new int[]{5, 20, 3, 2, 50, 80},78);
+        //int[] result = ep.twoSumClosest(new int[]{1, 2, 3, 4, 5},10);
+        //Arrays.stream(result).forEach(System.out::println);
+        //ep.threeSortedArr();
+        //ep.findIncreaseAndDecrease();
+        int[] arr= {3, 1, 2, 2, 1, 2, 3, 3};
+        int n = arr.length;
+        int k = 4;
+        ep.findFrequencyNDevideK(arr,n,k);
     }
 }

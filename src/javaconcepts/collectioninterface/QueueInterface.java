@@ -38,7 +38,8 @@ public class QueueInterface {
         deque.remove();  //Remove From Head
         deque.offer("Hello"); //Add to the Tail - Use for Capacity Restricted Queue
         deque.push("Hi"); //Add to The Head
-        //deque.pop(); //Remove From Tail
+        deque.pop(); //Remove from Head
+        deque.poll(); //Remove from Head
         for (String str : deque) {
             System.out.println(str);
         }
