@@ -6,10 +6,15 @@ public class QueueInterface {
     public static void main(String args[]) {
 
         Queue<String> queue = new PriorityQueue<String>();
-        queue.add("Amit Sharma");
+        /*queue.add("Amit Sharma");
         queue.add("Vijay Raj");
         queue.add("JaiShankar");
-        queue.add("Raj");
+        queue.add("Raj");*/
+        queue.add("1");
+        queue.add("2");
+        queue.add("3");
+        queue.add("4");
+
         System.out.println("head:" + queue.element());
         System.out.println("head:" + queue.peek());
         System.out.println("iterating the queue elements:");

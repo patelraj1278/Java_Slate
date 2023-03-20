@@ -212,6 +212,10 @@ public class EmpowerJava8Prep {
                     .stream()
                     .collect(Collectors.mapping(Employee::getName, Collectors.toList()));
             employeeNamess.forEach(System.out::println);
+
+        employeeList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).collect(Collectors.toList());
+        employeeList.stream().sorted(Comparator.comparing(Employee::getName).reversed()).collect(Collectors.toList());
+        employeeList.stream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
     }
 
     public void testSorting(){
