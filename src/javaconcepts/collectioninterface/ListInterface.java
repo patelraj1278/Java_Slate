@@ -24,8 +24,8 @@ public class ListInterface {
         System.out.println("Final List Result=>"+list);
 
 
-        //LinkedList
-        LinkedList<String> al1 = new LinkedList<String>();
+        //Deque-LinkedList
+        Deque<String> al1 = new LinkedList<String>();
         al1.add("3");
         al1.addFirst("1");
         al1.addLast("4");
@@ -41,11 +41,12 @@ public class ListInterface {
         System.out.println("Offer Last=>"+al1.offerLast("6")); //Add Element to Last - Capacity Driven
         System.out.println(al1);
 
-        System.out.println("POP =>"+al1.pop());  //Get TAIL
+        System.out.println("POP =>"+al1.pop());  //Get HEAD
         System.out.println("POLL ->"+al1.poll()); //Get HEAD
         System.out.println("POLL First->"+al1.pollFirst()); //Get HEAD
         System.out.println("POLL First->"+al1.pollLast()); //Get TAIL
         al1.push("10"); //ADD to HEAD
+        al1.remove();
         System.out.println(al1);
 
         //add,addFirst,addLast
@@ -62,7 +63,7 @@ public class ListInterface {
 
         Iterator<String> itr1 = al1.iterator();
         while (itr1.hasNext()) {
-            if(itr1.next().equals("10")){
+            if(itr1.next().equals("2")){
                 itr1.remove();
             }
         }
@@ -132,7 +133,11 @@ public class ListInterface {
           "I am at the top.",
           "I am in the middle.",
           "I am at the bottom.");*/
-
+        System.out.println(myStack1.peek());
+        //Convert to LifoQueue
+        Queue<String> lifoQueue = Collections.asLifoQueue(myStack1);
+        lifoQueue.add("Raj");
+        System.out.println(lifoQueue.peek());
 
     }
 }

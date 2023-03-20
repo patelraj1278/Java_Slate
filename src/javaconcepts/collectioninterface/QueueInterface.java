@@ -43,5 +43,6 @@ public class QueueInterface {
         for (String str : deque) {
             System.out.println(str);
         }
+
     }
 }
