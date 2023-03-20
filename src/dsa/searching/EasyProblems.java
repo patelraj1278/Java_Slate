@@ -138,9 +138,6 @@ public class EasyProblems {
         SortedMap<String,String> sMap = map.headMap("Heman");
         sMap.entrySet().forEach(System.out::println);
 
-
-
-
     }
 
     public static void main(String [] args){
