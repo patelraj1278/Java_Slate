@@ -139,6 +139,47 @@ public class EasyProblems {
 
     }
 
+    public void reverseString(){
+        String s = "GeeksQuiz Geeks";
+        System.out.println(s);
+        Stack<Character> stack = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i) != ' '){
+                stack.push(s.charAt(i));
+            }else{
+                while(!stack.isEmpty()){
+                    System.out.print(stack.pop());
+                }
+                System.out.print(" ");
+            }
+
+        }
+
+        while(!stack.isEmpty()){
+            System.out.print(stack.pop());
+        }
+    }
+
+    public void reverseQueue(){
+        Deque<Integer> deque = new ArrayDeque<>();
+        int[] arr =  {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+        for(int i=0 ; i<arr.length; i++){
+            deque.push(arr[i]);
+        }
+        deque.add(25);
+        deque.stream().forEach(System.out::println);
+    }
+
+    public void reverseWithStack() {
+        Stack<Integer> stack = new Stack<>();
+        int[] arr =  {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+        for(int i=arr.length-1; i >=0 ; i--){
+            stack.push(arr[i]);
+        }
+        stack.stream().forEach(System.out::println);
+    }
+
+
     public static void main(String [] args){
         EasyProblems ep = new EasyProblems();
         //ep.findMissingNumber();
@@ -149,9 +190,12 @@ public class EasyProblems {
         //Arrays.stream(result).forEach(System.out::println);
         //ep.threeSortedArr();
         //ep.findIncreaseAndDecrease();
-        int[] arr= {3, 1, 2, 2, 1, 2, 3, 3};
+        /*int[] arr= {3, 1, 2, 2, 1, 2, 3, 3};
         int n = arr.length;
         int k = 4;
-        ep.findFrequencyNDevideK(arr,n,k);
+        ep.findFrequencyNDevideK(arr,n,k);*/
+        //ep.reverseString();
+        ep.reverseQueue();
+        //ep.reverseWithStack();
     }
 }
