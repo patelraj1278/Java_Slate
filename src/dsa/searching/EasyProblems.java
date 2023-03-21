@@ -179,6 +179,25 @@ public class EasyProblems {
         stack.stream().forEach(System.out::println);
     }
 
+    public int twoSumLessThanK(int[] arr, int k){
+        Arrays.sort(arr);
+        Arrays.stream(arr).forEach(System.out::println);
+        int i=0;
+        int j=arr.length-1;
+        int ans=-1;
+        while(i < j){
+            if(arr[i]+arr[j] >= k){
+                System.out.println("Here K=>"+arr[i]+",J=>"+arr[j]);
+                j--;
+            }else{
+                System.out.println("There K=>"+arr[i]+",J=>"+arr[j]);
+                ans= Math.max(ans,arr[i]+arr[j]);
+                i++;
+            }
+        }
+        return ans;
+    }
+
 
     public static void main(String [] args){
         EasyProblems ep = new EasyProblems();
@@ -195,7 +214,9 @@ public class EasyProblems {
         int k = 4;
         ep.findFrequencyNDevideK(arr,n,k);*/
         //ep.reverseString();
-        ep.reverseQueue();
+        //ep.reverseQueue();
         //ep.reverseWithStack();
+        int[] arr= {34,23,1,24,75,33,54,8};
+        ep.twoSumLessThanK(arr,60);
     }
 }

@@ -35,6 +35,12 @@ public class EmpowerJava8Prep {
         i[3] = 4;
 
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
+        int[] arr2 = { 1,2,3,40};
+
+
+        System.out.println(Arrays.stream(arr).boxed().collect(Collectors.minBy(Comparator.naturalOrder())).orElse(0));
+        Map<Boolean,List<Integer>> partBy  = Arrays.stream(arr).boxed().collect(Collectors.partitioningBy(x->x > 30));
+        partBy.entrySet().forEach(System.out::println);
 
 
 
@@ -299,6 +305,8 @@ public class EmpowerJava8Prep {
         newList.add(4);
         newList.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
         newList.stream().sorted().forEach(System.out::println);
+
+
     }
 
     public void geekForGeeks(){
@@ -483,11 +491,11 @@ public class EmpowerJava8Prep {
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
         //emp.getListOfString();
         //emp.getListOfInteger();
-        //emp.mostFrequent();
+        emp.mostFrequent();
         //emp.getAccumelator();
         //System.out.println(emp.containsOnlyDigit("raj"));
         //emp.mapOperation();
-        emp.randomThought();
+        //emp.randomThought();
         //emp.geekForGeeks();
         //emp.testSorting();
         //emp.testSortingGeekForGeek();
