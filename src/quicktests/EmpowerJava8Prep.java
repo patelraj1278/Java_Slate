@@ -37,12 +37,9 @@ public class EmpowerJava8Prep {
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
         int[] arr2 = { 1,2,3,40};
 
-
         System.out.println(Arrays.stream(arr).boxed().collect(Collectors.minBy(Comparator.naturalOrder())).orElse(0));
         Map<Boolean,List<Integer>> partBy  = Arrays.stream(arr).boxed().collect(Collectors.partitioningBy(x->x > 30));
         partBy.entrySet().forEach(System.out::println);
-
-
 
         List<Integer> arrList = Arrays.stream(arr).boxed().collect(Collectors.toList());
         Collections.sort(arrList, Comparator.naturalOrder());

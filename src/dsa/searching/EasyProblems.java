@@ -18,6 +18,7 @@ public class EasyProblems {
             }
         }
         intList.forEach(System.out::println);*/
+
         Arrays.sort(arr);
         List<Integer> missingElementsList = new ArrayList<>();
         for(int i=0; i< arr.length; i++){
