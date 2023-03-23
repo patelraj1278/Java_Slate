@@ -1,5 +1,7 @@
 package quicktests;
 
+import java.io.CharArrayReader;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BinaryOperator;
@@ -25,6 +27,8 @@ public class EmpowerJava8Prep {
         return str.chars().anyMatch(x -> Character.isDigit((char)x));
 
     }
+
+
 
 
     public void mostFrequent(){
@@ -484,11 +488,167 @@ public class EmpowerJava8Prep {
         Arrays.stream(arr1).forEach(System.out::println);
     }
 
-    public static void main(String [] args){
+
+    public void reverseString(){
+        String str = "Raj Patel";
+        Stack<Character> stack = new Stack<>();
+        for(int i=0; i<str.length();i++){
+            if(str.charAt(i) == ' '){
+                while (stack.isEmpty() == false) {
+                    System.out.print(stack.pop());
+                }
+                System.out.print(" ");
+            }else {
+                stack.push(str.charAt(i));
+            }
+        }
+        while(stack.isEmpty()==false){
+            System.out.print(stack.pop());
+        }
+    }
+
+    public void palinDrome(){
+        String str = "abaa";
+        String reverse="";
+        for(int i=str.length()-1;i>=0;i--){
+            reverse+=str.charAt(i);
+        }
+        if(str.equals(reverse)){
+            System.out.println("Palindrome");
+        }else{
+            System.out.println("Non Palindrome");
+        }
+    }
+
+    public void numOfOcccOfCharInString(){
+            String str= "abcd skfeas";
+            char find = 'a';
+            //str.chars().forEach(System.out::println);
+
+            int count=0;
+            for(int i=0; i< str.length();i++){
+                if(str.charAt(i) == find){
+                    count++;
+                }
+            }
+            System.out.println("Result=>"+count);
+
+
+            Long result = str.chars()
+                    .mapToObj(x->(char)x)
+                    .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                    .entrySet().stream().filter(x->x.getKey().equals(find))
+                    .findAny().orElse(Map.entry('n',0L)).getValue();
+            System.out.println("Result=>"+result);
+
+    }
+
+    public void bestBuySell(){
+        int[] prices={7,1,5,3,6,4};
+        int minBuy= Integer.MAX_VALUE;
+        int maxSell=0;
+        for(int i=0;i<prices.length;i++){
+            System.out.println("minBuy=>"+minBuy+"maxBuy=>"+maxSell+"index=>"+i+"value=>"+prices[i]);
+            if(prices[i] < minBuy){
+                minBuy= prices[i];
+            }
+            if(prices[i]-minBuy > maxSell){
+                maxSell=prices[i];
+            }
+        }
+        System.out.println(maxSell);
+    }
+
+    public void findVovelvsConstanct(){
+        String str = "fewfefwetwdq";
+        int vowel=0;
+        int consonants=0;
+        for(int i=0;i<str.length();i++){
+            char c = str.charAt(i);
+            if(c=='a' || c == 'e' || c == 'i' || c == 'o' || c == 'u'){
+                vowel++;
+            }else{
+                consonants++;
+            }
+        }
+        System.out.println("Vowel count is " + vowel);
+        System.out.println("consonants count is " + consonants);
+    }
+
+    public void matchingElement(){
+        int[] a = { 1, 2, 3, 4, 5, 1, 2, 6, 7 };
+        Set<Integer> s = new HashSet<>();
+        for(int i=0;i<a.length;i++){
+            if(!s.add(a[i])){
+                System.out.println(a[i]);
+            }
+        }
+
+        Arrays.stream(a).boxed()
+                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet().stream()
+                .filter(x->x.getValue()>1)
+                .forEach(x->{
+                    System.out.println(x);
+                });
+    }
+
+    public void reverseArray(){
+        int[] a = { 1, 2, 7, 6, 4, 9, 12,15 };
+        System.out.println(a.length/2);
+        for(int i=0; i<a.length/2; i++){
+            int tmp = a[i];
+            a[i] = a[a.length - i - 1];
+            a[a.length - i- 1] = tmp;
+        }
+
+        Arrays.stream(a).forEach(System.out::println);
+    }
+
+    private void findSecondHighest() {
+        int[] array= { 1, 2, 7, 6, 4, 9, 12,15 };
+
+        int maxNum = Integer.MIN_VALUE;
+        int secondMaxNum = Integer.MIN_VALUE;
+        for(int i=0; i<array.length;i++){
+            if(array[i] > maxNum){
+                secondMaxNum=maxNum;
+                maxNum=array[i];
+            }else if(array[i] > secondMaxNum){
+                secondMaxNum=array[i];
+            }
+        }
+        System.out.println(secondMaxNum);
+    }
+
+    //One Note
+    //AWS
+    //Java Program
+    public void reverseString1(){
+        String str = "Raj Patel";
+        Stack<Character> stack= new Stack<>();
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i) != ' '){
+                stack.push(str.charAt(i));
+            }else{
+                while(stack.isEmpty()==false){
+                    System.out.print(stack.pop());
+                }
+                System.out.print(" ");
+            }
+        }
+        while(stack.isEmpty()==false){
+            System.out.print(stack.pop());
+        }
+
+    }
+
+
+        public static void main(String [] args){
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
         //emp.getListOfString();
         //emp.getListOfInteger();
-        emp.mostFrequent();
+        //emp.mostFrequent();
         //emp.getAccumelator();
         //System.out.println(emp.containsOnlyDigit("raj"));
         //emp.mapOperation();
@@ -496,6 +656,15 @@ public class EmpowerJava8Prep {
         //emp.geekForGeeks();
         //emp.testSorting();
         //emp.testSortingGeekForGeek();
+        //emp.reverseString();
+        //emp.palinDrome();
+        //emp.numOfOcccOfCharInString();
+        //emp.bestBuySell();
+        //emp.findVovelvsConstanct();
+        //emp.matchingElement();
+        //emp.reverseArray();
+        //emp.findSecondHighest();
+        emp.reverseString1();
     }
 
 }
