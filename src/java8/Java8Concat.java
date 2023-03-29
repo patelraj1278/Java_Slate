@@ -1,6 +1,8 @@
 package java8;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -29,6 +31,13 @@ public class Java8Concat {
 
         System.out.println(Arrays.toString(result3));
 
+        String[][] s4 = new String[][]{{"a", "b", "c"},{"a", "b", "c"}};
+        String[][] s5 = new String[][]{{"d", "e", "f"},{"d", "e", "f"}};
+        String[][] s6 = new String[][]{{"g", "h", "i"},{"d", "e", "f"}};
+
+        Stream.of(s4,s5,s6).flatMap(Stream::of)
+
+                .collect(Collectors.toSet()).forEach(System.out::println);
     }
     public static void main(String[] args) {
         Java8Concat jc = new Java8Concat();

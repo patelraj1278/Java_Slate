@@ -1,12 +1,12 @@
 package quicktests;
 
-import java.io.CharArrayReader;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,8 +24,8 @@ public class EmpowerJava8Prep {
                 }
         }
         return b;*/
-        return str.chars().anyMatch(x -> Character.isDigit((char)x));
 
+        return str.chars().anyMatch(x -> Character.isDigit((char)x));
     }
 
 
@@ -40,7 +40,9 @@ public class EmpowerJava8Prep {
 
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
         int[] arr2 = { 1,2,3,40};
-
+        System.out.println("Average :=>"+Arrays.stream(arr).boxed().collect(Collectors.averagingInt(x->x)));
+        Arrays.stream(arr).boxed().sorted((o1, o2) -> o2-o1);
+        System.out.println("Hello "+Arrays.stream(arr).boxed().reduce(0,(a,b) -> a > b ? a : b));
         System.out.println(Arrays.stream(arr).boxed().collect(Collectors.minBy(Comparator.naturalOrder())).orElse(0));
         Map<Boolean,List<Integer>> partBy  = Arrays.stream(arr).boxed().collect(Collectors.partitioningBy(x->x > 30));
         partBy.entrySet().forEach(System.out::println);
@@ -48,7 +50,6 @@ public class EmpowerJava8Prep {
         List<Integer> arrList = Arrays.stream(arr).boxed().collect(Collectors.toList());
         Collections.sort(arrList, Comparator.naturalOrder());
         arrList.stream().forEach(System.out::println);
-
         System.out.println("Get Min ::"+Arrays.stream(arr).reduce((x,y) -> Integer.min(x,y)).getAsInt());
         System.out.println("Get Sum ::"+Arrays.stream(arr).reduce((x,y) -> Integer.sum(x,y)).getAsInt());
         System.out.println("Get Max ::"+Arrays.stream(arr).reduce((x,y) -> Integer.max(x,y)).getAsInt());
@@ -82,15 +83,21 @@ public class EmpowerJava8Prep {
     public void getAccumelator(){
         int[] i1 = {1,4,5,6,7};
 
-        Collector<Integer, ArrayList<Integer> , List<Integer>> accountListCollector = Collector.of(
-                ArrayList::new, //Supplier - Supplier
-                ArrayList::add, //Accumelator - BiConsumer
+        Collector<String, ArrayList<String> , List<String>> accountListCollector = Collector.of(
+                ArrayList::new, //Supplier - Supplier -> l1
+                ArrayList::add, //Accumelator - BiConsumer -> l2
                 (l1,l2) -> {l1.addAll(l2); return l1; }, //BinaryOperator - Combiner
                 Collections::unmodifiableList // Function - Finisher
         );
 
-        List<Integer> resultList = Arrays.stream(i1).boxed().collect(accountListCollector);
+        List<String> resultList = Arrays.stream(i1)
+                .mapToObj(String::valueOf)
+                .collect(accountListCollector);
         System.out.println("Final Accumalator Result ::=>"+resultList);
+
+        Map<String,Integer> iMap= Arrays.stream(i1).boxed()
+                .collect(Collectors.toMap(String::valueOf,Function.identity(),(o,n)-> n, TreeMap::new));
+
     }
 
     public List<Integer> getListOfInteger(){
@@ -105,6 +112,7 @@ public class EmpowerJava8Prep {
         result.forEach((k,v) -> {
             System.out.println("Hello Key :"+k+"Hello Value :"+v);
         });
+
 
         System.out.println("Max Key ::"+result.keySet().stream().collect(Collectors.maxBy(Comparator.naturalOrder())).get());
         System.out.println("Get Value From Map Using Above Key::"+result.get(result.keySet().stream().collect(Collectors.maxBy(Comparator.naturalOrder())).get()));
@@ -149,6 +157,14 @@ public class EmpowerJava8Prep {
             System.out.println(x.getValue().stream().collect(Collectors.maxBy(Comparator.comparing(JobExperienceHistory::getSalary))).get().getDepartment());
         });
 
+        newMap.entrySet().stream()
+                .flatMap(x->x.getValue().stream())
+                .collect(Collectors.maxBy(Comparator.comparing(JobExperienceHistory::getSalary))).get();
+
+        newMap.entrySet().stream()
+                .flatMap(x->x.getValue().stream())
+                        .collect(Collectors.maxBy(Comparator.comparing(JobExperienceHistory::getSalary)));
+
         newMap.values().stream()
                 .flatMap(x -> x.stream())
                 .sorted(Comparator.comparing(JobExperienceHistory::getSalary))
@@ -191,13 +207,13 @@ public class EmpowerJava8Prep {
 
     public void randomThought(){
         int[] i = {1,2,3,4,5};
+        IntStream.rangeClosed(i[0],i[i.length-1]).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList()).forEach(System.out::println);
         IntStream.rangeClosed(1,11).boxed().filter(x -> x % 2 != 0).forEach(System.out::println);
         Arrays.stream(i).boxed().filter(x -> x % 2 != 0).forEach(System.out::println);
         IntSupplier intSupplier = () -> 5;
         IntStream.iterate(0, x-> x+1)
                 .limit(10)
                 .forEach(System.out::println);
-
         StringJoiner sj = new StringJoiner(",");
         sj.add("aaa");
         sj.add("bbb");
@@ -219,7 +235,7 @@ public class EmpowerJava8Prep {
                     .stream()
                     .collect(Collectors.mapping(Employee::getName, Collectors.toList()));
             employeeNamess.forEach(System.out::println);
-
+        employeeList.stream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
         employeeList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).collect(Collectors.toList());
         employeeList.stream().sorted(Comparator.comparing(Employee::getName).reversed()).collect(Collectors.toList());
         employeeList.stream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
@@ -298,7 +314,6 @@ public class EmpowerJava8Prep {
                 .getAverage();
         System.out.println(avgSalry);
 
-
         List<Integer> newList = new ArrayList<>();
         newList.add(5);
         newList.add(2);
@@ -306,8 +321,6 @@ public class EmpowerJava8Prep {
         newList.add(4);
         newList.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
         newList.stream().sorted().forEach(System.out::println);
-
-
     }
 
     public void geekForGeeks(){
@@ -491,7 +504,7 @@ public class EmpowerJava8Prep {
 
     public void reverseString(){
         String str = "Raj Patel";
-        Stack<Character> stack = new Stack<>();
+       /* Stack<Character> stack = new Stack<>();
         for(int i=0; i<str.length();i++){
             if(str.charAt(i) == ' '){
                 while (stack.isEmpty() == false) {
@@ -504,7 +517,8 @@ public class EmpowerJava8Prep {
         }
         while(stack.isEmpty()==false){
             System.out.print(stack.pop());
-        }
+        }*/
+
     }
 
     public void palinDrome(){
@@ -643,6 +657,39 @@ public class EmpowerJava8Prep {
 
     }
 
+    public void testEmp(){
+        Map<String,List<JobExperienceHistory>> newMap= new HashMap<>();
+        newMap.put("Raj",Arrays.asList(new JobExperienceHistory("JPMC","AWM",BigDecimal.valueOf(100000L)),new JobExperienceHistory("JPMC","CCB",BigDecimal.valueOf(150000L))));
+        newMap.put("Ami",Arrays.asList(new JobExperienceHistory("AMNEAL","R&D",BigDecimal.valueOf(85000L)),new JobExperienceHistory("Novel","Practictioner",BigDecimal.valueOf(20000L))));
+        newMap.put("Heman",Arrays.asList(new JobExperienceHistory("HouseWife","House",BigDecimal.valueOf(25000L))));
+
+        newMap.entrySet().stream()
+                .flatMap(x -> x.getValue().stream())
+                .filter(x -> x.getSalary().longValue() < 85000L)
+                .forEach(x -> {
+                    System.out.println(x.getCompanyName());
+                });
+
+        newMap.entrySet().stream()
+                .flatMap(x -> x.getValue().stream())
+                .collect(Collectors.partitioningBy(x->x.getSalary().longValueExact()<85000L))
+                .entrySet().forEach(x -> {
+            System.out.println(x.getKey()+" "+x.getValue());
+        });
+
+
+        newMap.entrySet().stream()
+                .flatMap(x->x.getValue().stream())
+                .filter(x -> x.getSalary().longValueExact() > 85000L)
+                .forEach(x ->{
+                    System.out.println(x);
+                        });
+
+        Map<String,List<JobExperienceHistory>> jobMap = new HashMap<>();
+        jobMap.put("Raj", Arrays.asList(new JobExperienceHistory("JPMC","AWM",BigDecimal.valueOf(100000L))));
+
+    }
+
 
         public static void main(String [] args){
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
@@ -664,7 +711,10 @@ public class EmpowerJava8Prep {
         //emp.matchingElement();
         //emp.reverseArray();
         //emp.findSecondHighest();
-        emp.reverseString1();
+        //emp.reverseString1();
+        //emp.testEmp();
+        //emp.mostFrequent();
+
     }
 
 }

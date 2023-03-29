@@ -12,7 +12,8 @@ public class StreamConvertStreamToArray {
     //1. Stream -> String[]
     public void convertStreamToArray(){
         String lines = "I Love Java 8 Stream!";
-        String[] result = Arrays.stream(lines.split("\\s+")).map(String::toUpperCase).toArray(String[]::new);
+        String[] result = Arrays.stream(lines.split("\\s+"))
+                .map(String::toUpperCase).toArray(String[]::new);
         for (String s : result) {
             System.out.println(s);
         }
