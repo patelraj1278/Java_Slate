@@ -9,8 +9,9 @@ package quicktests;
 
  */
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -138,7 +139,7 @@ class Solution
                                                                          List<FundAllocation> targetAllocation) throws Exception {
         List<Order> orders = new ArrayList<>();
 
-        if(targetAllocation.stream().collect(Collectors.summingDouble(x->x.getPercent())) > 100){
+        if(targetAllocation.stream().collect(Collectors.summingDouble(x->x.getPercent())) != 100){
             throw new RuntimeException("Allocation Exceeded");
         }else{
             targetAllocation.stream()
@@ -172,7 +173,7 @@ class Solution
                                 }
                             }
                         });
-            });
+                });
 
             orders.stream().forEach(x-> {
                 if(x.getOrderType().equalsIgnoreCase("BUY")){
