@@ -7,7 +7,7 @@ public class ListInterface {
     public static void main(String args[]) {
 
 
-        //ArrayList
+       /* //ArrayList
         ArrayList<String> list = new ArrayList<String>();//Creating arraylist
         list.add("Ravi");//Adding object in arraylist
         list.add("Vijay");
@@ -22,9 +22,9 @@ public class ListInterface {
             }
         }
         System.out.println("Final List Result=>"+list);
+*/
 
-
-        //Deque-LinkedList
+        /*//Deque-LinkedList
         Deque<String> al1 = new LinkedList<String>();
         al1.add("3");
         al1.addFirst("1");
@@ -67,7 +67,7 @@ public class ListInterface {
                 itr1.remove();
             }
         }
-        System.out.println(al1);
+        System.out.println(al1);*/
 
 
         //Vector
@@ -82,7 +82,7 @@ public class ListInterface {
             System.out.println(itr2.next());
         }
 
-        //Stack
+        /*//Stack
         Stack<String> stack = new Stack<String>();
         stack.ensureCapacity(5);
         stack.add("Raj");
@@ -102,7 +102,7 @@ public class ListInterface {
         Iterator<String> itr3=stack.iterator();
         while(itr3.hasNext()){
             System.out.println(itr3.next());
-        }
+        }*/
 
         //Stack vs Deque push()
 

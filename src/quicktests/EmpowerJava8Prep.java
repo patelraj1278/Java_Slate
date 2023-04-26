@@ -1,9 +1,11 @@
 package quicktests;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntSupplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -26,28 +28,52 @@ public class EmpowerJava8Prep {
         return str.chars().anyMatch(x -> Character.isDigit((char)x));
     }
 
+    public void reverSeString(){
+        String str = "GeeksQuiz Geeks";
+        Stack<Character> stack = new Stack<>();
+
+        char[] ch = str.toCharArray();
+        for(char c=0 ; c < ch.length ; c++){
+            stack.push(ch[c]);
+        }
+
+        while(stack.isEmpty() == false){
+            System.out.print(stack.pop());
+        }
+
+    }
+
 
 
 
     public void mostFrequent(){
-        int[] i = new int[5];
-        i[0] = 3;
-        i[1] = 1;
-        i[2] = 2;
-        i[3] = 4;
+        int[] iArr = new int[5];
+        iArr[0] = 3;
+        iArr[1] = 1;
+        iArr[2] = 2;
+        iArr[3] = 4;
 
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
         int[] arr2 = { 1,2,3,40};
+
+        Arrays.stream(arr).reduce(0, Math::max);
+        Arrays.stream(arr).boxed().reduce(0,BinaryOperator.maxBy(Comparator.naturalOrder()));
         System.out.println("Average :=>"+Arrays.stream(arr).boxed().collect(Collectors.averagingInt(x->x)));
         Arrays.stream(arr).boxed().sorted((o1, o2) -> o2-o1);
         System.out.println("Hello "+Arrays.stream(arr).boxed().reduce(0,(a,b) -> a > b ? a : b));
-        System.out.println(Arrays.stream(arr).boxed().collect(Collectors.minBy(Comparator.naturalOrder())).orElse(0));
+        System.out.println(Arrays.stream(arr).boxed().min(Comparator.naturalOrder()).orElse(0));
         Map<Boolean,List<Integer>> partBy  = Arrays.stream(arr).boxed().collect(Collectors.partitioningBy(x->x > 30));
         partBy.entrySet().forEach(System.out::println);
-
+        Map<Boolean,List<Integer>> partMpa=  Arrays.stream(arr2).boxed().collect(Collectors.partitioningBy(x -> x > 30));
         List<Integer> arrList = Arrays.stream(arr).boxed().collect(Collectors.toList());
+
+        for(int k=0; k < arrList.size(); k++){
+            System.out.println(arrList.get(k));
+        }
+        arrList.forEach(System.out::println);
+
         Collections.sort(arrList, Comparator.naturalOrder());
-        arrList.stream().forEach(System.out::println);
+        arrList.forEach(System.out::println);
         System.out.println("Get Min ::"+Arrays.stream(arr).reduce((x,y) -> Integer.min(x,y)).getAsInt());
         System.out.println("Get Sum ::"+Arrays.stream(arr).reduce((x,y) -> Integer.sum(x,y)).getAsInt());
         System.out.println("Get Max ::"+Arrays.stream(arr).reduce((x,y) -> Integer.max(x,y)).getAsInt());
@@ -114,7 +140,7 @@ public class EmpowerJava8Prep {
 
         System.out.println("Max Key ::"+result.keySet().stream().collect(Collectors.maxBy(Comparator.naturalOrder())).get());
         System.out.println("Get Value From Map Using Above Key::"+result.get(result.keySet().stream().collect(Collectors.maxBy(Comparator.naturalOrder())).get()));
-        System.out.println("Min Value ::"+result.values().stream().collect(Collectors.minBy(Comparator.naturalOrder())).get());
+        System.out.println("Min Value ::"+result.values().stream().min(Comparator.naturalOrder()).get());
         result.entrySet().stream().filter(x -> x.getKey().toString().equalsIgnoreCase("6")).forEach(x -> {
             System.out.println("Filtered Value :"+ x.getValue() );
         });
@@ -144,6 +170,7 @@ public class EmpowerJava8Prep {
         newMap.put("Raj",Arrays.asList(new JobExperienceHistory("JPMC","AWM",BigDecimal.valueOf(100000L)),new JobExperienceHistory("JPMC","CCB",BigDecimal.valueOf(150000L))));
         newMap.put("Ami",Arrays.asList(new JobExperienceHistory("AMNEAL","R&D",BigDecimal.valueOf(85000L)),new JobExperienceHistory("Novel","Practictioner",BigDecimal.valueOf(20000L))));
         newMap.put("Heman",Arrays.asList(new JobExperienceHistory("HouseWife","House",BigDecimal.valueOf(25000L))));
+
 
         Stream.of(newMap).forEach(x -> {
                 System.out.println("Key :"+x.keySet().size());
@@ -691,6 +718,7 @@ public class EmpowerJava8Prep {
 
         public static void main(String [] args){
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
+        emp.reverSeString();
         //emp.getListOfString();
         //emp.getListOfInteger();
         //emp.mostFrequent();

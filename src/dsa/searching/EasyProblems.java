@@ -214,10 +214,10 @@ public class EasyProblems {
         int n = arr.length;
         int k = 4;
         ep.findFrequencyNDevideK(arr,n,k);*/
-        //ep.reverseString();
+        ep.reverseString();
         //ep.reverseQueue();
         //ep.reverseWithStack();
-        int[] arr= {34,23,1,24,75,33,54,8};
-        ep.twoSumLessThanK(arr,60);
+        //int[] arr= {34,23,1,24,75,33,54,8};
+        //ep.twoSumLessThanK(arr,60);
     }
 }
