@@ -72,9 +72,7 @@ public class QuickPractice2 {
         list.add(new Hosting(4, "aws.amazon.com", 200000));
         list.add(new Hosting(5, "mkyong.com", 1));
 
-
         Map<Integer,String> imap = list.stream().collect(Collectors.toMap(x -> x.getId(), x -> x.getName() ,(old, existing) -> old, HashMap::new));
-
         imap.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(x -> x.getKey(),y -> y.getValue()));
