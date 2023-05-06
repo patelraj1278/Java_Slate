@@ -2,8 +2,8 @@ package bank.subclass;
 
 
 import bank.Account;
-import bank.exceptions.NegativeAmountException;
 import bank.interfaces.Penalty;
+import bank.exceptions.NegativeAmountException;
 
 public class CurrentAccount extends Account {
 
