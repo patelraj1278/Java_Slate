@@ -1,15 +1,13 @@
 package dsa.hashing;
 
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.function.BinaryOperator;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class MostFrequestCount {
 
-    public int findMostFrequent(int[] arr){
+    public int findMostFrequent(int[] arr) {
 
         /*return Arrays.stream(arr).boxed()
                 .collect(Collectors.groupingByConcurrent(Function.identity(),Collectors.counting()))
@@ -20,7 +18,7 @@ public class MostFrequestCount {
          return Arrays.stream(arr).boxed()
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
                 .entrySet().stream()
-                 .collect(Collectors.toList())
+                 .toList()
                  .stream()
                  .max(Map.Entry.comparingByValue()).get().getKey();
     }

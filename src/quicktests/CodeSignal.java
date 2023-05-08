@@ -234,7 +234,7 @@ public class CodeSignal {
     public String reverseString(String s){
         String result = "";
         for(int i=s.length()-1 ; i >=0 ; i--){
-            result += s.charAt(i);
+            result+= s.charAt(i);
             System.out.println(s.charAt(i));
         }
         return result;

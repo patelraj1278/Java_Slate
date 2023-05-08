@@ -22,8 +22,7 @@ public class CollectionInterface {
         Boolean val=set.contains(5);
         if (val){
             System.out.println("5 is present in the collection");
-        }
-        else{
+        }else{
             System.out.println("5 is not present in the collection");
         }
         //It removes all the elements automatically from this collection.

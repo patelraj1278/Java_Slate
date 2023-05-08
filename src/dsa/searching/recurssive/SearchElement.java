@@ -2,6 +2,7 @@ package dsa.searching.recurssive;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -11,10 +12,10 @@ public class SearchElement {
             if (mostRight < mostLeft){
                 return "NA";
             }
-            if(arr[mostLeft] == toFind){
+            if(Objects.equals(arr[mostLeft], toFind)){
                 return arr[mostLeft];
             }
-            if(arr[mostRight] == toFind){
+            if(Objects.equals(arr[mostRight], toFind)){
                 return arr[mostRight];
             }
         return findStringUsingRecussriveSearch(arr,mostLeft+1,mostRight-1,toFind);

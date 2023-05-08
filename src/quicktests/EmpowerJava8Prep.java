@@ -623,13 +623,20 @@ public class EmpowerJava8Prep {
             }
         }
 
+        Arrays.stream(a).boxed().sorted(Comparator.reverseOrder()).reduce(BinaryOperator.maxBy(Comparator.naturalOrder()));
+        Map.Entry<Integer,Long> entry= Arrays.stream(a).boxed()
+                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .get();
+        System.out.println("Highest ==>"+entry.getValue());
+
         Arrays.stream(a).boxed()
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
                 .entrySet().stream()
                 .filter(x->x.getValue()>1)
-                .forEach(x->{
-                    System.out.println(x);
-                });
+                .forEach(System.out::println);
     }
 
     public void reverseArray(){
@@ -718,7 +725,7 @@ public class EmpowerJava8Prep {
 
         public static void main(String [] args){
         EmpowerJava8Prep emp = new EmpowerJava8Prep();
-        emp.reverSeString();
+        //emp.reverSeString();
         //emp.getListOfString();
         //emp.getListOfInteger();
         //emp.mostFrequent();
@@ -734,7 +741,7 @@ public class EmpowerJava8Prep {
         //emp.numOfOcccOfCharInString();
         //emp.bestBuySell();
         //emp.findVovelvsConstanct();
-        //emp.matchingElement();
+        emp.matchingElement();
         //emp.reverseArray();
         //emp.findSecondHighest();
         //emp.reverseString1();
