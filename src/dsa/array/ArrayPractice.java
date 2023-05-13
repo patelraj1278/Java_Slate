@@ -5,27 +5,45 @@ import java.util.stream.Collectors;
 
 public class ArrayPractice {
 
-    public void findLargestArray(){
+    public int findLargestArray(){
         int arr[] = {10, 4, 3, 50, 23, 90};
-        Arrays.stream(arr)
+        /*Arrays.stream(arr)
                 .boxed()
                 .distinct()
                 .sorted(Comparator.reverseOrder())
                 .limit(3)
                 .collect(Collectors.toList())
-                .forEach(System.out::println);
+                .forEach(System.out::println);*/
+
+        int max = Integer.MIN_VALUE;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
     }
 
-    public void findSecondLargestArray(){
-        int arr[] = {10, 4, 3, 50, 23,51, 90};
-        Integer result = Arrays.stream(arr).boxed()
+    public int findSecondLargestArray(){
+        int arr[] = {10, 4, 3, 61, 23,51, 90};
+        /*Integer result = Arrays.stream(arr).boxed()
                 .distinct()
                 .sorted(Comparator.reverseOrder())
                 .limit(2)
                 .min(Comparator.naturalOrder())
                 .get();
-
-        System.out.println(result);
+        */
+        int max = Integer.MIN_VALUE;
+        int second_max = Integer.MIN_VALUE;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                second_max=max;
+                max = arr[i];
+            }else if(arr[i] > second_max){
+                second_max=arr[i];
+            }
+        }
+        return second_max;
     }
 
     public void moveAllZeroToEnd(){
@@ -38,11 +56,7 @@ public class ArrayPractice {
                 queue.addLast(arr[i]);
             }
         }
-        Iterator itr = queue.iterator();
-        while(itr.hasNext()){
-            System.out.println(itr.next());
-        }
-
+        queue.stream().iterator().forEachRemaining(System.out::println);
 
         /*for(int i=0; i<arr.length ; i++){
             if(((i+1) < arr.length) && (arr[i]==0 && arr[i+1]!=0)){
@@ -58,8 +72,8 @@ public class ArrayPractice {
 
     public static void main(String [] args){
         ArrayPractice ap = new ArrayPractice();
-        //ap.findLargestArray();
-        //ap.findSecondLargestArray();
+        System.out.println(ap.findLargestArray());
+        System.out.println(ap.findSecondLargestArray());
         ap.moveAllZeroToEnd();
     }
 }

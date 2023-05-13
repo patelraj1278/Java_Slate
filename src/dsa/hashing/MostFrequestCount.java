@@ -18,15 +18,13 @@ public class MostFrequestCount {
          return Arrays.stream(arr).boxed()
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
                 .entrySet().stream()
-                 .toList()
-                 .stream()
-                 .max(Map.Entry.comparingByValue()).get().getKey();
+                 .max(Map.Entry.comparingByValue()).orElse(Map.entry(0,0L)).getKey();
     }
 
     // Driver program
     public static void main(String[] args) {
         MostFrequestCount mfc = new MostFrequestCount();
-        int[] arr = {5,3,1,2,1,4,1,3,3};
+        int[] arr = {5,3,1,2,1,4,1,3,3,3};
         System.out.println(mfc.findMostFrequent(arr));
     }
 }
