@@ -1,9 +1,6 @@
 package dsa.searching.recurssive;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SearchElement {
@@ -72,20 +69,18 @@ public class SearchElement {
     }
 
     //Not Working
-    static void findMissingNumber(int[] arr,int low, int high){
-        Stack<Integer> stack = new Stack<>();
-        if(low < high){
-            int mid= low + (high-low) /2;
-            if(arr[mid] - arr[mid-1] != 1){
-                stack.add(arr[mid]-1);
-                findMissingNumber(arr,low,mid-1);
-            }
-            if(arr[mid+1] - arr[mid] != 1){
-                stack.add(arr[mid]+1);
-                findMissingNumber(arr,mid+1,high);
+    static void findMissingNumber(int[] arr){
+        List<Integer> missingNumbers = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+        for (int i : arr) {
+            set.add(i);
+        }
+        for (int i = 1; i <= Arrays.stream(arr).max().getAsInt(); i++) {
+            if (!set.contains(i)) {
+                missingNumbers.add(i);
             }
         }
-        System.out.println(stack.stream().collect(Collectors.toList()));
+        missingNumbers.forEach(System.out::println);
     }
 
 
@@ -101,13 +96,13 @@ public class SearchElement {
         int[] arr= {10,3,4,5,6,7};
         Arrays.sort(arr);
         System.out.println(findIntegerUsingBinarySearch(arr,0,arr.length-1,7));
-        System.out.println(findIntegerUsingRecussriveSearch(arr,0,arr.length-1,11));
+        System.out.println(findIntegerUsingRecussriveSearch(arr,0,arr.length-1,11));*/
 
-        int[] arr1= {10,3,4,5,6,7};
+        /*int[] arr1= {10,3,4,5,6,7};
         int low = 0;
         int high = arr1.length-1;
         Arrays.sort(arr1);
-        findMissingNumber(arr1,low,high);*/
+        findMissingNumber(arr1);*/
         int[] arr1= {10,3,4,5,6,7};
         Arrays.sort(arr1);
         findMissingNumber1(arr1);

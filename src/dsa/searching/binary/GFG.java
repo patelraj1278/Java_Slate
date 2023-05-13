@@ -7,12 +7,10 @@ public class GFG {
     static int binaryRecurrsiveSearch(int arr[], int low, int high, int key) {
             if(high >= 1){
                  int mid = low + (high - 1) / 2;
-
                  if(arr[mid] == key){
                         System.out.println("Key Fonund");
                         return mid;
                  }
-
                  if(arr[mid] > key) {
                      return binaryRecurrsiveSearch(arr,low, mid - 1 , key);
                  }
