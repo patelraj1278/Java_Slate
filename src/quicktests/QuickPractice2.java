@@ -218,6 +218,7 @@ public class QuickPractice2 {
         System.out.println(practiceEnum.ONE.ordinal());
         System.out.println(practiceEnum.ONE.name());
         System.out.println(practiceEnum.ONE.getValue());
+        Arrays.stream(practiceEnum.values()).forEach(System.out::println);
         for(Enum enm : practiceEnum.values()){
             System.out.println(enm);
         }
