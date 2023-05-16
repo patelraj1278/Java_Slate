@@ -185,13 +185,13 @@ public class QuickPractice2 {
         System.out.println(name);
     }
 
-    enum practiceEnum {
+    enum PracticeEnum {
         ONE("NAME"),
         TWO("TWO"),
         THREE("THREE");
 
         String name;
-        practiceEnum(String s){
+        PracticeEnum(String s){
             this.name=s;
         }
         public String getValue() {
@@ -215,11 +215,11 @@ public class QuickPractice2 {
         qp.convertListToMap();
         qp.quickPractice();
         qp.switchCase('e');
-        System.out.println(practiceEnum.ONE.ordinal());
-        System.out.println(practiceEnum.ONE.name());
-        System.out.println(practiceEnum.ONE.getValue());
-        Arrays.stream(practiceEnum.values()).forEach(System.out::println);
-        for(Enum enm : practiceEnum.values()){
+        System.out.println(PracticeEnum.ONE.ordinal());
+        System.out.println(PracticeEnum.ONE.name());
+        System.out.println(PracticeEnum.ONE.getValue());
+        Arrays.stream(PracticeEnum.values()).forEach(System.out::println);
+        for(Enum enm : PracticeEnum.values()){
             System.out.println(enm);
         }
 
