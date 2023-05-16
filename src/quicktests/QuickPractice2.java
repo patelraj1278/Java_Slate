@@ -178,8 +178,8 @@ public class QuickPractice2 {
         String name = switch(i) {
             case 'a' -> "One";
             case 'b' -> "Two";
-            case 'c','d','e' -> "Two";
-            default -> "Three";
+            case 'c','d','e' -> "Three";
+            default -> "Four";
         };
 
         System.out.println(name);
