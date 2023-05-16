@@ -173,6 +173,39 @@ public class QuickPractice2 {
 
     }
 
+    public void switchCase(char i){
+
+        String name = switch(i) {
+            case 'a' -> "One";
+            case 'b' -> "Two";
+            case 'c','d','e' -> "Two";
+            default -> "Three";
+        };
+
+        System.out.println(name);
+    }
+
+    enum practiceEnum {
+        ONE("NAME"),
+        TWO("TWO"),
+        THREE("THREE");
+
+        String name;
+        practiceEnum(String s){
+            this.name=s;
+        }
+        public String getValue() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return "practiceEnum{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
+    }
+
     public static void main(String [] args){
 
         QuickPractice2 qp = new QuickPractice2();
@@ -181,6 +214,14 @@ public class QuickPractice2 {
         qp.codeSignal1(new int[]{8, 5, 6, 16, 5},1,3); //[false, false, true, false, true].
         qp.convertListToMap();
         qp.quickPractice();
+        qp.switchCase('e');
+        System.out.println(practiceEnum.ONE.ordinal());
+        System.out.println(practiceEnum.ONE.name());
+        System.out.println(practiceEnum.ONE.getValue());
+        for(Enum enm : practiceEnum.values()){
+            System.out.println(enm);
+        }
+
     }
 
 

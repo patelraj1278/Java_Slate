@@ -1,11 +1,9 @@
 package quicktests;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
-import java.util.function.IntBinaryOperator;
 import java.util.function.IntSupplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
