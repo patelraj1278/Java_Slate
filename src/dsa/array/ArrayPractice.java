@@ -69,11 +69,31 @@ public class ArrayPractice {
         }
         Arrays.stream(arr).forEach(System.out::println);*/
     }
+    public void moveAllZeroToEndNew(){
+        int[] dataArr = {1,0,3,40,0,3,9};
+        int counter=0;
+        for(int i=0; i< dataArr.length; i++){
+            if(dataArr[i]!=0){
+                dataArr[counter]=dataArr[i];
+                counter++;
+            }
+        }
+
+        while(counter < dataArr.length){
+            dataArr[counter]=0;
+            counter++;
+        }
+
+        for(int num: dataArr){
+            System.out.println(num);
+        }
+    }
 
     public static void main(String [] args){
         ArrayPractice ap = new ArrayPractice();
         System.out.println(ap.findLargestArray());
         System.out.println(ap.findSecondLargestArray());
         ap.moveAllZeroToEnd();
+        ap.moveAllZeroToEndNew();
     }
 }

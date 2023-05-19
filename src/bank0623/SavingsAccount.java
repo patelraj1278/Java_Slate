@@ -5,7 +5,7 @@ public class SavingsAccount extends Account{
         super(actNo, name, openBal);
     }
 
-    public SavingsAccount(String name, long openBal) throws NegativeAmountException {
+    public SavingsAccount(String name, long openBal) throws NegativeAmountException{
         super(name, openBal);
     }
 }

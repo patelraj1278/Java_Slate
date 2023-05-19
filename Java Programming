@@ -1,0 +1,28 @@
+==Reduce==/===Find Min Max===
+Arrays.stream(arr).reduce(0, Math::max);
+Arrays.stream(arr).reduce((x,y) -> Integer.min(x,y)).getAsInt();
+Arrays.stream(arr).reduce((x,y) -> Integer.sum(x,y)).getAsInt();
+Arrays.stream(arr).reduce((x,y) -> Integer.max(x,y)).getAsInt();
+Arrays.stream(arr).boxed().reduce(0,BinaryOperator.maxBy(Comparator.naturalOrder()));
+Arrays.stream(arr).boxed().reduce(0,(a,b) -> a > b ? a : b);
+Arrays.stream(arr).boxed().min(Comparator.naturalOrder()).orElse(0);
+
+
+==Math===
+Arrays.stream(arr).boxed().collect(Collectors.averagingInt(x->x));
+Arrays.stream(arr).boxed().collect(Collectors.summingInt(x->x));
+Arrays.stream(arr).boxed().mapToInt(x -> x).sum();
+Arrays.stream(arr).summaryStatistics().getMax();
+Arrays.stream(arr).summaryStatistics().getSum();
+
+
+===Partition By===
+Map<Boolean,List<Integer>> partBy  = Arrays.stream(arr).boxed().collect(Collectors.partitioningBy(x->x > 30));
+
+===Group By===
+Map<Integer,Long> result = list.stream().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+
+==Sorting===
+Collections.sort(arrList, Comparator.naturalOrder());
+
+

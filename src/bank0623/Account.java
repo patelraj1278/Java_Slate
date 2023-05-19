@@ -36,7 +36,7 @@ public abstract class Account {
             this.transType = transType;
             this.transactionAmount = transactionAmount;
 
-            Account.this.passbook.add(this);
+                    Account.this.passbook.add(this);
         }
 
         public long getDate() {

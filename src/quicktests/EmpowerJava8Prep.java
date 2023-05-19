@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntSupplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -53,10 +54,10 @@ public class EmpowerJava8Prep {
 
         int[] arr = { 40, 50, 30, 40, 50, 30, 30, 40};
         int[] arr2 = { 1,2,3,40};
-
         Arrays.stream(arr).reduce(0, Math::max);
         Arrays.stream(arr).boxed().reduce(0,BinaryOperator.maxBy(Comparator.naturalOrder()));
         System.out.println("Average :=>"+Arrays.stream(arr).boxed().collect(Collectors.averagingInt(x->x)));
+        System.out.println("Average :=>"+Arrays.stream(arr).boxed().collect(Collectors.summingInt(x->x)));
         Arrays.stream(arr).boxed().sorted((o1, o2) -> o2-o1);
         System.out.println("Hello "+Arrays.stream(arr).boxed().reduce(0,(a,b) -> a > b ? a : b));
         System.out.println(Arrays.stream(arr).boxed().min(Comparator.naturalOrder()).orElse(0));
@@ -134,7 +135,6 @@ public class EmpowerJava8Prep {
         result.forEach((k,v) -> {
             System.out.println("Hello Key :"+k+"Hello Value :"+v);
         });
-
 
         System.out.println("Max Key ::"+result.keySet().stream().collect(Collectors.maxBy(Comparator.naturalOrder())).get());
         System.out.println("Get Value From Map Using Above Key::"+result.get(result.keySet().stream().collect(Collectors.maxBy(Comparator.naturalOrder())).get()));
@@ -258,7 +258,7 @@ public class EmpowerJava8Prep {
                     .stream()
                     .collect(Collectors.mapping(Employee::getName, Collectors.toList()));
             employeeNamess.forEach(System.out::println);
-        employeeList.stream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
+        employeeList.stream().sorted(Comparator.comparing(Employee::getAge).thenComparing(Employee::getName)).collect(Collectors.toList());
         employeeList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).collect(Collectors.toList());
         employeeList.stream().sorted(Comparator.comparing(Employee::getName).reversed()).collect(Collectors.toList());
         employeeList.stream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
@@ -693,6 +693,21 @@ public class EmpowerJava8Prep {
         newMap.put("Ami",Arrays.asList(new JobExperienceHistory("AMNEAL","R&D",BigDecimal.valueOf(85000L)),new JobExperienceHistory("Novel","Practictioner",BigDecimal.valueOf(20000L))));
         newMap.put("Heman",Arrays.asList(new JobExperienceHistory("HouseWife","House",BigDecimal.valueOf(25000L))));
 
+        newMap.values().stream()
+                        .flatMap(Collection::stream)
+                                .filter(x->x.getSalary().longValue() > 85000L)
+                                        .forEach(x->{
+                                            System.out.println("Name==>"+x.getCompanyName());
+                                        });
+
+        newMap.values().stream()
+                        .flatMap(Collection::stream)
+                                .sorted(Comparator.comparingLong(x->x.getSalary().longValue()))
+                                        .forEach(x->{
+                                            System.out.println("Name==>"+x.getCompanyName());
+                                        });
+
+
         newMap.entrySet().stream()
                 .flatMap(x -> x.getValue().stream())
                 .filter(x -> x.getSalary().longValue() < 85000L)
@@ -708,6 +723,15 @@ public class EmpowerJava8Prep {
         });
 
 
+        System.out.println ("Helo"+ newMap.entrySet().stream()
+                .flatMap(x->x.getValue().stream())
+                        .min(Comparator.comparing(x->x.getSalary())).get());
+        Map<Boolean, Long> heyMap = newMap.entrySet().stream()
+                .flatMap(x->x.getValue().stream())
+                .collect(Collectors.partitioningBy(x->x.getSalary().longValue()> 5000L,Collectors.counting()));
+
+
+        System.out.println("HeyMap ==>"+heyMap);
         newMap.entrySet().stream()
                 .flatMap(x->x.getValue().stream())
                 .filter(x -> x.getSalary().longValueExact() > 85000L)
@@ -718,6 +742,34 @@ public class EmpowerJava8Prep {
         Map<String,List<JobExperienceHistory>> jobMap = new HashMap<>();
         jobMap.put("Raj", Arrays.asList(new JobExperienceHistory("JPMC","AWM",BigDecimal.valueOf(100000L))));
 
+    }
+
+
+    private static int binarySearch(int[] array, int target, int left, int right) {
+        if (left > right) {
+            return -1; // Element not found
+        }
+        int mid = left + (right - left) / 2;
+        if (array[mid] == target) {
+            return mid; // Element found at index mid
+        } else if (array[mid] < target) {
+            return binarySearch(array, target, mid + 1, right); // Search in the right half
+        } else {
+            return binarySearch(array, target, left, mid - 1); // Search in the left half
+        }
+    }
+
+    private static void searchUsingMap(){
+        int[] dataArr = {3,1,2,4,5,6};
+        Map<Integer,Integer> iMap = new HashMap<>();
+        for(int i=0; i< dataArr.length; i++){
+            iMap.put(i,dataArr[i]);
+        }
+        iMap.entrySet().stream()
+                .filter(x->x.getValue() == 5)
+                .forEach(x->{
+                    System.out.println("x.getKey() = " + x.getKey());
+                });
     }
 
 
@@ -743,9 +795,15 @@ public class EmpowerJava8Prep {
         //emp.reverseArray();
         //emp.findSecondHighest();
         //emp.reverseString1();
-        //emp.testEmp();
+        emp.testEmp();
         //emp.mostFrequent();
 
-    }
+            int[] dataArr = {3,1,2,4,5,6};
+            //Arrays.sort(dataArr);
+            System.out.println(binarySearch(dataArr,1,0,dataArr.length-1));
+            searchUsingMap();
+
+
+        }
 
 }

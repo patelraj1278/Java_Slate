@@ -11,6 +11,68 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class QuickPractice2 {
+
+
+    public void findMinMax(){
+        int[] dataArr = {4,2,4,5,1,40};
+        System.out.println(Arrays.stream(dataArr).max().getAsInt());
+        System.out.println(Arrays.stream(dataArr).min().getAsInt());
+    }
+
+    public void practice(){
+        int[] dataArr = {4,5,6,2,3,5};
+        Stack<Integer> stack = new Stack<>();
+        Queue<Integer> queue = new ArrayDeque<>();
+        for(int i=0; i < dataArr.length ; i++){
+            //System.out.println(dataArr[i]);
+            queue.add(dataArr[i]);
+            stack.push(dataArr[i]);
+        }
+
+        while(stack.isEmpty() == false){
+            System.out.println(stack.pop());
+        }
+
+        while(queue.isEmpty() == false){
+            System.out.println(queue.poll());
+        }
+    }
+
+    public void findMinMaxUsingBST(){
+        int[] dataArr = {4,2,4,5,1,40};
+        int MIN_VALUE =  Integer.MAX_VALUE;
+        int MAX_VALUE =  Integer.MIN_VALUE;
+
+        for (int number : dataArr) {
+            if (number < MIN_VALUE) {
+                MIN_VALUE = number;
+            }
+            if (number > MAX_VALUE) {
+                MAX_VALUE = number;
+            }
+        }
+
+        System.out.println("MIN_VALUE"+MIN_VALUE);
+        System.out.println("MAX_VALUE"+MAX_VALUE);
+    }
+
+
+    public static int findIntegerUsingBinarySearch(int[] arr, int mostLeft, int mostRight, int toFind){
+        if(mostRight>=mostLeft){
+            int mid= mostLeft + (mostRight-mostLeft) / 2;
+
+            if(arr[mid] == toFind){
+                return mid;
+            }
+            if(arr[mid] > toFind){
+                return findIntegerUsingBinarySearch(arr,mostLeft,mid-1,toFind);
+            }else{
+                return findIntegerUsingBinarySearch(arr,mid+1,mostRight,toFind);
+            }
+        }
+        return -1;
+    }
+
     public boolean anagramOrNot(){
         String s1 = "hello";
         String s2 = "eholl";
@@ -244,6 +306,11 @@ public class QuickPractice2 {
         String str = "A man, a plan, a canal: Panama";
         boolean isPalindrome = isPalindrome(str);
         System.out.println("Is Palindrome: " + isPalindrome);
+
+        qp.findMinMax();
+        qp.findMinMaxUsingBST();
+
+        qp.practice();
 
     }
 

@@ -85,7 +85,7 @@ public class GFG {
         int currentSum = nums[0];
         for (int i = 1; i < nums.length; i++) {
             currentSum = Math.max(nums[i], currentSum + nums[i]);
-            System.out.println(currentSum);
+            //System.out.println(currentSum);
             maxSum = Math.max(maxSum, currentSum);
             //System.out.println(maxSum);
         }

@@ -5,18 +5,19 @@ import java.util.Arrays;
 public class GFG {
 
     static int binaryRecurrsiveSearch(int arr[], int low, int high, int key) {
-            if(high >= 1){
-                 int mid = low + (high - 1) / 2;
-                 if(arr[mid] == key){
-                        System.out.println("Key Fonund");
-                        return mid;
-                 }
-                 if(arr[mid] > key) {
-                     return binaryRecurrsiveSearch(arr,low, mid - 1 , key);
-                 }
-                 return binaryRecurrsiveSearch(arr,mid + 1, high , key);
+            if(low > high){
+                return -1;
             }
-        return -1;
+
+             int mid = low + (high - 1) / 2;
+             if(arr[mid] == key){
+                    System.out.println("Key Fonund");
+                    return mid;
+             }else if(arr[mid] > key){
+                 return binaryRecurrsiveSearch(arr,low, mid - 1 , key);
+             }else{
+                 return binaryRecurrsiveSearch(arr,mid + 1, high , key);
+             }
     }
 
     static int binaryLinerSearch(int[] arr , int key){
