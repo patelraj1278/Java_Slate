@@ -102,10 +102,6 @@ public class QuickTest4 {
         Map<String,Long> empGroupBy = empDptList.stream().collect(Collectors.groupingBy(Employee::getName,Collectors.counting()));
         empGroupBy.forEach((k,v) -> System.out.println("K : "+k+"V :"+v));
     }
-    public static void main(String [] args){
-        QuickTest4 qt4 = new QuickTest4();
-        qt4.test1();
-    }
 
 }
 
@@ -175,6 +171,7 @@ class Employee{
     }
 }
 
+
 class Department{
     private int id;
     private String name;
@@ -206,5 +203,30 @@ class Department{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public static void practiceThread(){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Hello World");
+            }
+        });
+        t.start();
+    }
+
+
+    public static void main(String [] args){
+        QuickTest4 qt4 = new QuickTest4();
+        qt4.test1();
+        practiceThread();
+        Task newTask = new Task();
+        Thread tr = new Thread(newTask);
+    }
+}
+class Task implements  Runnable{
+    @Override
+    public void run() {
+        System.out.println("Hello World");
     }
 }
