@@ -17,6 +17,6 @@ public class BinarySearch {
         return -1;
     }
     public static void main(String [] args){
-        search(new int[] {1,4,5,6,2},4);
+        System.out.println(search(new int[] {1,4,5,6,2},4));
     }
 }

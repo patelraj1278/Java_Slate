@@ -15,6 +15,6 @@ public class CountElements {
         return count;
     }
     public static void main(String [] args){
-        countElements(new int[]{2,1,3,4});
+        System.out.println(countElements(new int[]{2,1,3,4}));
     }
 }

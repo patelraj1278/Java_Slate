@@ -20,6 +20,6 @@ public class ArrayPartition {
         return sum;
     }
     public static void main(String [] args){
-        arrayPairSum(new int[] {1,4,5,6,2});
+        System.out.println(arrayPairSum(new int[] {1,4,5,6,2}));
     }
 }

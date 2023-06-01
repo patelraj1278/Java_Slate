@@ -13,6 +13,6 @@ public class AddDigit {
         return addDigits(digitSum);
     }
     public static void main(String [] args){
-        addDigits(5);
+        System.out.println(addDigits(5));
     }
 }

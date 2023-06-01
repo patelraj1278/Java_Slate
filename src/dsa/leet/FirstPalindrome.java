@@ -11,6 +11,6 @@ public class FirstPalindrome {
         return new StringBuilder().append(s).reverse().toString().equals(s);
     }
     public static void main(String [] args){
-        firstPalindrome(new String[]{"efwf","ff"});
+        System.out.println(firstPalindrome(new String[]{"efwf","ff"}));
     }
 }

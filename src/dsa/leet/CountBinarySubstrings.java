@@ -19,6 +19,6 @@ public class CountBinarySubstrings {
         return totalCount + Math.min(currCount, oppositeCount);
     }
     public static void main(String [] args){
-        countBinarySubstrings("abdbejnfe");
+        System.out.println(countBinarySubstrings("abdbejnfe"));
     }
 }

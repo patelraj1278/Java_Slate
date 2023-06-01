@@ -14,6 +14,6 @@ public class Fibbonacci {
         return result[n];
     }
     public static void main(String [] args){
-        fib(12);
+        System.out.println(fib(12));
     }
 }

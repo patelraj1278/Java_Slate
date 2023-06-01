@@ -19,6 +19,6 @@ public class DigitSum {
     }
 
     public static void main(String [] args){
-        alternateDigitSum(5);
+        System.out.println(alternateDigitSum(5));
     }
 }
